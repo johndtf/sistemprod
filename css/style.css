@@ -1,0 +1,435 @@
+/* =====================CUSTOM PROPERTIES============================ */
+
+body {
+  background-color: var(--background-color);
+}
+
+.header {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--white-color);
+}
+
+/* para que las imágenes se adapten al contenedor */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.logo {
+  width: 3rem;
+  height: auto;
+  /*  border: thin solid black; */
+}
+
+.tabs-menu {
+  position: relative;
+  z-index: 1;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  width: 65%;
+  height: 2rem;
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: var(--gray-color);
+  /*  font-size: 1.2rem; */
+}
+
+/* Clase que pone visible el menú principal*/
+.tabs-menu.active {
+  display: flex;
+}
+
+.tabs-menu input[type="radio"] {
+  display: none;
+}
+
+/* Label de los check, tamaño, alineación y que el cursor cambie cuando esté sobre ellos */
+.tabs-menu label {
+  position: relative;
+  z-index: 1;
+  width: calc(100% / 5 - 0.5rem);
+  text-align: center;
+  cursor: pointer;
+}
+
+/* cambio color de la letra cuando el cursor este por arriba de los label del menú*/
+.tabs-menu label:hover {
+  color: #fff;
+}
+
+/* cambio color de la letra cuando esté chequeado la opción*/
+.tabs-menu input[type="radio"]:checked + label {
+  color: var(--white-color);
+}
+
+/* propiedades de la div que marca la opción del menú seleccionada*/
+.tab-bg-hover {
+  position: absolute;
+  width: calc(100% / 6 - 0.5rem);
+
+  height: 2rem;
+  border-radius: 0.5rem;
+  /* la siguiente linea sería para que aparezca desde un principio*/
+  /*  background-image: linear-gradient(90deg, #f00, #d00); */
+  transition: transform 300ms ease-in-out;
+}
+
+#tab-1:checked ~ .tab-bg-hover {
+  transform: translateX(0);
+  background-image: linear-gradient(90deg, #f00, #d00);
+}
+#tab-2:checked ~ .tab-bg-hover {
+  transform: translateX(100%);
+  background-image: linear-gradient(90deg, #f00, #d00);
+}
+#tab-3:checked ~ .tab-bg-hover {
+  transform: translateX(200%);
+  background-image: linear-gradient(90deg, #f00, #d00);
+}
+#tab-4:checked ~ .tab-bg-hover {
+  transform: translateX(300%);
+  background-image: linear-gradient(90deg, #f00, #d00);
+}
+
+#tab-5:checked ~ .tab-bg-hover {
+  transform: translateX(400%);
+  background-image: linear-gradient(90deg, #f00, #d00);
+}
+
+#tab-6:checked ~ .tab-bg-hover {
+  transform: translateX(500%);
+  background-image: linear-gradient(90deg, #f00, #d00);
+}
+
+.logout-btn {
+  width: 8rem;
+  height: 2rem;
+  cursor: pointer;
+  border-radius: 0.5rem;
+  border: thin solid #5685a8;
+}
+
+/*===============Propiedades Menú hamburguesa=================================*/
+.bars-menu {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 3%;
+  /* top: 3%; */
+  cursor: pointer;
+  display: none;
+}
+
+.bars-menu span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: red;
+  margin-top: 6px;
+  transform-origin: 0px 100%;
+  transition: all 300ms;
+}
+
+.active-line1-bars-menu {
+  transform: rotate(45deg) translate(-2px, 1px);
+}
+
+.active-line2-bars-menu {
+  opacity: 0;
+  margin-left: -30px;
+}
+.active-line3-bars-menu {
+  transform: rotate(-45deg) translate(-4px, 2px);
+}
+
+/* ===========SUBMENUS=============== */
+
+/* ============ESTILOS PARA LA HERO IMAGE================ */
+.hero {
+  /*  background-image: url("../img/responsive.png"); */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background-position: center center; */
+  /* border: thick solid rebeccapurple; */
+}
+
+/* no visible el hero cuando se cargue una página en este espacio*/
+.hero.hidden {
+  display: none;
+}
+
+.hero-titles {
+  height: 30vh;
+  color: #fff;
+  /*  border: thick solid rebeccapurple; */
+  text-align: center;
+  display: block;
+  padding: 3rem;
+
+  /* align-content: center; */
+}
+
+.form {
+  padding: 20px;
+  background-color: #7b9b74;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  border: thin solid #7b9b74;
+  width: 320px;
+  position: absolute;
+}
+
+.form h2 {
+  text-align: center;
+  padding-bottom: 1rem;
+  border-bottom: thin solid #000;
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+  /*  margin-bottom: 10px; */
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+/* Aspecto de los botones */
+input[type="submit"],
+.butomForm {
+  background-color: #afabab;
+  font-size: 16px;
+  border: none;
+  width: 100%;
+  padding: 10px 20px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+input[type="submit"]:hover,
+.butomForm:hover {
+  color: #fff;
+}
+
+/* botón con apariencia de enlace */
+.buttomLink {
+  background: none;
+  border: none;
+  color: blue;
+  width: 100%;
+  margin: 0.5rem;
+  cursor: pointer;
+  font-style: italic;
+  font-size: 1rem;
+}
+
+.buttomLink:hover {
+  color: black;
+  font-size: 1.1rem;
+}
+
+.centerText {
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.main-content {
+  position: relative;
+}
+
+/*
+=================Contenedor para cargar páginas en página principal======*/
+
+/* main {
+  margin-top: 50px; /* Ajusta el margen superior según la altura del encabezado 
+}*/
+
+iframe {
+  display: none;
+  width: 100%;
+  height: auto;
+  /*   height: calc(
+    100vh - 50px
+  ); */ /* Ajusta la altura del iframe según el tamaño del viewport y la altura del encabezado */
+  border: none;
+}
+
+iframe.visible {
+  display: block;
+}
+
+#frame-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* height: 600px; */
+  border: none;
+}
+
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* Formulario modal recuperar contraseña  */
+
+#modal-recuperar-contrasena {
+  display: none;
+}
+
+/* Formulario modal nuevo usuario*/
+
+#modal-nuevo-usuario {
+  display: none;
+}
+
+/* Clase del boton cerrar X */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0.1rem 0.5rem;
+}
+
+.close:hover {
+  color: #000;
+  background-color: #d00;
+}
+
+/*==========================MEDIA QUERIE TABLETAS============================*/
+@media (max-width: 1024px) {
+  /* Reglas de estilo para tamaño de tableta */
+  .header {
+    position: relative;
+  }
+
+  .tabs-menu {
+    position: absolute;
+    flex-direction: column;
+    align-items: flex-start;
+    top: 100%;
+    left: 0;
+    /*  justify-content: flex-start; */
+    /* background-color: rgba(1, 1, 1, 0.7); */
+    border-radius: 0;
+    width: auto;
+    height: auto;
+    min-width: 300px;
+    right: 15%;
+
+    display: none;
+  }
+
+  .tabs-menu label {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+
+    padding: 8px 30px 8px 10%;
+  }
+
+  .tab-bg-hover {
+    display: none;
+  }
+
+  .tabs-menu label:hover {
+    color: #fff;
+    background-color: var(--gray-dark-color);
+  }
+
+  /* cambio color del color de fondo de los label de menú*/
+  .tabs-menu input[type="radio"]:checked + label {
+    background-color: var(--background-color);
+  }
+
+  .bars-menu {
+    display: block;
+  }
+}
+
+/*====================Form para mensajes de error====================*/
+
+.error-message {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  /* padding: 20px; */
+  background-color: #f2f2f2;
+  border: 1px solid var(--black-color);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  z-index: 9999;
+}
+
+.error-message h2 {
+  margin: 0;
+  padding: 10px;
+  font-size: 18px;
+  color: var(--gray-color);
+  background-color: var(--black-color);
+}
+
+.error-message p {
+  margin: 20px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.error-message button {
+  padding: 8px 16px;
+  width: 60%;
+  margin-bottom: 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.error-message button:hover {
+  background-color: #0056b3;
+}
+
+.error-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+  color: #ff0000;
+}
+
+/* ================ comentar esto ================*/
+/* #modal-ingreso {
+  display: none;
+} */
+/*==================================================*/

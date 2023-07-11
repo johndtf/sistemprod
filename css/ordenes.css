@@ -1,0 +1,131 @@
+/* Estilos generales */
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--white-color);
+}
+
+header {
+  text-align: center;
+  padding: 20px;
+  /*  background-color: var(--secondbackground-color); */
+}
+
+h1 {
+  font-size: 24px;
+  margin: 0;
+  color: var(--white-color);
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+
+  /* Eliminar esto */
+}
+
+.col {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.cliente {
+  width: 300px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.llantas-table {
+  margin-top: 30px;
+}
+
+.icon-print {
+  display: flex;
+  justify-content: flex-end;
+}
+.icon-print i {
+  font-size: 40px;
+}
+
+.print-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+/* Estilos específicos de la página de Ordenes de Servicio */
+
+.orden-section {
+  /*  margin-bottom: 30px; */
+  margin: 30px 50px;
+  padding: 20px;
+  border-radius: 8px;
+  border: thin solid;
+}
+
+.add-orden-btn,
+.modify-orden-btn {
+  background-color: var(--first-color);
+  color: var(--white-color);
+  border: none;
+  padding: 10px 20px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.llantas-section {
+  margin-bottom: 30px;
+}
+
+.add-llanta-btn,
+.modify-llanta-btn {
+  background-color: var(--second-color);
+  color: var(--white-color);
+  border: none;
+  padding: 10px 20px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid var(--gray-color);
+}
+
+.print-all-btn,
+.print-selected-btn {
+  background-color: var(--third-color);
+  color: var(--white-color);
+  border: none;
+  padding: 10px 20px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+/* Media queries */
+
+@media (max-width: 768px) {
+  .row {
+    flex-wrap: wrap;
+  }
+
+  .col {
+    flex: 0 0 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+}
