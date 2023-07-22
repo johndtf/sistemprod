@@ -1,11 +1,13 @@
 :root {
   --background-color: #2a4152;
   --secondbackground-color: #bcbfcf;
-  --first-color: #7b9d74;
-  --first-alpha-color: rgba(123, 155, 116, 0.75);
+  --first-color: rgb(68, 114, 196);
+  --first-alpha-color: rgba(68, 114, 196, 0.75);
 
-  --second-color: #4472c4;
-  --second-alpha-color: rgba(68, 114, 196, 0.75);
+  --second-color: #5c8273;
+  --second-dark-color: rgb(70, 98, 87);
+  --second-alpha-color: rgba(92, 130, 115, 0.75);
+
   --third-color: #501464;
   --third-alpha-color: rgba(80, 20, 100, 0.75);
   --white-color: #fff;
@@ -15,17 +17,17 @@
   --black-color: #000;
   --link-color: #509ee3;
   --title-color: #333;
-  --text-color: #222;
+  --text-dark-color: #000;
+  --text-light-color: #fff;
   --white-alpha-color: rgba(255, 255, 255, 0.5);
   --black-alpha-color: rgba(0, 0, 0, 0.5);
-
-  --font: "Raleway", sans-serif;
-  --max-width: 1200px;
+  --font: Arial, Helvetica, sans-serif;
+  --max-width: 1400px;
 }
 html {
   box-sizing: border-box;
   font-size: 16px;
-  font-family: sans-serif;
+  font-family: var(--font);
   scroll-behavior: smooth;
 }
 
@@ -40,7 +42,9 @@ html {
 body {
   margin: 0;
   padding: 0;
-  /* background-color: #2a4152; */
+  max-width: var(--max-width);
+  background-color: var(--background-color);
+
   /* Tamaño de letra responsive */
   font-size: clamp(
     14px,

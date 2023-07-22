@@ -1,9 +1,5 @@
 /* =====================CUSTOM PROPERTIES============================ */
 
-body {
-  background-color: var(--background-color);
-}
-
 .header {
   display: flex;
   justify-content: space-around;
@@ -112,6 +108,8 @@ img {
   cursor: pointer;
   border-radius: 0.5rem;
   border: thin solid #5685a8;
+
+  padding: 0;
 }
 
 /*===============Propiedades Menú hamburguesa=================================*/
@@ -178,7 +176,7 @@ img {
 
 .form {
   padding: 20px;
-  background-color: #7b9b74;
+  color: var(--text-light-color);
 
   top: 50%;
   left: 50%;
@@ -188,7 +186,25 @@ img {
   width: 320px;
   position: absolute;
 }
+.form:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  border-radius: 10px;
 
+  background-color: var(--black-alpha-color);
+
+  backdrop-filter: blur(3px);
+}
+
+/* .form:before {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(3px);
+} */
 .form h2 {
   text-align: center;
   padding-bottom: 1rem;
@@ -203,10 +219,53 @@ label {
 
 input[type="text"],
 input[type="password"] {
-  width: 100%;
-  padding: 5px;
-  margin-bottom: 10px;
+  /* width: 100%;
+  padding: 5px; */
+  margin-bottom: 8px;
+  background-color: transparent;
+  color: var(--text-light-color);
 }
+
+/* =============efecto en labels======================== */
+
+.form-group {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #999;
+  outline: none;
+  font-size: 1.2rem;
+}
+
+.form label {
+  position: absolute;
+  left: 10px;
+  top: 5px;
+  color: var(--gray-color);
+  pointer-events: none;
+  transition: 0.2s;
+}
+
+.form input:focus ~ label,
+.form input:valid ~ label {
+  top: -20px;
+  font-size: 0.8rem;
+  color: var(--text-light-color);
+}
+
+.form-radio {
+  display: flex;
+}
+.form-radio span {
+  width: 50%;
+}
+
+/*===0================================================== */
 
 /* Aspecto de los botones */
 input[type="submit"],
@@ -231,7 +290,7 @@ input[type="submit"]:hover,
 .buttomLink {
   background: none;
   border: none;
-  color: blue;
+  color: rgb(71, 241, 99);
   width: 100%;
   margin: 0.5rem;
   cursor: pointer;
@@ -240,8 +299,7 @@ input[type="submit"]:hover,
 }
 
 .buttomLink:hover {
-  color: black;
-  font-size: 1.1rem;
+  color: rgb(196, 248, 239);
 }
 
 .centerText {

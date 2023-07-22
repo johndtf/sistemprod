@@ -4,6 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sistemprod</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
     <script
@@ -30,7 +36,7 @@
           type="radio"
           id="tab-2"
           name="tabs"
-          onclick="loadPage('html/produccion/produccion.html'); hideTabsMenu()"
+          onclick="loadPage('html/produccion/menu_produccion.html'); hideTabsMenu()"
         />
         <label for="tab-2">Producción</label>
 
@@ -93,13 +99,13 @@
     <div id="modal-ingreso" class="modal">
       <form class="form">
         <h2>Iniciar sesión</h2>
-        <div>
+        <div class="form-group">
+          <input type="text" id="login" name="login" required />
           <label for="login">Usuario:</label>
-          <input type="text" id="login" name="login" />
         </div>
-        <div>
+        <div class="form-group">
+          <input type="password" id="password" name="password" required />
           <label for="password">Contraseña:</label>
-          <input type="password" id="password" name="password" />
         </div>
         <div>
           <input type="submit" value="Iniciar sesión" id="submit-btn" />
@@ -121,37 +127,40 @@
     <div id="modal-recuperar-contrasena" class="modal">
       <form class="form">
         <h2>Recuperar contraseña</h2>
-        <div>
-          <label for="username-recovery">Usuario:</label>
+        <div class="form-group">
           <input
             type="text"
             id="username-recovery"
             name="username-recovery"
             required
           />
+          <label for="username-recovery">Usuario:</label>
         </div>
         <div>
           <button type="button" class="butomForm">Generar Pin</button>
         </div>
+
         <div class="centerText">
           <p>Ingresa el pin enviado a tu correo registrado</p>
         </div>
-        <div>
-          <label for="password-recuperar">Pin de recuperación:</label>
+        <br />
+
+        <div class="form-group">
           <input
             type="password"
             id="password-recuperar"
             name="password-recuperar"
             required
           />
+          <label for="password-recuperar">Pin de recuperación:</label>
         </div>
-        <div>
+        <div class="form-group">
+          <input type="password" id="nuevaClave1" name="nuevaClave1" required />
           <label for="nuevaClave1">Ingresa tu nueva clave</label>
-          <input type="text" id="nuevaClave1" name="nuevaClave1" required />
         </div>
-        <div>
+        <div class="form-group">
+          <input type="password" id="nuevaClave2" name="nuevaClave2" required />
           <label for="nuevaClave2">Confirma tu nueva clave</label>
-          <input type="text" id="nuevaClave2" name="nuevaClave2" required />
         </div>
         <div>
           <button type="button" class="butomForm" id="nuevaClave-btn">
@@ -167,34 +176,53 @@
       <form class="form">
         <span class="close">&times;</span>
         <h2>Nuevo Usuario</h2>
-        <div>
-          <label for="usernames">Nombres:</label>
+        <div class="form-group">
           <input type="text" id="usernames" name="usernames" required />
+          <label for="usernames">Nombres:</label>
         </div>
-        <div>
-          <label for="userlastnames">Apellidos:</label>
+        <div class="form-group">
           <input type="text" id="userlastnames" name="userlastnames" required />
+          <label for="userlastnames">Apellidos:</label>
         </div>
-        <div>
-          <label for="userid">Cédula/Nit:</label>
+        <div class="form-group">
           <input type="text" id="userid" name="userid" required />
+          <label for="userid">Cédula/Nit:</label>
         </div>
 
-        <div>
-          <label for="email">Correo electrónico:</label>
+        <div class="form-group">
           <input type="text" id="email" name="email" required />
+          <label for="email">Correo electrónico:</label>
         </div>
-        <div>
-          <label for="tipousuario">Tipo de usuario:</label>
-          <input type="text" id="tipousuario" name="tipousuario" required />
-        </div>
-        <div>
-          <label for="telefono">Teléfono:</label>
+
+        <div class="form-group">
           <input type="text" id="telefono" name="telefono" required />
+          <label for="telefono">Teléfono:</label>
         </div>
-        <div>
-          <label for="direccion">Dirección:</label>
+        <div class="form-group">
           <input type="text" id="direccion" name="direccion" required />
+          <label for="direccion">Dirección:</label>
+        </div>
+
+        <div class="form-radio">
+          <span>Cliente</span>
+          <input
+            type="radio"
+            name="radio_tipo"
+            id="radio-cliente"
+            value="cliente"
+            checked
+          />
+        </div>
+        <!-- <label for="radio-cliente">Cliente</label> -->
+        <div class="form-radio">
+          <span>Empleado</span>
+          <input
+            type="radio"
+            name="radio_tipo"
+            id="radio-empleado"
+            value="empleado"
+          />
+          <!-- <label for="radio-empleado">Empleado</label> -->
         </div>
         <div>
           <button type="button" class="butomForm" id="nuevoUsuario-btn">

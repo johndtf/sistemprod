@@ -1,97 +1,93 @@
 /* Estilos generales */
 
 body {
-  font-family: Arial, sans-serif;
   background-color: var(--background-color);
   color: var(--white-color);
+}
+
+.button-group {
+  grid-column-start: 2;
+  /* margin: 20px 50px 0px 20px; */
+  padding: 10px;
+  border-radius: 8px;
+  border: thin solid var(--first-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: center;
+  background-color: var(--background-color);
+}
+
+.form-container {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-gap: 20px;
+  border: thin solid var(--first-color);
+  border-radius: 10px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
 }
 
 header {
   text-align: center;
   padding: 20px;
-  /*  background-color: var(--secondbackground-color); */
 }
 
-h1 {
-  font-size: 24px;
-  margin: 0;
-  color: var(--white-color);
-}
+/* Estilos específicos de la sección de Ordenes de Servicio */
 
-.row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
+.triple-section {
+  display: grid;
+  grid-template-columns: repeat(3, auto); /* tres columnas de igual tamaño */
 
-  /* Eliminar esto */
-}
+  grid-template-rows: auto auto; /* tres filas de altura automática */
 
-.col {
-  flex: 1;
-  margin-right: 10px;
-}
-
-.cliente {
-  width: 300px;
-}
-
-.actions {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-}
-
-.llantas-table {
-  margin-top: 30px;
-}
-
-.icon-print {
-  display: flex;
-  justify-content: flex-end;
-}
-.icon-print i {
-  font-size: 40px;
-}
-
-.print-buttons {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 10px;
-}
-
-/* Estilos específicos de la página de Ordenes de Servicio */
-
-.orden-section {
-  /*  margin-bottom: 30px; */
-  margin: 30px 50px;
-  padding: 20px;
+  grid-gap: 10px; /* Espacio entre elementos */
   border-radius: 8px;
-  border: thin solid;
+  border: thin solid var(--first-color);
+  padding: 10px;
 }
 
-.add-orden-btn,
-.modify-orden-btn {
+.triple-section label {
+  min-width: 7rem;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.double-size {
+  grid-column: span 2; /* Ocupa dos columnas en la grid */
+}
+
+/* Ajustar el tamaño de los inputs */
+
+.double-size input {
+  flex: 2; /* Inputs de tamaño doble ocupan 2 partes (el doble) */
+}
+
+.triple-size {
+  grid-column: span 3;
+}
+
+.triple-size input {
+  flex: 3; /* Inputs de tamaño doble ocupan 3 partes  */
+}
+
+input[type="text"],
+select {
+  width: 10rem;
+  padding: 2px 2px;
+  font-size: 1.2rem;
+  border: 1px solid var(--black-color);
+  border-radius: 4px; /* Añade esquinas redondeadas */
+  background-color: var(--secondbackground-color);
   background-color: var(--first-color);
-  color: var(--white-color);
-  border: none;
-  padding: 10px 20px;
-  margin-left: 10px;
-  cursor: pointer;
-}
-
-.llantas-section {
-  margin-bottom: 30px;
-}
-
-.add-llanta-btn,
-.modify-llanta-btn {
-  background-color: var(--second-color);
-  color: var(--white-color);
-  border: none;
-  padding: 10px 20px;
-  margin-left: 10px;
-  cursor: pointer;
+  color: var(--text-light-color);
+  font-family: var(--font);
 }
 
 table {
@@ -99,14 +95,40 @@ table {
   border-collapse: collapse;
 }
 
-th,
-td {
-  padding: 8px;
-  text-align: left;
-  border-bottom: 1px solid var(--gray-color);
+tbody tr:nth-child(odd) {
+  background-color: var(--secondbackground-color);
 }
 
-.print-all-btn,
+tbody tr:nth-child(even) {
+  background-color: var(--gray-light-color);
+}
+
+th,
+td {
+  padding: 2px;
+
+  border: 1px solid var(--white-color);
+  text-align: center;
+  font-family: var(--font);
+}
+
+th {
+  background-color: var(--first-color);
+}
+
+td {
+  color: var(--text-dark-color);
+}
+
+.icon-print {
+  display: flex;
+  justify-content: flex-end;
+}
+.print-btn i {
+  font-size: 40px;
+}
+
+/* .print-all-btn,
 .print-selected-btn {
   background-color: var(--third-color);
   color: var(--white-color);
@@ -114,18 +136,17 @@ td {
   padding: 10px 20px;
   margin-top: 10px;
   cursor: pointer;
-}
+} */
 
 /* Media queries */
-
 @media (max-width: 768px) {
-  .row {
-    flex-wrap: wrap;
+  .form-container {
+    grid-template-columns: 1fr;
   }
 
-  .col {
-    flex: 0 0 100%;
-    margin-right: 0;
-    margin-bottom: 10px;
+  .orden-section,
+  .llantas-section,
+  .button-group {
+    grid-column-start: auto;
   }
 }
