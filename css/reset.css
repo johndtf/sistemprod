@@ -5,10 +5,12 @@
   --first-alpha-color: rgba(68, 114, 196, 0.75);
 
   --second-color: #5c8273;
+
   --second-dark-color: rgb(70, 98, 87);
   --second-alpha-color: rgba(92, 130, 115, 0.75);
 
-  --third-color: #501464;
+  --third-color: rgb(80, 20, 100);
+
   --third-alpha-color: rgba(80, 20, 100, 0.75);
   --white-color: #fff;
   --gray-light-color: #f3f3f3;

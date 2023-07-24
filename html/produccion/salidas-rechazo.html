@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Salidas</title>
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/produccion.css" />
+    <link rel="stylesheet" href="../../css/salidas.css" />
+    <script
+      src="https://kit.fontawesome.com/f3b6c3464d.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Salidas llanta Rechazada</h1>
+    </header>
+    <div class="form-container">
+      <section class="triple-section">
+        <div class="form-group item">
+          <label for="documento">Documento:</label>
+          <input type="text" id="documento" name="documento" />
+        </div>
+
+        <div class="form-group item">
+          <label for="fechaSalida">Fecha Salida:</label>
+          <input type="text" id="fechaSalida" name="fechaSalida" />
+        </div>
+
+        <div class="form-group item">
+          <label for="destino">Destino:</label>
+          <select name="destino" id="destino">
+            <option value="bodega ">Bodega 1</option>
+            <option value="bodega ">Bodega 2</option>
+            <option value="bodega ">Bodega 3</option>
+          </select>
+        </div>
+
+        <div class="form-group item">
+          <label for="tiquete">Tiquete:</label>
+          <input type="text" id="tiquete" name="tiquete" />
+        </div>
+
+        <div class="form-group item double-size">
+          <label for="cliente">Cliente:</label>
+          <input type="text" id="cliente" name="cliente" />
+        </div>
+
+        <div class="form-group item">
+          <label for="orden">Orden:</label>
+          <input type="text" id="orden" name="orden" />
+        </div>
+
+        <div class="form-group item">
+          <label for="ubicacion">Ubicación:</label>
+          <input type="text" id="ubicacion" name="ubicacion" />
+        </div>
+
+        <div class="form-group item">
+          <label for="estado">Estado:</label>
+          <input type="text" id="estado" name="estado" />
+        </div>
+
+        <div class="form-group item">
+          <label for="dimension">Dimensión:</label>
+          <input type="text" id="dimension" name="dimension" />
+        </div>
+
+        <div class="form-group item double-size">
+          <label for="resol-inspec">Inspección:</label>
+          <input type="text" id="resol-inspec" name="resol-inspec" />
+        </div>
+
+        <div class="form-group item">
+          <label for="docSalida">Doc. Salida:</label>
+          <input type="text" id="docSalida" name="docSalida" />
+        </div>
+
+        <!-- <div class="form-group item">
+          <label for="costo">Costo:</label>
+          <input type="text" id="costo" name="costo" />
+        </div> -->
+
+        <div class="form-group item">
+          <label for="fechaSale">Fecha Sale:</label>
+          <input type="text" id="fechaSale" name="fechaSale" />
+        </div>
+      </section>
+      <section class="button-group">
+        <button class="increase-doc-btn primary-button">Nuevo documento</button>
+        <button class="processed-btn primary-button">Actualizar</button>
+        <button class="undo-processed-btn primary-button">Deshacer</button>
+      </section>
+    </div>
+
+    <!-- --------------Sección Imprimir--------------- -->
+    <section class="print-section">
+      <div class="print-group">
+        <label>Tipo de reporte:</label>
+        <label>
+          <input type="checkbox" name="reporte" value="planta" />
+          Planta
+        </label>
+        <label>
+          <input type="checkbox" name="reporte" value="bodega" />
+          Bodega
+        </label>
+        <label>
+          <input type="checkbox" name="reporte" value="cliente" />
+          Cliente
+        </label>
+      </div>
+
+      <div class="print-group">
+        <label for=""
+          >Documento: <input type="text" id="documento" name="documento"
+        /></label>
+      </div>
+
+      <div class="print-group double-size print-group-btn">
+        <!-- <label>Opciones de impresión:</label> -->
+        <button class="option-button">
+          <img src="../../img/vista_previa.png" alt="Vista Previa" />
+          Vista Previa
+        </button>
+        <!-- <button class="option-button">
+          <img src="enviar_archivo.png" alt="Enviar a Archivo" />
+          Enviar a Archivo
+        </button> -->
+        <button class="option-button print">
+          <img src="../../img/imprimir.png" alt="Imprimir" />
+          Imprimir
+        </button>
+      </div>
+    </section>
+  </body>
+</html>
