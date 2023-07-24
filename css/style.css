@@ -12,11 +12,10 @@ img {
   max-width: 100%;
   height: auto;
 }
-
 .logo {
   width: 3rem;
   height: auto;
-  /*  border: thin solid black; */
+  /* border: thin solid black; */
 }
 
 .tabs-menu {
@@ -48,19 +47,19 @@ img {
 .tabs-menu label {
   position: relative;
   z-index: 1;
-  width: calc(100% / 5 - 0.5rem);
+  width: calc(100% / 6 - 0.5rem);
   text-align: center;
   cursor: pointer;
 }
 
 /* cambio color de la letra cuando el cursor este por arriba de los label del menú*/
 .tabs-menu label:hover {
-  color: #fff;
+  color: var(--text-light-color);
 }
 
 /* cambio color de la letra cuando esté chequeado la opción*/
 .tabs-menu input[type="radio"]:checked + label {
-  color: var(--white-color);
+  color: var(--text-light-color);
 }
 
 /* propiedades de la div que marca la opción del menú seleccionada*/
@@ -71,35 +70,29 @@ img {
   height: 2rem;
   border-radius: 0.5rem;
   /* la siguiente linea sería para que aparezca desde un principio*/
-  /*  background-image: linear-gradient(90deg, #f00, #d00); */
+  background-image: linear-gradient(90deg, #f00, #d00);
   transition: transform 300ms ease-in-out;
 }
 
 #tab-1:checked ~ .tab-bg-hover {
   transform: translateX(0);
-  background-image: linear-gradient(90deg, #f00, #d00);
 }
 #tab-2:checked ~ .tab-bg-hover {
   transform: translateX(100%);
-  background-image: linear-gradient(90deg, #f00, #d00);
 }
 #tab-3:checked ~ .tab-bg-hover {
   transform: translateX(200%);
-  background-image: linear-gradient(90deg, #f00, #d00);
 }
 #tab-4:checked ~ .tab-bg-hover {
   transform: translateX(300%);
-  background-image: linear-gradient(90deg, #f00, #d00);
 }
 
 #tab-5:checked ~ .tab-bg-hover {
   transform: translateX(400%);
-  background-image: linear-gradient(90deg, #f00, #d00);
 }
 
 #tab-6:checked ~ .tab-bg-hover {
   transform: translateX(500%);
-  background-image: linear-gradient(90deg, #f00, #d00);
 }
 
 .logout-btn {
@@ -315,10 +308,6 @@ input[type="submit"]:hover,
 /*
 =================Contenedor para cargar páginas en página principal======*/
 
-/* main {
-  margin-top: 50px; /* Ajusta el margen superior según la altura del encabezado 
-}*/
-
 iframe {
   display: none;
   width: 100%;
@@ -365,7 +354,7 @@ iframe.visible {
   display: none;
 }
 
-/* Clase del boton cerrar X */
+/* Clase del boton cerrar X formulario nuevo usuario*/
 .close {
   color: #aaa;
   float: right;

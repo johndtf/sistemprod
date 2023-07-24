@@ -1,8 +1,108 @@
 /* estilos comunes para las hojas de producción */
 
+body {
+  background-color: var(--background-color);
+  color: var(--white-color);
+}
+
+header {
+  text-align: center;
+  padding: 20px;
+}
+
+.form-container {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-gap: 20px;
+  border: thin solid var(--first-color);
+  border-radius: 10px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+}
+.triple-section {
+  display: grid;
+  grid-template-columns: repeat(3, auto); /* tres columnas de igual tamaño */
+
+  grid-template-rows: auto auto; /* tres filas de altura automática */
+
+  grid-gap: 10px; /* Espacio entre elementos */
+  border-radius: 8px;
+  border: thin solid var(--first-color);
+  padding: 10px;
+}
+
+.quad-section {
+  display: grid;
+  grid-template-columns: repeat(4, auto); /* cuatro columnas de igual tamaño */
+
+  grid-template-rows: auto auto; /* filas de altura automática */
+
+  grid-gap: 10px; /* Espacio entre elementos */
+  border-radius: 8px;
+  border: thin solid var(--first-color);
+  padding: 10px;
+}
+
+.triple-section label {
+  min-width: 7rem;
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.double-size {
+  grid-column: span 2; /* Ocupa dos columnas en la grid */
+}
+
+/* Ajustar el tamaño de los inputs */
+
+.double-size input {
+  flex: 2; /* Inputs de tamaño doble ocupan 2 partes (el doble) */
+}
+
+.triple-size {
+  grid-column: span 3;
+}
+
+.triple-size input {
+  flex: 3; /* Inputs de tamaño doble ocupan 3 partes  */
+}
+
+input[type="text"],
+select {
+  width: 10rem;
+  padding: 2px 2px;
+  font-size: 1.2rem;
+  border: 1px solid var(--black-color);
+  border-radius: 4px; /* Añade esquinas redondeadas */
+
+  background-color: var(--first-color);
+  color: var(--text-light-color);
+  font-family: var(--font);
+}
+/*=============Estilos para grupo de botones=================*/
+
+.button-group {
+  grid-column-start: 2;
+  /* margin: 20px 50px 0px 20px; */
+  padding: 10px;
+  border-radius: 8px;
+  border: thin solid var(--first-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: center;
+  background-color: var(--background-color);
+}
+
 /* Estilos para botón primario */
 .primary-button {
-  background-color: var(--second-color);
+  background-color: var(--secondbackground-color);
   color: var(--text-dark-color);
   font-size: large;
   padding: 5px 20px;
@@ -36,12 +136,17 @@
 
 /* Estilos para botón de peligro o alerta */
 .danger-button {
-  background-color: #dc3545;
-  color: #ffffff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
+  background-color: var(--third-color);
+  color: var(--text-dark-color);
+  font-size: large;
+  padding: 5px 20px;
+  /*  border: none; */
+  border-radius: 6px;
   cursor: pointer;
+}
+
+.danger-button:hover {
+  color: var(--text-light-color);
 }
 
 /* Estilos para botón de enlace */

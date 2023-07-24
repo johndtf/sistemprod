@@ -1,0 +1,90 @@
+.print-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+
+  max-width: 39rem;
+  margin: 10px auto;
+  background-color: var(--secondbackground-color);
+  grid-gap: 10px;
+  border-radius: 8px;
+  padding: 10px;
+  border: thin solid var(--first-color);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.print-section label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: black;
+}
+
+.print-group {
+  border-radius: 8px;
+  border: thin solid var(--first-color);
+  padding: 10px;
+}
+
+.print-group-btn {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Estilos para los botones de opciones */
+.option-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  color: #007bff;
+  background-color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  width: 10rem;
+}
+
+.option-button img {
+  width: 2rem;
+  height: 2rem;
+  margin-right: 10px;
+}
+
+.option-button:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* Estilos para los checkboxes */
+.print-section input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #007bff;
+  border-radius: 4px;
+  margin-right: 5px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  background-color: #007bff;
+}
+
+input[type="checkbox"]:focus {
+  outline: none;
+}
+
+/* Estilos para el botón Imprimir */
+.option-button.print {
+  border-color: #28a745;
+  color: #28a745;
+}
+
+.option-button.print:hover {
+  background-color: #28a745;
+  color: #fff;
+}
