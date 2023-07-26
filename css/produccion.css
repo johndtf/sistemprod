@@ -10,6 +10,7 @@ header {
   padding: 20px;
 }
 
+/* container para form con 2 columnas, la primera el triple de tamaño que la segunda */
 .form-container {
   display: grid;
   grid-template-columns: 3fr 1fr;
@@ -21,31 +22,60 @@ header {
   margin-right: auto;
   padding: 10px;
 }
+
+/* Container formulario de 1 columna y tres filas */
+.form-container2 {
+  /* display: grid; */
+  /*  grid-template-columns: 1fr; */
+  /*  grid-template-rows: 1fr 1fr 1fr; */
+  /* grid-gap: 20px; */
+  border: thin solid var(--first-color);
+  border-radius: 10px;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+}
+
+/* secciones de tres columnas */
 .triple-section {
   display: grid;
   grid-template-columns: repeat(3, auto); /* tres columnas de igual tamaño */
-
   grid-template-rows: auto auto; /* tres filas de altura automática */
-
   grid-gap: 10px; /* Espacio entre elementos */
   border-radius: 8px;
   border: thin solid var(--first-color);
   padding: 10px;
 }
+
+/* secciones de 4 columnas */
 
 .quad-section {
   display: grid;
   grid-template-columns: repeat(4, auto); /* cuatro columnas de igual tamaño */
-
   grid-template-rows: auto auto; /* filas de altura automática */
-
   grid-gap: 10px; /* Espacio entre elementos */
   border-radius: 8px;
   border: thin solid var(--first-color);
   padding: 10px;
 }
 
-.triple-section label {
+.five-section {
+  display: grid;
+  grid-template-columns: repeat(5, auto); /* cinco columnas de igual tamaño */
+  grid-template-rows: auto auto; /* filas de altura automática */
+  grid-gap: 10px; /* Espacio entre elementos */
+  border-radius: 8px;
+  border: thin solid var(--first-color);
+  padding: 10px;
+}
+
+.triple-section label,
+.five-section label {
+  min-width: 7rem;
+}
+
+.quad-section label {
   min-width: 7rem;
 }
 
@@ -53,6 +83,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  /* border: thin solid red; */
 }
 
 .double-size {
