@@ -101,8 +101,10 @@ img {
   cursor: pointer;
   border-radius: 0.5rem;
   border: thin solid #5685a8;
-
-  padding: 0;
+  align-content: center;
+  text-align: center;
+  text-decoration: none;
+  padding: 6px;
 }
 
 /*===============Propiedades Menú hamburguesa=================================*/
