@@ -1,0 +1,106 @@
+.one-size {
+  width: 14rem;
+}
+
+.one-size input {
+  width: 7rem;
+}
+
+.two-size {
+  width: 25rem;
+}
+
+.two-size input,
+.two-size select {
+  width: 18rem;
+}
+
+.three-size {
+  width: 31rem;
+}
+.three-size select {
+  width: 24rem;
+}
+
+.form-container3 label {
+  min-width: 7rem;
+}
+
+/* Container formulario de 1 columna y tres filas */
+.form-container3 {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  grid-template-rows: auto auto;
+  grid-gap: 10px;
+  border: thin solid var(--first-color);
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+}
+
+.section-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  justify-content: space-around;
+  grid-gap: 10px; /* Espacio entre elementos */
+  border-radius: 8px;
+  /* border: thin solid var(--first-color); */
+  padding: 10px;
+}
+
+input[type="text"],
+select {
+  /* Estilos para input de ingreso de información */
+  background-color: var(--secondbackground-color); /* Color de fondo */
+  color: var(--text-dark-color); /* Color del texto */
+  border: 1px solid var(--gray-light-color); /* Borde */
+  /* Otras propiedades visuales opcionales, como el cursor */
+  cursor: text;
+}
+
+select {
+  cursor: pointer;
+}
+
+/* Estilos para input en modo de solo lectura */
+input[readonly] {
+  background-color: var(--first-color);
+  color: var(--text-light-color); /* Color del texto */
+  border: thin solid var(--secondbackground-color);
+  /* Otras propiedades visuales opcionales, como el cursor */
+  cursor: not-allowed;
+}
+
+.input-container {
+  position: relative;
+}
+
+/* Estilos para los checkboxes */
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--black-color);
+  border-radius: 4px;
+  margin-right: 5px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--first-color);
+}
+.fa-pencil-alt {
+  /* Estilos para el ícono de lápiz */
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--background-color);
+}

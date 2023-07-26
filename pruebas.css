@@ -1,0 +1,32 @@
+.form-group {
+  display: flex;
+  align-items: center;
+}
+
+.input-container {
+  position: relative;
+}
+
+input[type="text"] {
+  /* Estilos para input de ingreso de información */
+  background-color: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  /* Otras propiedades visuales opcionales, como el cursor */
+  cursor: text;
+  padding-right: 30px; /* Espacio para el ícono */
+}
+
+input[type="text"]::placeholder {
+  color: #999; /* Color del texto de placeholder */
+}
+
+.fa-pencil-alt {
+  /* Estilos para el ícono de lápiz */
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  font-size: 16px;
+}

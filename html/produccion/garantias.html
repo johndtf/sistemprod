@@ -4,6 +4,272 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Garantias</title>
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/produccion.css" />
+    <link rel="stylesheet" href="../../css/garantias.css" />
+    <script
+      src="https://kit.fontawesome.com/f3b6c3464d.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
-  <body></body>
+  <body>
+    <header>
+      <h1>Garantías</h1>
+    </header>
+    <div class="form-container2">
+      <!-- -----------------1----------------------------------------- -->
+      <section class="quad-section">
+        <div class="form-group item">
+          <label for="tiquete">Tiquete:</label>
+          <div class="input-container">
+            <input type="text" id="tiquete" name="tiquete" value="19821" />
+            <i class="fas fa-pencil-alt"></i>
+            <!-- Ícono de lápiz -->
+          </div>
+        </div>
+
+        <div class="form-group item">
+          <label for="cedula">Cédula/nit:</label>
+          <input
+            type="text"
+            id="cedula"
+            name="cedula"
+            value="1.123.567.890-1"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item double-size">
+          <label for="cliente">Cliente:</label>
+          <input
+            type="text"
+            id="cliente"
+            name="cliente"
+            value="NOMBRE1 NOMBRE2 APELLIDOEJEMPLO1 APELLIDO EJEMPLO2"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="orden">Orden:</label>
+          <input type="text" id="orden" name="orden" value="8879" readonly />
+        </div>
+
+        <div class="form-group item">
+          <label for="ubicacion">Ubicación:</label>
+          <input
+            type="text"
+            id="ubicacion"
+            name="ubicacion"
+            value="CLIENTE"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="dimension">Dimensión:</label>
+          <input
+            type="text"
+            id="dimension"
+            name="dimension"
+            value="275/80R22.5"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="diseno">Diseño:</label>
+          <input type="text" id="diseno" name="diseno" value="VDE2" readonly />
+        </div>
+
+        <div class="form-group item">
+          <label for="marca">Marca:</label>
+          <input
+            type="text"
+            id="marca"
+            name="marca"
+            value="Goodyear"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="estado">Estado:</label>
+          <input
+            type="text"
+            id="estado"
+            name="estado"
+            value="Reencauchada"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="factura">Factura:</label>
+          <input
+            type="text"
+            id="factura"
+            name="factura"
+            value="2958"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="valor">Valor:</label>
+          <input type="text" id="valor" name="valor" value="550.000" readonly />
+        </div>
+
+        <div class="form-group item">
+          <label for="fechaV">Fecha V.:</label>
+          <input
+            type="text"
+            id="fechaV"
+            name="fechaV"
+            value="2023/07/07"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item double-size">
+          <label for="resolucionA">Resolución:</label>
+          <input
+            type="text"
+            id="resolucionA"
+            name="resolucionA"
+            value="RODADA A BAJA PRESIÓN O SOBRECARGA"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="ajustada">Ajustada:</label>
+          <input
+            type="text"
+            id="ajustada"
+            name="ajustada"
+            value="SI"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="porcentajeC">% Concedido:</label>
+          <input
+            type="text"
+            id="porcentajeC"
+            name="porcentajeC"
+            value="40"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="dAjuste">Doc. Ajuste:</label>
+          <input
+            type="text"
+            id="dAjuste"
+            name="dAjuste"
+            value="2321"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="fechaA">Fecha Aj.:</label>
+          <input
+            type="text"
+            id="fechaA"
+            name="fechaA"
+            value="2023/07/07"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item double-size">
+          <label for="observacionA">Observación:</label>
+          <input
+            type="text"
+            id="observacionA"
+            name="observacionA"
+            value="OBSERVACIÓN DEL AJUSTE"
+            readonly
+          />
+        </div>
+      </section>
+
+      <!-- -----------------------2--------------------------------- -->
+
+      <div class="form-container3">
+        <section class="section-group">
+          <div class="form-group item one-size">
+            <label for="documento">Doc. ajuste:</label>
+            <input type="text" id="documento" name="documento" value="2354" />
+          </div>
+
+          <div class="form-group item one-size">
+            <label for="fecha">Fecha:</label>
+            <input type="text" id="fecha" name="fecha" value="2023/07/07" />
+          </div>
+
+          <div class="form-group two-size">
+            <label for="observacion">Observación:</label>
+            <input
+              type="text"
+              id="observacion"
+              name="observacion"
+              value="OBSERVACIÓN DEL AJUSTE"
+            />
+          </div>
+        </section>
+        <section class="button-group">
+          <button class="ingreso-garantia-btn primary-button">Ingresar</button>
+        </section>
+      </div>
+      <!-- ------------------3----------------------------------------- -->
+
+      <div class="form-container3">
+        <section class="section-group">
+          <div class="form-group item">
+            <label for="fechaC">Fecha comité: </label>
+            <input type="text" id="fechaC" name="fechaC" value="2023/07/07" />
+          </div>
+
+          <div class="form-group three-size">
+            <label for="resolucion">Resolución:</label>
+            <select name="resolucion" id="resolucion">
+              <option value="FALLA DE VULCANIZACION">
+                FALLA DE VULCANIZACION
+              </option>
+              <option value="RODADA A BAJA PRESION">
+                RODADA A BAJA PRESION
+              </option>
+              <option value="FALLA DE VULCANIZACION">
+                FALLA DE VULCANIZACION
+              </option>
+            </select>
+          </div>
+
+          <label>
+            <input type="checkbox" name="ajustable" value="ajustable" />
+            Ajustable
+          </label>
+
+          <label>
+            <input type="checkbox" name="reencauchable" value="reencauchable" />
+            Reencauchable
+          </label>
+
+          <div class="form-group item">
+            <label for="porcentaje">% Otorgado:</label>
+            <input type="text" id="porcentaje" name="porcentaje" value="40" />
+          </div>
+        </section>
+        <section class="button-group">
+          <button class="salida-garantia-btn primary-button">Actualizar</button>
+        </section>
+      </div>
+      <!-- ------------------------------5---------------------- -->
+    </div>
+  </body>
 </html>
