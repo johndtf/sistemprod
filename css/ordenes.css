@@ -1,5 +1,10 @@
 /* Estilos específicos de la sección de Ordenes de Servicio */
 
+.llantas-table {
+  overflow-x: auto;
+  border: thin solid red;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -48,5 +53,29 @@ td {
   .llantas-section,
   .button-group {
     grid-column-start: auto;
+  }
+
+  .triple-section label,
+  .quad-section label,
+  .five-section label {
+    min-width: 5rem;
+  }
+}
+
+/* Media queries */
+@media (max-width: 1200px) {
+  .triple-size {
+    grid-column: span 2;
+  }
+}
+
+/* Media queries */
+@media (max-width: 1000px) {
+  .triple-size {
+    grid-column: span 1;
+  }
+
+  .double-size {
+    grid-column: span 1;
   }
 }

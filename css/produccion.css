@@ -40,8 +40,11 @@ header {
 /* secciones de tres columnas */
 .triple-section {
   display: grid;
-  grid-template-columns: repeat(3, auto); /* tres columnas de igual tamaño */
-  grid-template-rows: auto auto; /* tres filas de altura automática */
+  /* grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+
+  /* grid-template-rows: auto auto; */
   grid-gap: 10px; /* Espacio entre elementos */
   border-radius: 8px;
   border: thin solid var(--first-color);
@@ -52,7 +55,8 @@ header {
 
 .quad-section {
   display: grid;
-  grid-template-columns: repeat(4, auto); /* cuatro columnas de igual tamaño */
+  /* grid-template-columns: repeat(4, auto); */
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   grid-template-rows: auto auto; /* filas de altura automática */
   grid-gap: 10px; /* Espacio entre elementos */
   border-radius: 8px;
@@ -71,13 +75,14 @@ header {
 }
 
 .triple-section label,
+.quad-section label,
 .five-section label {
   min-width: 7rem;
 }
 
-.quad-section label {
+/* .quad-section label {
   min-width: 7rem;
-}
+} */
 
 .form-group {
   display: flex;
@@ -86,8 +91,9 @@ header {
   /* border: thin solid red; */
 }
 
+/* Ocupa dos columnas en la grid */
 .double-size {
-  grid-column: span 2; /* Ocupa dos columnas en la grid */
+  grid-column: span 2;
 }
 
 /* Ajustar el tamaño de los inputs */
@@ -129,6 +135,10 @@ select {
   justify-content: space-evenly;
   text-align: center;
   background-color: var(--background-color);
+  /* width: 100%; */
+  /* max-width: 300px; */
+  /*  margin-left: auto;
+  margin-right: auto; */
 }
 
 /* Estilos para botón primario */
@@ -189,4 +199,42 @@ select {
   border-radius: 4px;
   cursor: pointer;
   text-decoration: underline;
+}
+
+/*================= Media queries =============================*/
+
+/* Media queries */
+@media (max-width: 1200px) {
+  .triple-size {
+    grid-column: span 2;
+  }
+}
+
+/* Media queries */
+@media (max-width: 1000px) {
+  .triple-size {
+    grid-column: span 1;
+  }
+
+  .double-size {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-container {
+    grid-template-columns: 1fr;
+  }
+
+  .orden-section,
+  .llantas-section,
+  .button-group {
+    grid-column-start: auto;
+  }
+
+  .triple-section label,
+  .quad-section label,
+  .five-section label {
+    min-width: 5rem;
+  }
 }

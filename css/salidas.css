@@ -27,6 +27,7 @@
 
 .print-group-btn {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
 }
 
@@ -87,4 +88,11 @@ input[type="checkbox"]:focus {
 .option-button.print:hover {
   background-color: #28a745;
   color: #fff;
+}
+
+@media (max-width: 768px) {
+  .print-section {
+    grid-template-columns: 1fr;
+    max-width: 90%;
+  }
 }
