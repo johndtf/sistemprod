@@ -230,12 +230,12 @@
 
       <div class="form-container3">
         <section class="section-group">
-          <div class="form-group item">
+          <div class="form-group item one-size">
             <label for="fechaC">Fecha comité: </label>
             <input type="text" id="fechaC" name="fechaC" value="2023/07/07" />
           </div>
 
-          <div class="form-group three-size">
+          <div class="form-group two-size">
             <label for="resolucion">Resolución:</label>
             <select name="resolucion" id="resolucion">
               <option value="FALLA DE VULCANIZACION">
@@ -244,25 +244,29 @@
               <option value="RODADA A BAJA PRESION">
                 RODADA A BAJA PRESION
               </option>
-              <option value="FALLA DE VULCANIZACION">
-                FALLA DE VULCANIZACION
-              </option>
+              <option value="FALLA DE REPARACION">FALLA DE REPARACION</option>
             </select>
           </div>
 
-          <label>
-            <input type="checkbox" name="ajustable" value="ajustable" />
-            Ajustable
-          </label>
-
-          <label>
-            <input type="checkbox" name="reencauchable" value="reencauchable" />
-            Reencauchable
-          </label>
-
-          <div class="form-group item">
+          <div class="form-group item one-size">
             <label for="porcentaje">% Otorgado:</label>
             <input type="text" id="porcentaje" name="porcentaje" value="40" />
+          </div>
+
+          <div>
+            <label>
+              <input type="checkbox" name="ajustable" value="ajustable" />
+              Ajustable
+            </label>
+
+            <label>
+              <input
+                type="checkbox"
+                name="reencauchable"
+                value="reencauchable"
+              />
+              Reencauchable
+            </label>
           </div>
         </section>
         <section class="button-group">
