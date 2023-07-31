@@ -153,6 +153,9 @@ img {
   /* border: thick solid rebeccapurple; */
 }
 
+.hero-img {
+  width: minmax(320px, 700px);
+}
 /* no visible el hero cuando se cargue una página en este espacio*/
 .hero.hidden {
   display: none;

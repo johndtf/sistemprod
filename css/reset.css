@@ -54,3 +54,8 @@ body {
     18px
   );
 }
+
+img {
+  width: 100%;
+  height: auto;
+}

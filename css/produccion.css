@@ -23,12 +23,20 @@ header {
   padding: 10px;
 }
 
-/* Container formulario de 1 columna y tres filas */
+.form-container2x1 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 10px;
+  border: thin solid var(--first-color);
+  border-radius: 10px;
+
+  /*  margin-left: auto;
+  margin-right: auto; */
+  padding: 10px;
+}
+
+/* Container formulario contenedor básico */
 .form-container2 {
-  /* display: grid; */
-  /*  grid-template-columns: 1fr; */
-  /*  grid-template-rows: 1fr 1fr 1fr; */
-  /* grid-gap: 20px; */
   border: thin solid var(--first-color);
   border-radius: 10px;
   width: 90%;
@@ -37,52 +45,20 @@ header {
   padding: 10px;
 }
 
-/* secciones de tres columnas */
-.triple-section {
+/* ==================Secciones de columnas automáticas ====================*/
+
+.grid-section {
   display: grid;
-  /* grid-template-columns: repeat(3, auto);
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
   grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-
-  /* grid-template-rows: auto auto; */
   grid-gap: 10px; /* Espacio entre elementos */
   border-radius: 8px;
   border: thin solid var(--first-color);
   padding: 10px;
 }
 
-/* secciones de 4 columnas */
-
-.quad-section {
-  display: grid;
-  /* grid-template-columns: repeat(4, auto); */
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  grid-template-rows: auto auto; /* filas de altura automática */
-  grid-gap: 10px; /* Espacio entre elementos */
-  border-radius: 8px;
-  border: thin solid var(--first-color);
-  padding: 10px;
-}
-
-.five-section {
-  display: grid;
-  grid-template-columns: repeat(5, auto); /* cinco columnas de igual tamaño */
-  grid-template-rows: auto auto; /* filas de altura automática */
-  grid-gap: 10px; /* Espacio entre elementos */
-  border-radius: 8px;
-  border: thin solid var(--first-color);
-  padding: 10px;
-}
-
-.triple-section label,
-.quad-section label,
-.five-section label {
+.grid-section label {
   min-width: 7rem;
 }
-
-/* .quad-section label {
-  min-width: 7rem;
-} */
 
 .form-group {
   display: flex;
@@ -110,6 +86,23 @@ header {
   flex: 3; /* Inputs de tamaño doble ocupan 3 partes  */
 }
 
+.large-size {
+  font-size: 1.5rem;
+}
+.large-size input[type="text"],
+.large-size select {
+  font-size: 2rem;
+}
+
+.double-large-size {
+  grid-column: span 2;
+}
+
+.double-large-size input[type="text"] {
+  font-size: 2rem;
+  flex: 2;
+}
+
 input[type="text"],
 select {
   width: 10rem;
@@ -135,10 +128,6 @@ select {
   justify-content: space-evenly;
   text-align: center;
   background-color: var(--background-color);
-  /* width: 100%; */
-  /* max-width: 300px; */
-  /*  margin-left: auto;
-  margin-right: auto; */
 }
 
 /* Estilos para botón primario */
@@ -226,15 +215,17 @@ select {
     grid-template-columns: 1fr;
   }
 
+  .form-container2x1 {
+    grid-template-columns: 1fr;
+  }
+
   .orden-section,
   .llantas-section,
   .button-group {
     grid-column-start: auto;
   }
 
-  .triple-section label,
-  .quad-section label,
-  .five-section label {
+  .grid-section label {
     min-width: 5rem;
   }
 }
