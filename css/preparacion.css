@@ -37,12 +37,8 @@ input[type="radio"]:checked:disabled + label {
 /* --------------------fin botones tipo radio--------------------------- */
 
 /*-------------Container central-----------------------------*/
-.center-container {
-  display: flex;
-  flex-wrap: wrap;
+
+/* otros atributos en la hoja de produccion.css */
+.flex-container-wrap {
   max-width: 600px;
-  align-items: center;
-  justify-content: center;
-  margin-left: auto;
-  margin-right: auto;
 }
