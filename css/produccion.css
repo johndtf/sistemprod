@@ -45,6 +45,52 @@ header {
   padding: 10px;
 }
 
+/* =============Estilos para input text y select de solo lectura y para ingreso ====== */
+
+input[type="text"],
+select {
+  width: 10rem;
+  padding: 2px 2px;
+  font-size: 1.2rem;
+  background-color: var(--secondbackground-color); /* Color de fondo */
+  color: var(--text-dark-color); /* Color del texto */
+  border: 1px solid var(--gray-light-color); /* Borde */
+  border-radius: 4px; /* Añade esquinas redondeadas */
+  font-family: var(--font);
+  cursor: text;
+}
+
+select {
+  cursor: pointer;
+}
+
+/* Estilos para input en modo de solo lectura */
+input[readonly] {
+  background-color: var(--first-color);
+  color: var(--text-light-color); /* Color del texto */
+  border: thin solid var(--secondbackground-color);
+  /* Otras propiedades visuales opcionales, como el cursor */
+  cursor: not-allowed;
+}
+
+/* Estilos para los checkboxes */
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--black-color);
+  border-radius: 4px;
+  margin-right: 5px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--third-color);
+}
+
 /* ==================Secciones de columnas automáticas ====================*/
 
 .grid-section {
@@ -76,6 +122,7 @@ header {
 
 .double-size input {
   flex: 2; /* Inputs de tamaño doble ocupan 2 partes (el doble) */
+  max-width: 532px;
 }
 
 .triple-size {
@@ -103,18 +150,6 @@ header {
   flex: 2;
 }
 
-input[type="text"],
-select {
-  width: 10rem;
-  padding: 2px 2px;
-  font-size: 1.2rem;
-  border: 1px solid var(--black-color);
-  border-radius: 4px; /* Añade esquinas redondeadas */
-
-  background-color: var(--first-color);
-  color: var(--text-light-color);
-  font-family: var(--font);
-}
 /*=============Estilos para grupo de botones=================*/
 
 .button-group {
@@ -136,7 +171,7 @@ select {
   color: var(--text-dark-color);
   font-size: large;
   padding: 5px 20px;
-  border-radius: 6px;
+  border-radius: 16px;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.75); /* Añadir sombra  */
   transition: all 0.2s ease-in-out;
@@ -167,16 +202,25 @@ select {
 /* Estilos para botón de peligro o alerta */
 .danger-button {
   background-color: var(--third-color);
-  color: var(--text-dark-color);
+  color: var(--text-light-color);
   font-size: large;
   padding: 5px 20px;
   /*  border: none; */
-  border-radius: 6px;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.75); /* Añadir sombra  */
+  transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
 
 .danger-button:hover {
-  color: var(--text-light-color);
+  background-color: red;
+  transform: translateY(-2px);
+}
+
+.danger-button:active {
+  transform: translateY(2px);
+  box-shadow: none;
+  background-color: var(--second-dark-color);
 }
 
 /* Estilos para botón de enlace */
@@ -188,6 +232,162 @@ select {
   border-radius: 4px;
   cursor: pointer;
   text-decoration: underline;
+}
+
+/*------------- Estilos para la barra lateral ----------------*/
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.logo img {
+  /*   font-size: 24px; */
+  width: 24px;
+  margin-right: 10px;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+}
+
+.menu li {
+  margin-bottom: 10px;
+}
+
+.menu a {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.menu a:hover {
+  background-color: #555;
+  border-radius: 4px;
+}
+
+.menu a .description {
+  margin-left: 10px;
+}
+
+.menu li img {
+  width: 20px;
+  height: auto;
+}
+/*Estilos para el proceso acual*/
+.menu li.current a {
+  background-color: var(--second-color);
+}
+/* Estilos para elementos completados */
+.menu li.completed a {
+  background-color: var(--first-color);
+}
+
+.toggle-description {
+  display: none;
+}
+
+.toggle-description span {
+  display: none;
+}
+
+/* Estilos para el contenido principal */
+.content {
+  margin-left: 260px; /* Ancho de la barra lateral */
+  padding: 10px;
+  /*  border: thin solid red; */
+}
+/* -----------------------------fin estilos barra lateral------------------------- */
+
+@media (max-width: 1100px) {
+  .double-large-size {
+    grid-column: span 1;
+  }
+}
+
+/* Estilos para pantallas estrechas barra lateral */
+@media (max-width: 768px) {
+  .sidebar {
+    width: fit-content;
+
+    padding-left: 10px;
+    height: auto;
+    /*  justify-content: center; */
+    /* position: static; */
+  }
+
+  .content {
+    margin-left: 70px;
+  }
+  /* Estilos para el botón "Mostrar Descripción" */
+  .toggle-description {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .toggle-description i {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+
+  .logo span {
+    display: none;
+  }
+  .menu li {
+    text-align: center;
+  }
+
+  .menu a .description {
+    display: none;
+  }
+
+  .menu a .description.show {
+    display: inline;
+  }
+
+  .span-toggle.show {
+    display: inline;
+  }
+
+  .span-logo.show {
+    display: inline;
+  }
+}
+
+@media (max-width: 540px) {
+  .large-size {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+}
+
+@media (max-width: 430px) {
+  .sidebar {
+    display: none;
+  }
+
+  .content {
+    margin-left: auto;
+  }
 }
 
 /*================= Media queries =============================*/
@@ -227,5 +427,17 @@ select {
 
   .grid-section label {
     min-width: 5rem;
+  }
+
+  .large-size {
+    font-size: 1.2rem;
+  }
+  .large-size input[type="text"],
+  .large-size select {
+    font-size: 1.2rem;
+  }
+
+  .double-large-size input[type="text"] {
+    font-size: 1.2rem;
   }
 }
