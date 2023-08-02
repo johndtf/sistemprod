@@ -3,45 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--  <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    /> -->
+
     <link rel="stylesheet" href="../../css/reset.css" />
     <link rel="stylesheet" href="../../css/produccion.css" />
-    <!--  <link rel="stylesheet" href="../../css/inspeccion.css" /> -->
-    <title>Inspección Inicial</title>
+    <link rel="stylesheet" href="../../css/reparacion.css" />
+    <title>Reparación</title>
   </head>
   <body>
     <header>
-      <h1>Inspección Inicial</h1>
+      <h1>Reparación</h1>
     </header>
     <div class="sidebar">
       <div class="logo">
-        <!-- <i class="fas fa-tire"></i> -->
         <img src="../../img/rueda.png" alt="llanta" />
         <span class="span-logo">Subprocesos</span>
       </div>
       <ul class="menu">
-        <li class="current">
+        <li class="completed">
           <a href="#" aria-label="Inspección Inicial">
             <i class="fas fa-search"></i>
             <span class="description">Inspección Inicial</span>
           </a>
         </li>
-        <li>
+        <li class="completed">
           <a href="#" aria-label="Raspado">
             <i class="fa-solid fa-fan"></i>
             <span class="description">Raspado</span>
           </a>
         </li>
-        <li>
+        <li class="completed">
           <a href="#" aria-label="Preparación">
             <i class="fa-solid fa-person-digging"></i>
             <span class="description">Preparación</span>
           </a>
         </li>
-        <li>
+        <li class="current">
           <a href="#" aria-label="Reparación">
             <i class="fas fa-tools"></i>
             <span class="description">Reparación</span>
@@ -150,46 +146,87 @@
             type="text"
             id="estadol"
             name="estadol"
-            value="PENDIENTE"
-            readonly
-          />
-        </div>
-
-        <div class="form-group item">
-          <label for="nivell">Nivel reenc:</label>
-          <input type="text" id="nivell" name="nivell" value="1" readonly />
-        </div>
-
-        <div class="form-group item double-size">
-          <label for="resolucionl">Resolución:</label>
-          <input
-            type="text"
-            id="resolucionl"
-            name="resolucionl"
-            value="12 RODADA A BAJA PRESIÓN O SOBRECARGA"
+            value="APTA"
             readonly
           />
         </div>
       </section>
-
-      <div class="form-container2x1">
-        <section class="grid-section">
+      <!-- ----------------------------sección 2-------------------------- -->
+      <div class="flex-container-wrap">
+        <div class="flex-container-column item-container">
           <div class="form-group item large-size">
             <label for="tiquete">Tiquete:</label>
             <input type="text" id="tiquete" name="tiquete" value="19879" />
           </div>
 
           <div class="form-group item large-size">
-            <label for="reencauches">N.Reenc.:</label>
-            <input type="text" id="reencauches" name="reencauches" value="1" />
+            <label for="reparacion">Reparación:</label>
+            <select id="reparacion" name="reparacion">
+              <option value="RAC-15">RAC-15</option>
+              <option value="RAC-20">RAC-20</option>
+              <option value="RAC-35">RAC-35</option>
+            </select>
           </div>
 
           <div class="form-group item large-size">
+            <label for="cantidad">Cantidad:</label>
+            <input type="text" id="cantidad" name="cantidad" value="2" />
+          </div>
+        </div>
+
+        <section class="button-group item-container">
+          <button class="add-reparación-btn primary-button">
+            Adicionar <i class="fa-solid fa-circle-plus"></i>
+          </button>
+          <button class="subs-reparación-btn primary-button">
+            Sustraer <i class="fa-solid fa-circle-minus"></i>
+          </button>
+
+          <button class="actualizar-reparación-btn primary-button">
+            Actualizar <i class="fa-solid fa-circle-check"></i>
+          </button>
+        </section>
+        <!-- ... Tabla que muestra las reparaciones ... -->
+
+        <div class="parches-table item-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Reparación</th>
+                <th>Cantidad</th>
+                <th><input type="checkbox" id="checkAll" /></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Generación de filas  -->
+              <tr>
+                <td>RAC-15</td>
+                <td>2</td>
+                <td><input type="checkbox" /></td>
+              </tr>
+              <tr>
+                <td>RAC-35</td>
+                <td>1</td>
+                <td><input type="checkbox" /></td>
+              </tr>
+              <tr>
+                <td>RAC-40</td>
+                <td>1</td>
+                <td><input type="checkbox" /></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- ------------------------------sección 3-------------------------- -->
+      <div class="form-container2x1">
+        <section class="grid-section">
+          <div class="form-group item large-size">
             <label for="codinsp">Cod. Insp:</label>
             <select id="codinsp" name="codinsp">
-              <option value="A">A</option>
               <option value="1">1</option>
               <option value="2">2</option>
+              <option value="3">3</option>
             </select>
           </div>
           <div class="form-group item double-large-size">
@@ -198,23 +235,21 @@
               type="text"
               id="resolinspect"
               name="resolinspect"
-              value="APTA PARA REENCAUCHE"
+              value="RODADA A BAJA PRESIÓN"
             />
           </div>
         </section>
         <section class="button-group">
-          <button class="inspect-llanta-btn primary-button">Actualizar</button>
-
-          <button class="cancel-inspect-btn primary-button">Deshacer</button>
+          <button class="rechazo-preparacion-btn danger-button">
+            Rechazar llanta
+          </button>
         </section>
       </div>
     </div>
-
-    <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script> -->
+    <script src="../../js/reparacion.js"></script>
     <script
       src="https://kit.fontawesome.com/f3b6c3464d.js"
       crossorigin="anonymous"
     ></script>
-    <script src="../../js/inspeccion.js"></script>
   </body>
 </html>

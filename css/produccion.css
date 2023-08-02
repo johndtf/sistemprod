@@ -45,6 +45,32 @@ header {
   padding: 10px;
 }
 
+.flex-container-column {
+  display: flex;
+  flex-direction: column;
+  border: thin solid var(--first-color);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.flex-container-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  /* max-width: 600px; */
+  align-items: center;
+  justify-content: space-evenly;
+  margin-left: auto;
+  margin-right: auto;
+  border: thin solid var(--first-color);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* para que los items internos del flexbox crescan hasta ocupar el espacio disponible */
+.item-container {
+  flex-grow: 1;
+}
+
 /* =============Estilos para input text y select de solo lectura y para ingreso ====== */
 
 input[type="text"],
@@ -241,8 +267,8 @@ input[type="checkbox"]:checked {
   left: 0;
   width: 250px;
   height: 100%;
-  background-color: #333;
-  color: #fff;
+  background-color: var(--black-color);
+  color: var(--text-light-color);
   padding: 20px;
   display: flex;
   flex-direction: column;
