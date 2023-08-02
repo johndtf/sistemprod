@@ -50,50 +50,11 @@
   /* width: 100%; */
 }
 
-input[type="text"],
-select {
-  /* Estilos para input de ingreso de información */
-  background-color: var(--secondbackground-color); /* Color de fondo */
-  color: var(--text-dark-color); /* Color del texto */
-  border: 1px solid var(--gray-light-color); /* Borde */
-  /* Otras propiedades visuales opcionales, como el cursor */
-  cursor: text;
-}
-
-select {
-  cursor: pointer;
-}
-
-/* Estilos para input en modo de solo lectura */
-input[readonly] {
-  background-color: var(--first-color);
-  color: var(--text-light-color); /* Color del texto */
-  border: thin solid var(--secondbackground-color);
-  /* Otras propiedades visuales opcionales, como el cursor */
-  cursor: not-allowed;
-}
-
+/* Contenedor par el input text de lapiz */
 .input-container {
   position: relative;
 }
 
-/* Estilos para los checkboxes */
-input[type="checkbox"] {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--black-color);
-  border-radius: 4px;
-  margin-right: 5px;
-  vertical-align: middle;
-  cursor: pointer;
-}
-
-input[type="checkbox"]:checked {
-  background-color: var(--first-color);
-}
 .fa-pencil-alt {
   /* Estilos para el ícono de lápiz */
   position: absolute;

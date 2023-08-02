@@ -3,18 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!--  <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    /> -->
+
     <link rel="stylesheet" href="../../css/reset.css" />
     <link rel="stylesheet" href="../../css/produccion.css" />
-    <!--  <link rel="stylesheet" href="../../css/inspeccion.css" /> -->
-    <title>Inspección Inicial</title>
+    <link rel="stylesheet" href="../../css/raspado.css" />
+    <title>Raspado</title>
   </head>
   <body>
     <header>
-      <h1>Inspección Inicial</h1>
+      <h1>Raspado</h1>
     </header>
     <div class="sidebar">
       <div class="logo">
@@ -23,13 +20,13 @@
         <span class="span-logo">Subprocesos</span>
       </div>
       <ul class="menu">
-        <li class="current">
+        <li class="completed">
           <a href="#" aria-label="Inspección Inicial">
             <i class="fas fa-search"></i>
             <span class="description">Inspección Inicial</span>
           </a>
         </li>
-        <li>
+        <li class="current">
           <a href="#" aria-label="Raspado">
             <i class="fa-solid fa-fan"></i>
             <span class="description">Raspado</span>
@@ -155,7 +152,7 @@
             type="text"
             id="estadol"
             name="estadol"
-            value="PENDIENTE"
+            value="APTA"
             readonly
           />
         </div>
@@ -165,15 +162,50 @@
           <input type="text" id="nivell" name="nivell" value="1" readonly />
         </div>
 
-        <div class="form-group item double-size">
-          <label for="resolucionl">Resolución:</label>
+        <div class="form-group item">
+          <label for="radiol">Radio rasp:</label>
+          <input type="text" id="radiol" name="radiol" value="22" readonly />
+        </div>
+
+        <div class="form-group item">
+          <label for="perimetrol">Perímetro:</label>
           <input
             type="text"
-            id="resolucionl"
-            name="resolucionl"
-            value="12 RODADA A BAJA PRESIÓN O SOBRECARGA"
+            id="perimetrol"
+            name="perimetrol"
+            value="322"
             readonly
           />
+        </div>
+
+        <div class="form-group item">
+          <label for="anchol">Ancho:</label>
+          <input type="text" id="anchol" name="anchol" value="250" readonly />
+        </div>
+
+        <!-- Opciones tipo radio para mostrar retiro de cinturon -->
+        <div class="form-group item">
+          <label for="">Retiro C:</label>
+          <div class="radio-container">
+            <input
+              type="radio"
+              name="option-show-rc"
+              id="option-1"
+              value="Si"
+              disabled
+            />
+            <label for="option-1">Si</label>
+
+            <input
+              type="radio"
+              name="option-show-rc"
+              id="option-2"
+              value="No"
+              checked
+              disabled
+            />
+            <label for="option-2">No</label>
+          </div>
         </div>
       </section>
 
@@ -185,16 +217,63 @@
           </div>
 
           <div class="form-group item large-size">
-            <label for="reencauches">N.Reenc.:</label>
-            <input type="text" id="reencauches" name="reencauches" value="1" />
+            <label for="radio-raspado">Radio Rasp.:</label>
+            <input
+              type="text"
+              id="radio-raspado"
+              name="radio-raspado"
+              value="22"
+            />
           </div>
 
           <div class="form-group item large-size">
+            <label for="perimetro">Perímetro:</label>
+            <input type="text" id="perimetro" name="perimetro" value="322" />
+          </div>
+
+          <div class="form-group item large-size">
+            <label for="ancho">Ancho:</label>
+            <input type="text" id="ancho" name="ancho" value="250" />
+          </div>
+
+          <!-- -----------Opcinones para retiro de cinturon----------- -->
+          <div class="form-group item">
+            <label for="">Retiro C:</label>
+            <div class="radio-container">
+              <input
+                type="radio"
+                name="option-rcinturon"
+                id="option-si"
+                value="Si"
+              />
+              <label for="option-si">Si</label>
+
+              <input
+                type="radio"
+                name="option-rcinturon"
+                id="option-no"
+                value="No"
+                checked
+              />
+              <label for="option-no">No</label>
+            </div>
+          </div>
+        </section>
+        <section class="button-group">
+          <button class="raspar-llanta-btn primary-button">
+            Actualizar Raspado
+          </button>
+        </section>
+      </div>
+      <!-- ------------------------------sección 3-------------------------- -->
+      <div class="form-container2x1">
+        <section class="grid-section">
+          <div class="form-group item large-size">
             <label for="codinsp">Cod. Insp:</label>
             <select id="codinsp" name="codinsp">
-              <option value="A">A</option>
               <option value="1">1</option>
               <option value="2">2</option>
+              <option value="3">3</option>
             </select>
           </div>
           <div class="form-group item double-large-size">
@@ -203,23 +282,21 @@
               type="text"
               id="resolinspect"
               name="resolinspect"
-              value="APTA PARA REENCAUCHE"
+              value="RODADA A BAJA PRESIÓN"
             />
           </div>
         </section>
         <section class="button-group">
-          <button class="inspect-llanta-btn primary-button">Actualizar</button>
-
-          <button class="cancel-inspect-btn primary-button">Deshacer</button>
+          <button class="rechazo-raspado-btn danger-button">
+            Rechazar llanta
+          </button>
         </section>
       </div>
     </div>
 
-    <!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script> -->
     <script
       src="https://kit.fontawesome.com/f3b6c3464d.js"
       crossorigin="anonymous"
     ></script>
-    <script src="../../js/inspeccion.js"></script>
   </body>
 </html>

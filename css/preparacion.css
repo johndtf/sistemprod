@@ -1,0 +1,48 @@
+.radio-container input[type="radio"] {
+  display: none;
+}
+
+.radio-container label {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: #f0f0f0;
+  border: 2px solid #ccc;
+  border-radius: 18px;
+  cursor: pointer;
+  color: var(--text-dark-color);
+  min-width: 4rem;
+}
+
+.radio-container input[type="radio"]:checked + label {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+/* --------------otros estilos radio--------------------- */
+
+input[type="radio"]:disabled + label {
+  background-color: var(--secondbackground-color);
+  background-color: var(--background-color);
+  color: var(--gray-dark-color);
+  border-color: var(--gray-dark-color);
+  cursor: not-allowed;
+}
+
+input[type="radio"]:checked:disabled + label {
+  background: var(--gray-dark-color);
+  color: var(--text-light-color);
+}
+
+/* --------------------fin botones tipo radio--------------------------- */
+
+/*-------------Container central-----------------------------*/
+.center-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 600px;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+}
