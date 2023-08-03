@@ -341,6 +341,43 @@ input[type="checkbox"]:checked {
 }
 /* -----------------------------fin estilos barra lateral------------------------- */
 
+/* -------------------------------TABLAS-------------------------- */
+.llantas-table {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: var(--secondbackground-color);
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--gray-light-color);
+}
+
+th,
+td {
+  padding: 2px;
+
+  border: 1px solid var(--white-color);
+  text-align: center;
+  font-family: var(--font);
+}
+
+th {
+  background-color: var(--first-color);
+}
+
+td {
+  color: var(--text-dark-color);
+}
+
+/* ----------------------------FIN TABLAS---------------------------- */
+
 @media (max-width: 1100px) {
   .double-large-size {
     grid-column: span 1;

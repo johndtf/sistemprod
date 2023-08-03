@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/produccion.css" />
+    <link rel="stylesheet" href="../../css/corte.css" />
+    <title>Corte de Banda</title>
+  </head>
+  <body>
+    <header>
+      <h1>Corte de Banda</h1>
+    </header>
+    <div class="sidebar">
+      <div class="logo">
+        <!-- <i class="fas fa-tire"></i> -->
+        <img src="../../img/rueda.png" alt="llanta" />
+        <span class="span-logo">Subprocesos</span>
+      </div>
+      <ul class="menu">
+        <li class="completed">
+          <a href="#" aria-label="Inspección Inicial">
+            <i class="fas fa-search"></i>
+            <span class="description">Inspección Inicial</span>
+          </a>
+        </li>
+        <li class="completed">
+          <a href="#" aria-label="Raspado">
+            <i class="fa-solid fa-fan"></i>
+            <span class="description">Raspado</span>
+          </a>
+        </li>
+        <li class="completed">
+          <a href="#" aria-label="Preparación">
+            <i class="fa-solid fa-person-digging"></i>
+            <span class="description">Preparación</span>
+          </a>
+        </li>
+        <li class="completed">
+          <a href="#" aria-label="Reparación">
+            <i class="fas fa-tools"></i>
+            <span class="description">Reparación</span>
+          </a>
+        </li>
+        <li class="completed">
+          <a href="#" aria-label="Relleno">
+            <i class="fas fa-fill"></i>
+            <span class="description">Relleno</span>
+          </a>
+        </li>
+        <li class="current">
+          <a href="#" aria-label="Corte de banda">
+            <i class="fas fa-cut"></i>
+            <span class="description">Corte de banda</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" aria-label="Embandado">
+            <i class="fas fa-toolbox"></i>
+            <!-- <img src="../../img/embandado.png" alt="" /> -->
+            <span class="description">Embandado</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" aria-label="Vulcanización">
+            <i class="fas fa-fire"></i>
+            <span class="description">Vulcanización</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" aria-label="Inspección Final">
+            <i class="fas fa-search"></i>
+            <span class="description">Inspección Final</span>
+          </a>
+        </li>
+        <li>
+          <a href="#" aria-label="Terminación">
+            <i class="fas fa-flag-checkered"></i>
+            <span class="description">Terminación</span>
+          </a>
+        </li>
+
+        <!-- Otros elementos del menú -->
+      </ul>
+      <div class="toggle-description">
+        <i class="fas fa-info-circle"></i>
+        <span class="span-toggle">Ocultar Descripción</span>
+      </div>
+    </div>
+
+    <!-- Contenido principal  -->
+    <div class="content">
+      <section class="flex-container-wrap">
+        <!-- Opciones tipo radio para mostrar la opción de ordenar -->
+        <div class="form-group item">
+          <label for="">Ordenar Por:</label>
+          <div class="radio-container">
+            <input
+              type="radio"
+              name="option-order"
+              id="option-tread"
+              value="banda"
+              checked
+            />
+            <label for="option-tread">Banda y ancho</label>
+
+            <input
+              type="radio"
+              name="option-order"
+              id="option-time"
+              value="tiempo"
+            />
+            <label for="option-time">tiempo transcurrido</label>
+          </div>
+        </div>
+        <section class="button-group">
+          <button class="actualizar-bandas-btn primary-button">
+            Actualizar Bandas
+          </button>
+        </section>
+      </section>
+
+      <div class="llantas-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Tiquete</th>
+              <th>Diseño</th>
+              <th>Ancho</th>
+              <th>Largo</th>
+              <th>Dimensión</th>
+              <th>Hora Raspado</th>
+              <th><input type="checkbox" id="checkAll" /></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Generación de filas  -->
+            <tr>
+              <td>19824</td>
+              <td>VM729</td>
+              <td>250</td>
+              <td>322</td>
+              <td>315/80R22.5</td>
+              <td>02/08/2023 10:30 a.m.</td>
+              <td><input type="checkbox" /></td>
+            </tr>
+            <tr>
+              <td>19829</td>
+              <td>VDE2</td>
+              <td>250</td>
+              <td>322</td>
+              <td>295/80R22.5</td>
+              <td>02/08/2023 8:30 a.m.</td>
+              <td><input type="checkbox" /></td>
+            </tr>
+            <tr>
+              <td>19830</td>
+              <td>VZE2</td>
+              <td>260</td>
+              <td>321</td>
+              <td>295/80R22.5</td>
+              <td>02/08/2023 9:00 a.m.</td>
+              <td><input type="checkbox" /></td>
+            </tr>
+            <tr>
+              <td>19832</td>
+              <td>VZE1</td>
+              <td>190</td>
+              <td>250</td>
+              <td>215/75R17.5</td>
+              <td>02/08/2023 9:20 a.m.</td>
+              <td><input type="checkbox" /></td>
+            </tr>
+            <tr>
+              <td>19834</td>
+              <td>VZE1</td>
+              <td>190</td>
+              <td>251</td>
+              <td>215/75R17.5</td>
+              <td>02/08/2023 9:30 a.m.</td>
+              <td><input type="checkbox" /></td>
+            </tr>
+            <tr>
+              <td>19836</td>
+              <td>VZY2</td>
+              <td>240</td>
+              <td>332</td>
+              <td>12R22.5</td>
+              <td>02/08/2023 9:50 a.m.</td>
+              <td><input type="checkbox" /></td>
+            </tr>
+            <tr>
+              <td>19838</td>
+              <td>VZY2</td>
+              <td>240</td>
+              <td>332</td>
+              <td>12R22.5</td>
+              <td>02/08/2023 10:10 a.m.</td>
+              <td><input type="checkbox" /></td>
+            </tr>
+            <tr>
+              <td>19839</td>
+              <td>VZY2</td>
+              <td>240</td>
+              <td>332</td>
+              <td>12R22.5</td>
+              <td>02/08/2023 10:30 a.m.</td>
+              <td><input type="checkbox" /></td>
+            </tr>
+            <tr>
+              <td>19840</td>
+              <td>VZY2</td>
+              <td>240</td>
+              <td>332</td>
+              <td>12R22.5</td>
+              <td>02/08/2023 10:50 a.m.</td>
+              <td><input type="checkbox" /></td>
+            </tr>
+            <tr>
+              <td>19825</td>
+              <td>VM729</td>
+              <td>250</td>
+              <td>322</td>
+              <td>315/80R22.5</td>
+              <td>02/08/2023 11:10 a.m.</td>
+              <td><input type="checkbox" /></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ------------------Sección búsqueda para deshacer corte----------------- -->
+      <section class="flex-container-wrap">
+        <div class="search-container">
+          <label for="search-input">Buscar tiquete :</label>
+          <input
+            type="text"
+            id="search-input"
+            name="search-input"
+            placeholder="Digite el tiquete"
+          />
+        </div>
+
+        <section class="button-group">
+          <button class="search-tiquete-btn primary-button">Buscar</button>
+        </section>
+        <section class="button-group">
+          <button class="deshacer-corte-btn danger-button">
+            Deshacer corte
+          </button>
+        </section>
+      </section>
+      <!-- ------------------tabla busqueda para deshacer corte------------------- -->
+      <div class="llantas-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Tiquete</th>
+              <th>Diseño</th>
+              <th>Ancho</th>
+              <th>Largo</th>
+              <th>Dimensión</th>
+              <th>Hora Raspado</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Generación de filas  -->
+            <tr>
+              <td>19824</td>
+              <td>VM729</td>
+              <td>250</td>
+              <td>322</td>
+              <td>315/80R22.5</td>
+              <td>02/08/2023 10:30 a.m.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script
+      src="https://kit.fontawesome.com/f3b6c3464d.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
