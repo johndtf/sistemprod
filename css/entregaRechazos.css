@@ -1,0 +1,19 @@
+.flex-container-wrap {
+  width: 90%;
+  justify-content: space-between;
+}
+.item2 {
+  margin-bottom: 10px;
+}
+
+.flex-container-column {
+  margin: auto;
+}
+
+.button-group {
+  margin: auto;
+}
+
+.button-group button {
+  margin-bottom: 5px;
+}

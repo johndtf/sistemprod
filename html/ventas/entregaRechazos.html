@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/produccion.css" />
+    <link rel="stylesheet" href="../../css/salidas.css" />
+    <link rel="stylesheet" href="../../css/entregaRechazos.css" />
+
+    <title>Entrega de Rechazos</title>
+  </head>
+  <body>
+    <header>
+      <h1>Entrega de Rechazos</h1>
+    </header>
+
+    <!------------------------- Contenido principal  -------------------->
+    <div class="form-container2">
+      <!-- -----------------Sección 1--------------------------------- -->
+      <section class="grid-section">
+        <div class="form-group item">
+          <label for="cedula">Cédula/nit:</label>
+          <input
+            type="text"
+            id="cedula"
+            name="cedula"
+            value="1.123.567.890-1"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item double-size">
+          <label for="cliente">Cliente:</label>
+          <input
+            type="text"
+            id="cliente"
+            name="cliente"
+            value="NOMBRE1 NOMBRE2 APELLIDOEJEMPLO1 APELLIDO EJEMPLO2"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="fechaOs">Fecha O.S.:</label>
+          <input
+            type="text"
+            id="fechaOs"
+            name="fechaOs"
+            value="07/07/2023"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="ubicacion">Ubicación:</label>
+          <input
+            type="text"
+            id="ubicacion"
+            name="ubicacion"
+            value="BODEGA 1"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="orden">Orden:</label>
+          <input type="text" id="orden" name="orden" value="8879" readonly />
+        </div>
+
+        <div class="form-group item">
+          <label for="dimension">Dimensión:</label>
+          <input
+            type="text"
+            id="dimension"
+            name="dimension"
+            value="275/80R22.5"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="diseno">Diseño:</label>
+          <input type="text" id="diseno" name="diseno" value="VDE2" readonly />
+        </div>
+
+        <div class="form-group item">
+          <label for="marca">Marca:</label>
+          <input
+            type="text"
+            id="marca"
+            name="marca"
+            value="GOODYEAR"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="estado">Estado:</label>
+          <input
+            type="text"
+            id="estado"
+            name="estado"
+            value="RECHAZADA"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="documento">Doc. Entrega:</label>
+          <input
+            type="text"
+            id="documento"
+            name="documento"
+            value="2958"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="fechaE">Fecha Entrega:</label>
+          <input
+            type="text"
+            id="fechaE"
+            name="fechaE"
+            value="07/07/2023"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item double-size">
+          <label for="causar">Causa Rechazo:</label>
+          <input
+            type="text"
+            id="causar"
+            name="causar"
+            value="REPARACIÓN FUERA DE LIMITE"
+            readonly
+          />
+        </div>
+      </section>
+    </div>
+    <!-- -----------------------2--------------------------------- -->
+
+    <div class="flex-container-wrap">
+      <section class="flex-container-column">
+        <div class="form-group item2">
+          <label for="documento">Documento:</label>
+          <input type="text" id="documento" name="documento" />
+        </div>
+
+        <div class="form-group item2">
+          <label for="fechaEntrega">Fecha Entrega:</label>
+          <input type="text" id="fechaEntrega" name="fechaEntrega" />
+        </div>
+
+        <div class="form-group item2">
+          <label for="tiquete">Tiquete:</label>
+          <input type="text" id="tiquete" name="tiquete" value="19821" />
+        </div>
+      </section>
+      <section class="button-group">
+        <button class="increase-doc-btn primary-button">Nuevo documento</button>
+        <button class="facturar-btn primary-button">Actualizar</button>
+        <button class="deshacer-factura-btn danger-button">Deshacer</button>
+      </section>
+
+      <section class="print-section">
+        <div class="print-group">
+          <label>Tipo de reporte:</label>
+          <label>
+            <input type="checkbox" name="reporte" value="registro" />
+            Registro
+          </label>
+          <label>
+            <input type="checkbox" name="reporte" value="bodega" />
+            Bodega
+          </label>
+          <label>
+            <input type="checkbox" name="reporte" value="cliente" />
+            Cliente
+          </label>
+        </div>
+
+        <div class="print-group">
+          <label for=""
+            >Documento: <input type="text" id="documento" name="documento"
+          /></label>
+        </div>
+
+        <div class="print-group double-size print-group-btn">
+          <!-- <label>Opciones de impresión:</label> -->
+          <button class="option-button">
+            <img src="../../img/vista_previa.png" alt="Vista Previa" />
+            Vista Previa
+          </button>
+          <!-- <button class="option-button">
+          <img src="enviar_archivo.png" alt="Enviar a Archivo" />
+          Enviar a Archivo
+        </button> -->
+          <button class="option-button print">
+            <img src="../../img/imprimir.png" alt="Imprimir" />
+            Imprimir
+          </button>
+        </div>
+      </section>
+    </div>
+    <script
+      src="https://kit.fontawesome.com/f3b6c3464d.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

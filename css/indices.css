@@ -1,0 +1,9 @@
+.radio-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.form-container2 {
+  max-width: 400px;
+}
