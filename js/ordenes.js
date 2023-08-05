@@ -1,3 +1,4 @@
+/* --------Tabla - Check de la cabecera ------------------------------ */
 // Obtener el elemento de la cabecera de la columna
 var checkAll = document.getElementById("checkAll");
 
@@ -18,3 +19,4 @@ checkAll.addEventListener("click", function () {
     }
   }
 });
+/* -------------Fin Tabla - check de la cabecera----------------- */

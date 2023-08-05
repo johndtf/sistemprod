@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/produccion.css" />
+    <link rel="stylesheet" href="../../css/consultainventarios.css" />
+    <title>Consulta Inventarios</title>
+  </head>
+  <body>
+    <header>
+      <h1>Consulta de Inventarios</h1>
+    </header>
+
+    <!------------------------- Contenido principal  -------------------->
+    <div class="form-container2">
+      <!-- -----------------Sección 1--------------------------------- -->
+      <section class="grid-section">
+        <div class="form-group item">
+          <label for="estado">Estado:</label>
+          <select id="estado" name="estado">
+            <option value="REENCAUCHADA">REENCAUCHADA</option>
+            <option value="REPARADA">REPARADA</option>
+            <option value="RECHAZADA">RECHAZADA</option>
+            <option value="APTA">APTA</option>
+            <option value="PENDIENTE">PENDIENTE</option>
+          </select>
+        </div>
+
+        <div class="form-group item">
+          <label for="fechaInv">Fecha:</label>
+          <input type="text" id="fechaInv" name="fechaInv" value="07/07/2023" />
+        </div>
+
+        <div class="form-group item">
+          <label for="ubicacion">Ubicación:</label>
+          <select id="ubicacion" name="ubicacion">
+            <option value="PLANTA">PLANTA</option>
+            <option value="BODEGA1">BODEGA1</option>
+            <option value="BODEGA2">BODEGA2</option>
+          </select>
+        </div>
+      </section>
+    </div>
+    <!-- -----------------------2--------------------------------- -->
+
+    <div class="flex-container-wrap">
+      <section class="flex-container-column">
+        <p>Ordenar por:</p>
+        <br />
+        <div class="radio-container">
+          <input
+            type="radio"
+            name="option-ordenar"
+            id="option-dimension"
+            value="dimension"
+            checked
+          />
+          <label for="option-dimension">Dimensión - Diseño</label>
+
+          <input
+            type="radio"
+            name="option-ordenar"
+            id="option-tiquete"
+            value="tiquete"
+          />
+          <label for="option-tiquete">Tiquete</label>
+        </div>
+      </section>
+
+      <section class="flex-container-column">
+        <p>Opciones de impresión</p>
+        <div class="flex-container-wrap">
+          <button class="print-preview-btn primary-button graph-button">
+            <img src="../../img/vista_previa.png" alt="Vista Previa" />
+          </button>
+          <button class="print-btn primary-button graph-button">
+            <img src="../../img/imprimir.png" alt="Imprimir" />
+          </button>
+          <button class="download-excel-btn primary-button graph-button">
+            <img
+              src="../../img/Microsoft-Excel-Logo.png"
+              alt="Enviar a excel"
+            />
+          </button>
+        </div>
+      </section>
+    </div>
+    <script
+      src="https://kit.fontawesome.com/f3b6c3464d.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

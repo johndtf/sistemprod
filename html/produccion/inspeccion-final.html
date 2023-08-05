@@ -6,12 +6,12 @@
 
     <link rel="stylesheet" href="../../css/reset.css" />
     <link rel="stylesheet" href="../../css/produccion.css" />
-    <link rel="stylesheet" href="../../css/preparacion.css" />
-    <title>Preparación</title>
+    <link rel="stylesheet" href="../../css/inspeccion-final.css" />
+    <title>Inspección Final</title>
   </head>
   <body>
     <header>
-      <h1>Preparación</h1>
+      <h1>Inspección Final</h1>
     </header>
     <div class="sidebar">
       <div class="logo">
@@ -31,44 +31,44 @@
             <span class="description">Raspado</span>
           </a>
         </li>
-        <li class="current">
+        <li class="completed">
           <a href="#" aria-label="Preparación">
             <i class="fa-solid fa-person-digging"></i>
             <span class="description">Preparación</span>
           </a>
         </li>
-        <li>
+        <li class="completed">
           <a href="#" aria-label="Reparación">
             <i class="fas fa-tools"></i>
             <span class="description">Reparación</span>
           </a>
         </li>
-        <li>
+        <li class="completed">
           <a href="#" aria-label="Relleno">
             <i class="fas fa-fill"></i>
             <span class="description">Relleno</span>
           </a>
         </li>
-        <li>
+        <li class="completed">
           <a href="#" aria-label="Corte de banda">
             <i class="fas fa-cut"></i>
             <span class="description">Corte de banda</span>
           </a>
         </li>
-        <li>
+        <li class="completed">
           <a href="#" aria-label="Embandado">
             <i class="fas fa-toolbox"></i>
             <!-- <img src="../../img/embandado.png" alt="" /> -->
             <span class="description">Embandado</span>
           </a>
         </li>
-        <li>
+        <li class="completed">
           <a href="#" aria-label="Vulcanización">
             <i class="fas fa-fire"></i>
             <span class="description">Vulcanización</span>
           </a>
         </li>
-        <li>
+        <li class="current">
           <a href="#" aria-label="Inspección Final">
             <i class="fas fa-search"></i>
             <span class="description">Inspección Final</span>
@@ -150,81 +150,73 @@
             readonly
           />
         </div>
-
-        <!-- Opciones tipo radio para mostrar retiro de cinturon -->
-        <div class="form-group item">
-          <label for="">Retiro C:</label>
-          <div class="radio-container">
-            <input
-              type="radio"
-              name="option-show-rc"
-              id="option-1"
-              value="Si"
-              disabled
-            />
-            <label for="option-1">Si</label>
-
-            <input
-              type="radio"
-              name="option-show-rc"
-              id="option-2"
-              value="No"
-              checked
-              disabled
-            />
-            <label for="option-2">No</label>
-          </div>
-        </div>
       </section>
       <!-- ----------------------------sección 2-------------------------- -->
-      <div class="flex-container-wrap">
-        <div class="form-container2x1">
-          <section class="grid-section">
-            <div class="form-group item large-size">
-              <label for="tiquete">Tiquete:</label>
-              <input type="text" id="tiquete" name="tiquete" value="19879" />
-            </div>
-          </section>
+      <div class="form-container2x1">
+        <section class="flex-container-wrap">
+          <div class="form-group item large-size">
+            <label for="tiquete">Tiquete:</label>
+            <input type="text" id="tiquete" name="tiquete" value="19879" />
+          </div>
 
-          <section class="button-group">
-            <button class="preparar-llanta-btn primary-button">
-              Actualizar Preparación
-            </button>
-          </section>
-        </div>
-        <!-- ------------------------------sección 3-------------------------- -->
-        <div class="form-container2x1">
-          <section class="grid-section">
-            <div class="form-group item large-size">
-              <label for="codinsp">Cod. Insp:</label>
-              <select id="codinsp" name="codinsp">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-              </select>
-            </div>
-            <div class="form-group item double-large-size">
-              <!-- <label for="reencauches">Nivel Reenc.:</label> -->
+          <div class="form-group item large-size">
+            <label for="fecha">fecha:</label>
+            <input type="text" id="fecha" name="fecha" value="03/08/2023" />
+          </div>
+
+          <div class="form-group item">
+            <div class="radio-container">
               <input
-                type="text"
-                id="resolinspect"
-                name="resolinspect"
-                value="RODADA A BAJA PRESIÓN"
+                type="radio"
+                name="option-procesada"
+                id="option-reencauchada"
+                value="reencauchada"
+                checked
               />
+              <label for="option-reencauchada">Reencauchada</label>
+
+              <input
+                type="radio"
+                name="option-procesada"
+                id="option-reparada"
+                value="raparada"
+              />
+              <label for="option-reparada">Reparada</label>
             </div>
-          </section>
-          <section class="button-group">
-            <button class="rechazo-preparacion-btn danger-button">
-              Rechazar llanta
-            </button>
-          </section>
-        </div>
+          </div>
+        </section>
+        <section class="button-group">
+          <button class="inspect-llanta-btn primary-button">Actualizar</button>
+
+          <button class="cancel-inspect-btn danger-button">Deshacer</button>
+        </section>
+      </div>
+      <div class="form-container2x1">
+        <section class="grid-section">
+          <div class="form-group item large-size">
+            <label for="codinsp">Cod. Insp:</label>
+            <select id="codinsp" name="codinsp">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+          </div>
+          <div class="form-group item double-large-size">
+            <!-- <label for="reencauches">Nivel Reenc.:</label> -->
+            <input
+              type="text"
+              id="resolinspect"
+              name="resolinspect"
+              value="RODADA A BAJA PRESIÓN"
+            />
+          </div>
+        </section>
+        <section class="button-group">
+          <button class="rechazo-preparacion-btn danger-button">
+            Rechazar llanta
+          </button>
+        </section>
       </div>
     </div>
-
-    <script
-      src="https://kit.fontawesome.com/f3b6c3464d.js"
-      crossorigin="anonymous"
-    ></script>
   </body>
 </html>

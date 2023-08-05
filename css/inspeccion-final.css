@@ -1,0 +1,13 @@
+.large-size {
+  /*  flex-grow: 1; */
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+.large-size input[type="text"] {
+  width: 12rem;
+}
+
+.large-size label {
+  min-width: 6rem;
+}

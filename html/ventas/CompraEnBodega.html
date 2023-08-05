@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/produccion.css" />
+    <!-- <link rel="stylesheet" href="../../css/terminacion.css" /> -->
+    <title>Compra de Casco en Bodega</title>
+  </head>
+  <body>
+    <header>
+      <h1>Compra de Casco en Bodega</h1>
+    </header>
+
+    <!------------------------- Contenido principal  -------------------->
+    <div class="form-container2">
+      <!-- -----------------Sección 1--------------------------------- -->
+      <section class="grid-section">
+        <div class="form-group item">
+          <label for="cedula">Cédula/nit:</label>
+          <input
+            type="text"
+            id="cedula"
+            name="cedula"
+            value="1.123.567.890-1"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item double-size">
+          <label for="cliente">Cliente:</label>
+          <input
+            type="text"
+            id="cliente"
+            name="cliente"
+            value="NOMBRE1 NOMBRE2 APELLIDOEJEMPLO1 APELLIDO EJEMPLO2"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="orden">Orden:</label>
+          <input type="text" id="orden" name="orden" value="8879" readonly />
+        </div>
+
+        <div class="form-group item">
+          <label for="fechaOs">Fecha O.S.:</label>
+          <input
+            type="text"
+            id="fechaOs"
+            name="fechaOs"
+            value="07/07/2023"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="ubicacion">Ubicación:</label>
+          <input
+            type="text"
+            id="ubicacion"
+            name="ubicacion"
+            value="CLIENTE"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="dimension">Dimensión:</label>
+          <input
+            type="text"
+            id="dimension"
+            name="dimension"
+            value="275/80R22.5"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="diseno">Diseño:</label>
+          <input type="text" id="diseno" name="diseno" value="VDE2" readonly />
+        </div>
+
+        <div class="form-group item">
+          <label for="marca">Marca:</label>
+          <input
+            type="text"
+            id="marca"
+            name="marca"
+            value="Goodyear"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="estado">Estado:</label>
+          <input
+            type="text"
+            id="estado"
+            name="estado"
+            value="Reencauchada"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="nivel_r">Nivel Reenc:</label>
+          <input type="text" id="nivel_r" name="nivel_r" value="1" readonly />
+        </div>
+
+        <div class="form-group item">
+          <label for="doccomprac">Doc. Compra:</label>
+          <input
+            type="text"
+            id="doccomprac"
+            name="doccomprac"
+            value="123"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="valorCompra">Valor Compra:</label>
+          <input
+            type="text"
+            id="valorCompra"
+            name="valorCompra"
+            value="150.000"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item">
+          <label for="fechaCompra">Fecha Compra:</label>
+          <input
+            type="text"
+            id="fechaCompra"
+            name="fechaCompra"
+            value="07/07/2023"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item double-size">
+          <label for="vendedorc">Comprada a:</label>
+          <input
+            type="text"
+            id="vendedorc"
+            name="vendedorc"
+            value="NOMBRE EJEMPLO DE QUIEN VENDE"
+            readonly
+          />
+        </div>
+
+        <div class="form-group item double-size">
+          <label for="observacionc">Observación:</label>
+          <input
+            type="text"
+            id="observacionc"
+            name="observacionc"
+            value="OBSERVACIÓN DE LA COMPRA"
+            readonly
+          />
+        </div>
+      </section>
+    </div>
+    <!-- -----------------------2--------------------------------- -->
+
+    <div class="form-container">
+      <section class="grid-section">
+        <div class="form-group item">
+          <label for="tiquete">Tiquete:</label>
+          <input type="text" id="tiquete" name="tiquete" value="19821" />
+        </div>
+        <div class="form-group item">
+          <label for="documento">Documento:</label>
+          <input type="text" id="documento" name="documento" />
+        </div>
+
+        <div class="form-group item">
+          <label for="valor">Valor:</label>
+          <input type="text" id="valor" name="valor" />
+        </div>
+
+        <div class="form-group item">
+          <label for="fechaCompra">Fecha Compra:</label>
+          <input type="text" id="fechaCompra" name="fechaCompra" />
+        </div>
+
+        <div class="form-group item double-size">
+          <label for="Observacion">Observacion:</label>
+          <input type="text" id="Observacion" name="Observacion" />
+        </div>
+      </section>
+      <section class="button-group">
+        <button class="compra-casco-btn primary-button">Actualizar</button>
+        <button class="deshacer-comprac-btn danger-button">Deshacer</button>
+      </section>
+    </div>
+    <script
+      src="https://kit.fontawesome.com/f3b6c3464d.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

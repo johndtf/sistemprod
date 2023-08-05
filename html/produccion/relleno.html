@@ -131,7 +131,7 @@
         </div>
 
         <div class="form-group item">
-          <label for="diseno">diseño:</label>
+          <label for="diseno">Diseño:</label>
           <input type="text" id="diseno" name="diseno" value="VZE2" readonly />
         </div>
 
@@ -198,34 +198,49 @@
         </div>
       </section>
       <!-- ------------------------------sección 3-------------------------- -->
-      <div class="form-container2x1">
-        <section class="grid-section">
-          <div class="form-group item large-size">
-            <label for="codinsp">Cod. Insp:</label>
-            <select id="codinsp" name="codinsp">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-            </select>
-          </div>
-          <div class="form-group item double-large-size">
-            <!-- <label for="reencauches">Nivel Reenc.:</label> -->
-            <input
-              type="text"
-              id="resolinspect"
-              name="resolinspect"
-              value="RODADA A BAJA PRESIÓN"
-            />
-          </div>
-        </section>
-        <section class="button-group">
-          <button class="relleno-llanta-btn primary-button">
-            Actualizar Relleno
-          </button>
-          <button class="rechazo-preparacion-btn danger-button">
-            Rechazar llanta
-          </button>
-        </section>
+      <div class="flex-container-wrap">
+        <div class="flex-container-wrap">
+          <section class="grid-section">
+            <div class="form-group item large-size">
+              <label for="tiquete">Tiquete:</label>
+              <input type="text" id="tiquete" name="tiquete" value="19879" />
+            </div>
+          </section>
+
+          <section class="button-group">
+            <button class="rellenar-llanta-btn primary-button">
+              Actualizar Relleno
+            </button>
+          </section>
+        </div>
+
+        <!-- -------------------------------sección 4 --------------------------->
+        <div class="form-container2x1">
+          <section class="grid-section">
+            <div class="form-group item large-size">
+              <label for="codinsp">Cod. Insp:</label>
+              <select id="codinsp" name="codinsp">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+            <div class="form-group item double-large-size">
+              <!-- <label for="reencauches">Nivel Reenc.:</label> -->
+              <input
+                type="text"
+                id="resolinspect"
+                name="resolinspect"
+                value="RODADA A BAJA PRESIÓN"
+              />
+            </div>
+          </section>
+          <section class="button-group">
+            <button class="rechazo-preparacion-btn danger-button">
+              Rechazar llanta
+            </button>
+          </section>
+        </div>
       </div>
     </div>
     <!-- <script src="../../js/relleno.js"></script> -->
