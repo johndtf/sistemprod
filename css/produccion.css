@@ -74,6 +74,7 @@ header {
 /* =============Estilos para input text y select de solo lectura y para ingreso ====== */
 
 input[type="text"],
+input[type="password"],
 select {
   width: 10rem;
   padding: 2px 2px;

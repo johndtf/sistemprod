@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/produccion.css" />
+    <link rel="stylesheet" href="../../css/administracion.css" />
+    <title>Permisos</title>
+  </head>
+  <body>
+    <header>
+      <h1>Actualizar Permisos de Perfil</h1>
+    </header>
+
+    <!-- Contenido principal  -->
+    <form class="form">
+      <div class="form-group">
+        <label for="perfil">Seleccionar Perfil:</label>
+        <select id="perfil" name="perfil">
+          <option value="OPERARIO">OPERARIO</option>
+          <option value="INGENIERO_DE_PLANTA">INGENIERO DE PLANTA</option>
+          <option value="JEFE_DE_VENTAS">JEFE DE VENTAS</option>
+        </select>
+      </div>
+      <section class="button-group">
+        <button class="actualizar-permisos-btn primary-button">
+          Actualizar Permisos
+        </button>
+      </section>
+    </form>
+
+    <section class="grid-section">
+      <label>
+        <input type="checkbox" name="ordenes" value="ordenes" />
+        Ordenes
+      </label>
+      <label>
+        <input type="checkbox" name="salidasProce" value="salidasProce" />
+        Salidas procesadas
+      </label>
+      <label>
+        <input type="checkbox" name="salidasrech" value="salidasrech" />
+        Salidas Rechazadas
+      </label>
+      <label>
+        <input type="checkbox" name="garantias" value="garantias" />
+        Garantías
+      </label>
+      <label>
+        <input type="checkbox" name="inspIninical" value="inspIninical" />
+        Inspección Inicial
+      </label>
+      <label>
+        <input type="checkbox" name="raspado" value="raspado" />
+        Raspado
+      </label>
+      <label>
+        <input type="checkbox" name="preparacion" value="preparacion" />
+        Preparación
+      </label>
+      <label>
+        <input type="checkbox" name="reparacion" value="reparacion" />
+        Reparación
+      </label>
+      <label>
+        <input type="checkbox" name="relleno" value="relleno" />
+        Relleno
+      </label>
+      <label>
+        <input type="checkbox" name="corteBanda" value="corteBanda" />
+        Corte de Banda
+      </label>
+      <label>
+        <input type="checkbox" name="embandado" value="embandado" />
+        Embandado
+      </label>
+      <label>
+        <input type="checkbox" name="vulcanizacion" value="vulcanizacion" />
+        Vulcanización
+      </label>
+      <label>
+        <input type="checkbox" name="inspefinal" value="inspefinal" />
+        Inspección final
+      </label>
+      <label>
+        <input type="checkbox" name="terminacion" value="terminacion" />
+        Terminación
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="entregareencauche"
+          value="entregareencauche"
+        />
+        Facturación Procesadas
+      </label>
+      <label>
+        <input type="checkbox" name="entregarechazo" value="entregarechazo" />
+        Entrega Rechazo a Cliente
+      </label>
+      <label>
+        <input type="checkbox" name="compraBodega" value="compraBodega" />
+        Compra de cascos en Bodega
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="consultaClientes"
+          value="consultaClientes"
+        />
+        Consulta para Clientes
+      </label>
+      <label>
+        <input type="checkbox" name="incices" value="incices" />
+        Íncices
+      </label>
+      <label>
+        <input type="checkbox" name="consultaventas" value="consultaventas" />
+        Consulta de Ventas
+      </label>
+      <label>
+        <input
+          type="checkbox"
+          name="consultaInventarios"
+          value="consultaInventarios"
+        />
+        Consulta de Inventarios
+      </label>
+      <label>
+        <input type="checkbox" name="empleados" value="empleados" />
+        Actualizar Empleados
+      </label>
+      <label>
+        <input type="checkbox" name="permisos" value="permisos" />
+        Asignar Permisos
+      </label>
+      <label>
+        <input type="checkbox" name="empresa" value="empresa" />
+        Actualizar información Empresa
+      </label>
+    </section>
+
+    <script
+      src="https://kit.fontawesome.com/f3b6c3464d.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
