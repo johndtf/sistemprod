@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/produccion.css" />
+    <link rel="stylesheet" href="../../css/administracion.css" />
+    <title>Empresa</title>
+  </head>
+  <body>
+    <header>
+      <h1>Actualizar Empresa</h1>
+    </header>
+
+    <!-- Contenido principal  -->
+    <form class="form">
+      <h2>Actualizar Empresa</h2>
+      <div class="form-group">
+        <label for="userid">Cédula/Nit:</label>
+        <input
+          type="search"
+          id="userid"
+          name="userid"
+          value="1.234.567.890-1"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="usernames">Nombres:</label>
+        <input
+          type="text"
+          id="usernames"
+          name="usernames"
+          value="EMPRESA ABC REENCAUCHE"
+          readonly
+        />
+      </div>
+      <div class="form-group">
+        <label for="userlastnames">Apellidos:</label>
+        <input
+          type="text"
+          id="userlastnames"
+          name="userlastnames"
+          required
+          readonly
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="eslogan">Eslogan:</label>
+        <textarea
+          name="eslogan"
+          id="eslogan"
+          class="eslogan"
+          cols="34"
+          rows="3"
+        >
+EL MEJOR PRODUCTO A LOS MEJORES PRECIOS</textarea
+        >
+      </div>
+
+      <div class="enterprice-logo">
+        <img src="../../img/logoempresa.png" alt="" />
+      </div>
+      <div class="button-group">
+        <button
+          type="button"
+          class="primary-button short-button"
+          id="change-logo-btn"
+        >
+          Cambiar Logo
+        </button>
+        <button
+          type="button"
+          class="primary-button short-button"
+          id="Actualizar-btn"
+        >
+          Actualizar
+        </button>
+      </div>
+    </form>
+
+    <script
+      src="https://kit.fontawesome.com/f3b6c3464d.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
