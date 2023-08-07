@@ -25,6 +25,7 @@
   --black-alpha-color: rgba(0, 0, 0, 0.5);
   --font: Arial, Helvetica, sans-serif;
   --max-width: 1400px;
+  --border1: thin solid var(--second-color);
 }
 html {
   box-sizing: border-box;
