@@ -74,20 +74,6 @@ btnRecuperar.addEventListener("click", () => {
   modalRecuperar.style.display = "block";
 });
 
-/* btnRecuperar.addEventListener("click", (event) => {
-  event.stopPropagation(); // Evita la propagación del evento
-  modalRecuperar.style.display = "block";
-}); */
-
-/* mostrar el formulario de ingresar nuevo usuario desde el botón respectivo */
-
-const btnRegister = document.getElementById("btnRegister");
-const modalRegistro = document.getElementById("modal-nuevo-usuario");
-
-btnRegister.addEventListener("click", () => {
-  modalRegistro.style.display = "block";
-});
-
 //================Form recuperar contraseña===================================
 
 // Boton Aceptar, solo salir del formulario, lo demás pendiente por programar
@@ -95,23 +81,6 @@ btnRegister.addEventListener("click", () => {
 const btnAceptarNuevaClave = document.getElementById("nuevaClave-btn");
 btnAceptarNuevaClave.addEventListener("click", () => {
   modalRecuperar.style.display = "none";
-});
-// ==============Form Ingresar Nuevo Usuario ======================================
-
-// Agrega el evento para cerrar el modal de ingresar nuevo usuario al hacer clic en el botón de cierre
-
-// Obtener el botón de cierre por su clase
-const closeButton = document.querySelector(".close");
-
-// Agregar un evento de clic al botón de cierre
-closeButton.addEventListener("click", () => {
-  modalRegistro.style.display = "none";
-});
-
-//Botón Aceptar, solo sale del formulario, pendiente el resto de programación
-const btnAceptarNuevoUsuario = document.getElementById("nuevoUsuario-btn");
-btnAceptarNuevoUsuario.addEventListener("click", () => {
-  modalRegistro.style.display = "none";
 });
 
 /*====================Form Error=================0*/

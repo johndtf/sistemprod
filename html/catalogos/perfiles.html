@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfiles</title>
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/produccion.css" />
+    <link rel="stylesheet" href="../../css/catalogos.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Perfiles</h1>
+    </header>
+
+    <form class="form">
+      <h2>Actualizar Perfiles</h2>
+      <div class="form-group">
+        <label for="profileName">Nombre:</label>
+        <input
+          type="text"
+          id="profileName"
+          name="profileName"
+          required
+          readonly
+        />
+      </div>
+      <div class="form-group">
+        <label for="profileDescription">Descripción:</label>
+        <input
+          type="text"
+          id="profileDescription"
+          name="profileDescription"
+          required
+          readonly
+        />
+      </div>
+
+      <div class="button-group">
+        <button
+          type="button"
+          class="primary-button short-button"
+          id="newProfile-btn"
+        >
+          Agregar
+        </button>
+        <button
+          type="button"
+          class="primary-button short-button"
+          id="modifyProfile-btn"
+        >
+          Modificar
+        </button>
+        <button
+          type="button"
+          class="primary-button short-button"
+          id="findProfile-btn"
+        >
+          Buscar
+        </button>
+        <button
+          type="button"
+          class="primary-button short-button"
+          id="cancelProfile-btn"
+        >
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </body>
+</html>

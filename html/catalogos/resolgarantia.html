@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resolución Garantías</title>
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/produccion.css" />
+    <link rel="stylesheet" href="../../css/catalogos.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Resolución Garantías</h1>
+    </header>
+
+    <form class="form">
+      <h2>Actualizar Resoluciones de Garantías</h2>
+      <div class="form-group">
+        <label for="resol-garantia-codigo">Código:</label>
+        <input
+          type="text"
+          id="resol-garantia-codigo"
+          name="resol-garantia-codigo"
+          value="RB"
+          required
+          readonly
+        />
+      </div>
+      <div class="form-group">
+        <label for="resol-garantia-Description">Descripción:</label>
+        <input
+          type="text"
+          id="resol-garantia-Description"
+          name="resol-garantia-Description"
+          value="RODADA A BAJA PRESIÓN"
+          required
+          readonly
+        />
+      </div>
+
+      <div class="button-group">
+        <button
+          type="button"
+          class="primary-button short-button"
+          id="newResolGarant-btn"
+        >
+          Agregar
+        </button>
+        <button
+          type="button"
+          class="primary-button short-button"
+          id="modifyResolGarant-btn"
+        >
+          Modificar
+        </button>
+        <button
+          type="button"
+          class="primary-button short-button"
+          id="findResolGarant-btn"
+        >
+          Buscar
+        </button>
+        <button
+          type="button"
+          class="primary-button short-button"
+          id="cancelResolGarant-btn"
+        >
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </body>
+</html>
