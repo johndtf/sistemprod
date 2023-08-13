@@ -60,9 +60,9 @@
           type="radio"
           id="tab-5"
           name="tabs"
-          onclick="hideTabsMenu(); loadPage('html/administracion/administracion.html')"
+          onclick="hideTabsMenu(); loadPage('html/catalogos/menu_catalogos.html')"
         />
-        <label for="tab-5">Administración</label>
+        <label for="tab-5">Catálogos</label>
 
         <input
           type="radio"
@@ -119,17 +119,13 @@
             Recuperar contraseña
           </button>
         </div>
-        <div class="register">
-          <button type="button" id="btnRegister" class="buttomLink">
-            Registrarse
-          </button>
-        </div>
       </form>
     </div>
 
     <!-- fORM para recuperar contraseña -->
     <div id="modal-recuperar-contrasena" class="modal">
       <form class="form">
+        <br />
         <h2>Recuperar contraseña</h2>
         <div class="form-group">
           <input
@@ -141,7 +137,7 @@
           <label for="username-recovery">Usuario:</label>
         </div>
         <div>
-          <button type="button" class="butomForm">Generar Pin</button>
+          <button type="button" class="butonForm">Generar Pin</button>
         </div>
 
         <div class="centerText">
@@ -167,77 +163,16 @@
           <label for="nuevaClave2">Confirma tu nueva clave</label>
         </div>
         <div>
-          <button type="button" class="butomForm" id="nuevaClave-btn">
+          <button type="button" class="butonForm" id="nuevaClave-btn">
             Aceptar
           </button>
         </div>
       </form>
     </div>
 
-    <!-- fORM para ingreso de nuevo usuario -->
-
-    <div id="modal-nuevo-usuario" class="modal">
-      <form class="form">
-        <span class="close">&times;</span>
-        <h2>Nuevo Usuario</h2>
-        <div class="form-group">
-          <input type="text" id="usernames" name="usernames" required />
-          <label for="usernames">Nombres:</label>
-        </div>
-        <div class="form-group">
-          <input type="text" id="userlastnames" name="userlastnames" required />
-          <label for="userlastnames">Apellidos:</label>
-        </div>
-        <div class="form-group">
-          <input type="text" id="userid" name="userid" required />
-          <label for="userid">Cédula/Nit:</label>
-        </div>
-
-        <div class="form-group">
-          <input type="text" id="email" name="email" required />
-          <label for="email">Correo electrónico:</label>
-        </div>
-
-        <div class="form-group">
-          <input type="text" id="telefono" name="telefono" required />
-          <label for="telefono">Teléfono:</label>
-        </div>
-        <div class="form-group">
-          <input type="text" id="direccion" name="direccion" required />
-          <label for="direccion">Dirección:</label>
-        </div>
-
-        <div class="form-radio">
-          <span>Cliente</span>
-          <input
-            type="radio"
-            name="radio_tipo"
-            id="radio-cliente"
-            value="cliente"
-            checked
-          />
-        </div>
-        <!-- <label for="radio-cliente">Cliente</label> -->
-        <div class="form-radio">
-          <span>Empleado</span>
-          <input
-            type="radio"
-            name="radio_tipo"
-            id="radio-empleado"
-            value="empleado"
-          />
-          <!-- <label for="radio-empleado">Empleado</label> -->
-        </div>
-        <div>
-          <button type="button" class="butomForm" id="nuevoUsuario-btn">
-            Aceptar
-          </button>
-        </div>
-      </form>
-    </div>
     <!-- ==================Form pantalla de error============= -->
     <div id="error-message" class="error-message">
-      <h2>Mensaje de error</h2>
+      <h2>Información Incompleta</h2>
       <div class="error-icon">
         <i class="fa-solid fa-triangle-exclamation"></i>
       </div>

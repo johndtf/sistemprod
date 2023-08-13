@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Causas de Reprocesos</title>
+    <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/produccion.css" />
+    <link rel="stylesheet" href="../../css/catalogos.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Causas de Reprocesos</h1>
+    </header>
+
+    <form class="form">
+      <h2>Actualizar Causas de Reprocesos</h2>
+      <div class="form-group">
+        <label for="causa-repro-codigo">Código:</label>
+        <input
+          type="text"
+          id="causa-repro-codigo"
+          name="causa-repro-codigo"
+          value="FV"
+          required
+          readonly
+        />
+      </div>
+      <div class="form-group">
+        <label for="causa-repro-Description">Descripción:</label>
+        <input
+          type="text"
+          id="causa-repro-Description"
+          name="causa-repro-Description"
+          value="FALLA DE VULCANIZACION"
+          required
+          readonly
+        />
+      </div>
+
+      <div class="button-group">
+        <button
+          type="button"
+          class="primary-button short-button"
+          id="newCausaRepro-btn"
+        >
+          Agregar
+        </button>
+        <button
+          type="button"
+          class="primary-button short-button"
+          id="modifyCausaRepro-btn"
+        >
+          Modificar
+        </button>
+        <button
+          type="button"
+          class="primary-button short-button"
+          id="findCausaRepro-btn"
+        >
+          Buscar
+        </button>
+        <button
+          type="button"
+          class="primary-button short-button"
+          id="cancelCausaRepro-btn"
+        >
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </body>
+</html>

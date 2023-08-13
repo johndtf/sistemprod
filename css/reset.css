@@ -10,8 +10,10 @@
   --second-alpha-color: rgba(92, 130, 115, 0.75);
 
   --third-color: rgb(80, 20, 100);
-
   --third-alpha-color: rgba(80, 20, 100, 0.75);
+
+  --alert-color: red;
+
   --white-color: #fff;
   --gray-light-color: #f3f3f3;
   --gray-color: #ccc;

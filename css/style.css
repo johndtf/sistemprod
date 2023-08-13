@@ -71,6 +71,7 @@ img {
   border-radius: 0.5rem;
   /* la siguiente linea sería para que aparezca desde un principio*/
   background-image: linear-gradient(90deg, #f00, #d00);
+
   transition: transform 300ms ease-in-out;
 }
 
@@ -122,7 +123,7 @@ img {
   display: block;
   width: 100%;
   height: 2px;
-  background-color: red;
+  background-color: var(--alert-color);
   margin-top: 6px;
   transform-origin: 0px 100%;
   transition: all 300ms;
@@ -199,10 +200,6 @@ img {
   backdrop-filter: blur(3px);
 }
 
-/* .form:before {
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(3px);
-} */
 .form h2 {
   text-align: center;
   padding-bottom: 1rem;
@@ -267,20 +264,20 @@ input {
 
 /* Aspecto de los botones */
 input[type="submit"],
-.butomForm {
+.butonForm {
   background-color: #afabab;
   font-size: 16px;
-  border: none;
+  /* border: none; */
   width: 100%;
   padding: 10px 20px;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  /* margin-top: 0.5rem;
+  margin-bottom: 0.5rem; */
   cursor: pointer;
   border-radius: 5px;
 }
 
 input[type="submit"]:hover,
-.butomForm:hover {
+.butonForm:hover {
   color: #fff;
 }
 
@@ -317,9 +314,6 @@ iframe {
   display: none;
   width: 100%;
   height: auto;
-  /*   height: calc(
-    100vh - 50px
-  ); */ /* Ajusta la altura del iframe según el tamaño del viewport y la altura del encabezado */
   border: none;
 }
 
@@ -353,25 +347,57 @@ iframe.visible {
   display: none;
 }
 
-/* Formulario modal nuevo usuario*/
+/*====================Form para mensajes de error====================*/
 
-#modal-nuevo-usuario {
+.error-message {
   display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  /* padding: 20px; */
+  background-color: #f2f2f2;
+  border: 1px solid var(--black-color);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  z-index: 9999;
 }
 
-/* Clase del boton cerrar X formulario nuevo usuario*/
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+.error-message h2 {
+  margin: 0;
+  padding: 10px;
+  font-size: 18px;
+  color: var(--text-dark-color);
+  background-color: var(--alert-color);
+}
+
+.error-message p {
+  margin: 20px 0;
+  font-size: 14px;
+  color: var(--text-dark-color);
+}
+
+.error-message button {
+  padding: 8px 16px;
+  width: 60%;
+  margin-bottom: 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
-  padding: 0.1rem 0.5rem;
 }
 
-.close:hover {
-  color: #000;
-  background-color: #d00;
+.error-message button:hover {
+  background-color: #0056b3;
+}
+
+.error-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+  color: var(--alert-color);
 }
 
 /*==========================MEDIA QUERIE TABLETAS============================*/
@@ -426,62 +452,3 @@ iframe.visible {
     display: block;
   }
 }
-
-/*====================Form para mensajes de error====================*/
-
-.error-message {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 300px;
-  /* padding: 20px; */
-  background-color: #f2f2f2;
-  border: 1px solid var(--black-color);
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  z-index: 9999;
-}
-
-.error-message h2 {
-  margin: 0;
-  padding: 10px;
-  font-size: 18px;
-  color: var(--gray-color);
-  background-color: var(--black-color);
-}
-
-.error-message p {
-  margin: 20px 0;
-  font-size: 14px;
-  color: #666;
-}
-
-.error-message button {
-  padding: 8px 16px;
-  width: 60%;
-  margin-bottom: 20px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.error-message button:hover {
-  background-color: #0056b3;
-}
-
-.error-icon {
-  font-size: 32px;
-  margin-bottom: 10px;
-  color: #ff0000;
-}
-
-/* ================ comentar esto ================*/
-/* #modal-ingreso {
-  display: none;
-} */
-/*==================================================*/
