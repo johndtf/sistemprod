@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../css/reset.css" />
     <link rel="stylesheet" href="../../css/produccion.css" />
     <link rel="stylesheet" href="../../css/catalogos.css" />
+    <link rel="stylesheet" href="../../css/clientes.css" />
   </head>
   <body>
     <header>
@@ -29,6 +30,7 @@
       </div>
       <div class="form-group">
         <label for="userlastnames">Apellidos:</label>
+
         <input
           type="text"
           id="userlastnames"
@@ -41,14 +43,17 @@
       </div>
       <div class="form-group">
         <label for="userid">Cédula/Nit:</label>
-        <input
-          type="text"
-          id="userid"
-          name="userid"
-          value="1.234.567.890-1"
-          required
-          readonly
-        />
+        <div>
+          <input
+            type="text"
+            id="userid"
+            name="userid"
+            value="12345678901"
+            required
+            readonly
+          />
+          <input type="text" id="userdv" name="userdv" value="1" readonly />
+        </div>
       </div>
 
       <div class="form-group">
