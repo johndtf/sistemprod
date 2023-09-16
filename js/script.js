@@ -18,9 +18,13 @@ function animateBars() {
 }
 
 //=====================Función para cargar páginas en la página principal===================
+// Cargar una página web dentro de un iframe.
 function loadPage(pageURL) {
+  // Asigna la URL de la página al atributo src del elemento frameContainer.
   frameContainer.src = pageURL;
+  // Oculta el elemento con la clase "hero" al agregar la clase "hidden".
   hero.classList.add("hidden");
+  // Hace visible el elemento con la clase "frameContainer" al agregar la clase "visible".
   frameContainer.classList.add("visible");
 }
 
