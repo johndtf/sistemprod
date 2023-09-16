@@ -278,6 +278,22 @@ input[type="radio"]:checked + label:after {
   background-color: var(--second-dark-color);
 }
 
+/* =======================Boton desactivado========================= */
+/* Estilo para un botón deshabilitado */
+button:disabled {
+  background-color: #ccc; /* Cambia el color de fondo cuando está deshabilitado */
+  color: #999; /* Cambia el color del texto cuando está deshabilitado */
+  cursor: not-allowed; /* Cambia el cursor cuando está deshabilitado */
+  /* Otros estilos deseados */
+}
+
+/* Estilo para un botón deshabilitado cuando se coloca el cursor sobre él */
+button:disabled:hover {
+  background-color: #ccc; /* Cambia el color de fondo cuando está deshabilitado */
+  color: #999; /* Cambia el color del texto cuando está deshabilitado */
+  /* Otros estilos deseados */
+}
+
 /* Estilos para botón secundario */
 .secondary-button {
   background-color: #6c757d;
@@ -444,6 +460,10 @@ th {
 
 td {
   color: var(--text-dark-color);
+}
+
+a {
+  color: var(--link-color);
 }
 
 /* ----------------------------FIN TABLAS---------------------------- */

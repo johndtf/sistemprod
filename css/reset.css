@@ -19,7 +19,9 @@
   --gray-color: #ccc;
   --gray-dark-color: #4e4e4e;
   --black-color: #000;
-  --link-color: #509ee3;
+  /*  --link-color: #509ee3; */
+  --link-color: rgb(71, 241, 99);
+
   --title-color: #333;
   --text-dark-color: #000;
   --text-light-color: #fff;
@@ -49,6 +51,7 @@ body {
   padding: 0;
   max-width: var(--max-width);
   background-color: var(--background-color);
+  /* color: var(--text-light-color); */
 
   /* Tamaño de letra responsive */
   font-size: clamp(
