@@ -26,6 +26,8 @@
           readonly
         />
       </div>
+      <!-- Input para almacenar de manera invisible el id de la dimensión -->
+      <input type="hidden" id="dimension-id" name="dimension-id" />
 
       <div class="button-group">
         <button
@@ -57,6 +59,13 @@
           Cancelar
         </button>
       </div>
+
+      <a href="http://localhost:8080/dimensiones/">Listado de Dimensiones</a>
+      <!-- Div para mensajes de error -->
+      <div id="error-message" style="color: red"></div>
+      <!-- Div para resultados de busqueda -->
+      <div id="search-results" style="display: none"></div>
     </form>
+    <script src="../../js/dimensiones.js"></script>
   </body>
 </html>

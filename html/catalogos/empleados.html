@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../css/reset.css" />
     <link rel="stylesheet" href="../../css/produccion.css" />
     <link rel="stylesheet" href="../../css/catalogos.css" />
+    <link rel="stylesheet" href="../../css/empleados.css" />
   </head>
   <body>
     <header>
@@ -30,8 +31,8 @@
         />
       </div>
       <div class="form-group">
-        <label for="userid">Cédula/Nit:</label>
-        <input type="text" id="userid" name="userid" required readonly />
+        <label for="cedula">Cédula/Nit:</label>
+        <input type="text" id="cedula" name="cedula" required readonly />
       </div>
 
       <div class="form-group">
@@ -72,6 +73,9 @@
         <input type="text" id="state" name="state" required readonly />
       </div>
 
+      <!-- Input para almacenar de manera invisible el id del empleado -->
+      <input type="hidden" id="employee-id" name="employee-id" />
+
       <div class="button-group">
         <button
           type="button"
@@ -84,6 +88,7 @@
           type="button"
           class="primary-button short-button"
           id="modifyEmployee-btn"
+          disabled
         >
           Modificar
         </button>
@@ -102,6 +107,13 @@
           Cancelar
         </button>
       </div>
+      <a href="http://localhost:8080/empleados/">Listado de Empleados</a>
     </form>
+    <br />
+    <div id="employee-list" class="employee-list">
+      <!-- Aquí se muestra la lista de empleados -->
+    </div>
+
+    <script src="../../js/empleados.js"></script>
   </body>
 </html>

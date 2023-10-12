@@ -346,6 +346,12 @@ button:disabled:hover {
   margin-left: auto;
   margin-right: auto;
 }
+
+.success-button {
+  background-color: #4caf50; /* Verde */
+  color: #fff; /* Texto en blanco */
+}
+
 /*------------- Estilos para la barra lateral ----------------*/
 .sidebar {
   position: fixed;
