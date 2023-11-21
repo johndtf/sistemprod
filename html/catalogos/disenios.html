@@ -21,11 +21,14 @@
           type="text"
           id="designName"
           name="designName"
-          value="VDE2"
           required
           readonly
+          oninput="this.value = this.value.toUpperCase()"
         />
       </div>
+
+      <!-- Input para almacenar de manera invisible el id del diseño -->
+      <input type="hidden" id="design-id" name="ddesign-id" />
 
       <div class="button-group">
         <button
@@ -39,6 +42,7 @@
           type="button"
           class="primary-button short-button"
           id="modifyDesign-btn"
+          disabled
         >
           Modificar
         </button>
@@ -57,6 +61,27 @@
           Cancelar
         </button>
       </div>
+      <button type="button" id="listDesign-btn" class="buttonLink">
+        Listado de Diseños
+      </button>
+
+      <!-- Div para mensajes de error -->
+      <div id="error-message" style="color: red"></div>
+      <!-- Div para resultados -->
+      <div id="success-results" style="display: none"></div>
     </form>
+    <br />
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Dimensión</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Las filas se agregarán dinámicamente aquí -->
+      </tbody>
+    </table>
+    <script type="module" src="../../js/disenios.js"></script>
   </body>
 </html>
