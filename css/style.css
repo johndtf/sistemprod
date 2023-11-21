@@ -264,7 +264,7 @@ input {
 
 /* Aspecto de los botones */
 input[type="submit"],
-.butonForm {
+.buttonForm {
   background-color: #afabab;
   font-size: 16px;
   /* border: none; */
@@ -277,12 +277,12 @@ input[type="submit"],
 }
 
 input[type="submit"]:hover,
-.butonForm:hover {
+.buttonForm:hover {
   color: #fff;
 }
 
 /* botón con apariencia de enlace */
-.buttomLink {
+.buttonLink {
   background: none;
   border: none;
   color: var(--link-color);
@@ -293,7 +293,7 @@ input[type="submit"]:hover,
   font-size: 1rem;
 }
 
-.buttomLink:hover {
+.buttonLink:hover {
   color: rgb(196, 248, 239);
 }
 
@@ -399,7 +399,6 @@ iframe.visible {
   margin-bottom: 10px;
   color: var(--alert-color);
 }
-
 
 /*==========================MEDIA QUERIE TABLETAS============================*/
 @media (max-width: 1024px) {

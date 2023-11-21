@@ -267,7 +267,7 @@ input[type="radio"]:checked + label:after {
 }
 
 .primary-button:hover {
-  color: var(--text-light-color);
+  /* color: var(--text-light-color); */
 
   transform: translateY(-2px);
 }
@@ -329,7 +329,7 @@ button:disabled:hover {
 }
 
 /* Estilos para botón de enlace */
-.link-button {
+/* .link-button {
   background-color: transparent;
   color: #007bff;
   padding: 10px 20px;
@@ -337,6 +337,20 @@ button:disabled:hover {
   border-radius: 4px;
   cursor: pointer;
   text-decoration: underline;
+} */
+.buttonLink {
+  background: none;
+  border: none;
+  color: var(--link-color);
+  /*  width: 100%; */
+  margin: 0.5rem;
+  cursor: pointer;
+  /* font-style: italic; */
+  font-size: 1.2rem;
+}
+
+.buttonLink:hover {
+  color: rgb(196, 248, 239);
 }
 
 .graph-button {

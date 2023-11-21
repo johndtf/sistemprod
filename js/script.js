@@ -2,6 +2,11 @@ const hero = document.querySelector(".hero");
 const frameContainer = document.getElementById("frame-container");
 const tabsMenu = document.getElementById("tabs-menu");
 
+// Cuando se carga la página, establece el enfoque en el campo de texto de usuario
+document.addEventListener("DOMContentLoaded", function () {
+  document.getElementById("login").focus();
+});
+
 /* =================Menú Hamburguesa========================0 */
 document.querySelector(".bars-menu").addEventListener("click", animateBars);
 
@@ -17,7 +22,7 @@ function animateBars() {
   tabsMenu.classList.toggle("active");
 }
 
-//=====================Función para cargar páginas en la página principal===================
+//=====================Función para cargar páginas en la página  principal===================
 // Cargar una página web dentro de un iframe.
 function loadPage(pageURL) {
   // Asigna la URL de la página al atributo src del elemento frameContainer.
