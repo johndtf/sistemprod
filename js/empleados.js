@@ -140,9 +140,6 @@ modifyEmployeeButton.addEventListener("click", () => {
     idEmpleado = parseInt(employeeIdField.value);
     // Llama a una función para modificar el empleado
 
-    console.log(idEmpleado);
-    console.log(empleadoActualizado);
-
     modificarEmpleado(idEmpleado, empleadoActualizado);
   }
 });

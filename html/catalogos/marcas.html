@@ -15,6 +15,7 @@
 
     <form class="form" id="marcaForm">
       <h2>Actualizar Marcas</h2>
+
       <div class="form-group">
         <label for="brandName">Marca:</label>
         <input
@@ -25,6 +26,8 @@
           oninput="this.value = this.value.toUpperCase()"
         />
       </div>
+      <!-- Input para almacenar de manera invisible el id de la marca -->
+      <input type="hidden" id="brand-id" name="brand-id" />
 
       <div class="button-group">
         <button
@@ -56,25 +59,30 @@
         >
           Cancelar
         </button>
-
-        <button
-          type="button"
-          class="primary-button short-button"
-          id="deleteBrand-btn"
-          disabled
-        >
-          Eliminar
-        </button>
       </div>
-      <a href="http://localhost:8080/SistemProdWeb/marca-list"
-        >Listado de Marcas</a
-      >
+
+      <button type="button" id="listBrand-btn" class="buttonLink">
+        Listado de Marcas
+      </button>
 
       <!-- Div para mensajes de error -->
       <div id="error-message" style="color: red"></div>
       <!-- Div para resultados de busqueda -->
-      <div id="search-results" style="display: none"></div>
+      <div id="success-results" style="display: none"></div>
     </form>
-    <script src="../../js/marcas.js"></script>
+    <br />
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre de la Marca</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Las filas se agregarán dinámicamente aquí -->
+      </tbody>
+    </table>
+
+    <script type="module" src="../../js/marcas.js"></script>
   </body>
 </html>

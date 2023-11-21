@@ -21,9 +21,8 @@
           type="text"
           id="dimensionName"
           name="dimensionName"
-          value="295/80R22.5"
           required
-          readonly
+          oninput="this.value = this.value.toUpperCase()"
         />
       </div>
       <!-- Input para almacenar de manera invisible el id de la dimensión -->
@@ -41,6 +40,7 @@
           type="button"
           class="primary-button short-button"
           id="modifyDimension-btn"
+          disabled
         >
           Modificar
         </button>
@@ -60,12 +60,29 @@
         </button>
       </div>
 
-      <a href="http://localhost:8080/dimensiones/">Listado de Dimensiones</a>
+      <button type="button" id="listDimension-btn" class="buttonLink">
+        Listado de Dimensiones
+      </button>
+
       <!-- Div para mensajes de error -->
       <div id="error-message" style="color: red"></div>
-      <!-- Div para resultados de busqueda -->
-      <div id="search-results" style="display: none"></div>
+      <!-- Div para resultados -->
+      <div id="success-results" style="display: none"></div>
     </form>
-    <script src="../../js/dimensiones.js"></script>
+
+    <br />
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Dimensión</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Las filas se agregarán dinámicamente aquí -->
+      </tbody>
+    </table>
+
+    <script type="module" src="../../js/dimensiones.js"></script>
   </body>
 </html>
