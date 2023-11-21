@@ -33,7 +33,6 @@ newBrandButton.addEventListener("click", () => {
     brandNameField.value = ""; // Limpiar el valor del campo
     newBrandButton.textContent = "Aceptar";
     newBrandButton.classList.add("success-button");
-    findBrandButton.disabled = true;
     limpiarResultados();
     brandNameField.focus();
   } else {

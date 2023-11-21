@@ -31,7 +31,6 @@ newDimensionButton.addEventListener("click", () => {
     dimensionNameField.value = ""; // Limpiar el valor del campo
     newDimensionButton.textContent = "Aceptar";
     newDimensionButton.classList.add("success-button");
-    findDimensionButton.disabled = true;
     limpiarResultados();
     dimensionNameField.focus();
   } else {
