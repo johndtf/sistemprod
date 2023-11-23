@@ -110,7 +110,7 @@ modifyBrandButton.addEventListener("click", () => {
 /* ===========Botón Listado de Marcas ============================ */
 listBrandButton.addEventListener("click", async () => {
   // Realiza la solicitud al backend
-  const response = await fetch(`${apiUrl}/brands`);
+  const response = await fetch(`${apiUrl}/api/brands`);
   const marcas = await response.json();
   //Limpia el contenido de la tabla
   while (tableBody.firstChild) {
@@ -138,7 +138,7 @@ async function agregarMarca(nuevaMarca) {
   // Realizar una solicitud POST para crear la marca
 
   try {
-    const response = await fetch(`${apiUrl}/brands`, {
+    const response = await fetch(`${apiUrl}/api/brands`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -182,7 +182,7 @@ function limpiarResultados() {
 async function buscarMarcaEnBaseDeDatos(nombreMarca) {
   try {
     // Realiza una solicitud al servidor para buscar la marca
-    const response = await fetch(`${apiUrl}/brands/${nombreMarca}`);
+    const response = await fetch(`${apiUrl}/api/brands/${nombreMarca}`);
 
     if (response.status === 200) {
       const marcaEncontrada = await response.json();
@@ -214,7 +214,7 @@ async function buscarMarcaEnBaseDeDatos(nombreMarca) {
 async function actualizarDescripcionEnBaseDeDatos(idMarca, nuevaDescripcion) {
   try {
     // Realiza una solicitud PATCH para modificar la marca
-    const response = await fetch(`${apiUrl}/brands/${idMarca}`, {
+    const response = await fetch(`${apiUrl}/api/brands/${idMarca}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
