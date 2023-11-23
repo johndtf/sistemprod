@@ -21,9 +21,9 @@
           type="text"
           id="resol-insp-codigo"
           name="resol-insp-codigo"
-          value="A"
           required
           readonly
+          oninput="this.value = this.value.toUpperCase()"
         />
       </div>
       <div class="form-group">
@@ -32,11 +32,14 @@
           type="text"
           id="resolinspDescription"
           name="resolinspDescription"
-          value="APTA PARA REENCAUCHE"
           required
           readonly
+          oninput="this.value = this.value.toUpperCase()"
         />
       </div>
+
+      <!-- Input para almacenar de manera invisible el id de la resolución de inspección inicial-->
+      <input type="hidden" id="resolinsp-id" name="resolinsp-id" />
 
       <div class="button-group">
         <button
@@ -50,6 +53,7 @@
           type="button"
           class="primary-button short-button"
           id="modifyResolinsp-btn"
+          disabled
         >
           Modificar
         </button>
@@ -68,6 +72,30 @@
           Cancelar
         </button>
       </div>
+
+      <button type="button" id="listResolinsp-btn" class="buttonLink">
+        Listado de Resoluciones
+      </button>
+
+      <!-- Div para mensajes de error-->
+      <div id="error-message" style="color: red"></div>
+      <!-- Div para resultados -->
+      <div id="success-results" style="display: none"></div>
     </form>
+
+    <br />
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Código</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Las filas se agregarán dinámicamente aquí -->
+      </tbody>
+    </table>
+    <script type="module" src="../../js/resolinspec.js"></script>
   </body>
 </html>
