@@ -108,7 +108,7 @@ modifyDimensionButton.addEventListener("click", () => {
 /* ===========Botón Listado de Dimensiones ============================ */
 listDimensionButton.addEventListener("click", async () => {
   // Realiza la solicitud al backend
-  const response = await fetch(`${apiUrl}/dimensions`);
+  const response = await fetch(`${apiUrl}/api/dimensions`);
   const dimensiones = await response.json();
   //Limpia el contenido de la tabla
   while (tableBody.firstChild) {
@@ -136,7 +136,7 @@ async function agregarDimension(nuevaDimension) {
   // Realizar una solicitud POST para crear la dimensión
 
   try {
-    const response = await fetch(`${apiUrl}/dimensions`, {
+    const response = await fetch(`${apiUrl}/api/dimensions`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -180,7 +180,7 @@ function limpiarResultados() {
 async function buscarDimensionEnBaseDeDatos(nombreDimension) {
   try {
     // Realiza una solicitud al servidor para buscar la dimensión
-    const response = await fetch(`${apiUrl}/dimensions/${nombreDimension}`);
+    const response = await fetch(`${apiUrl}/api/dimensions/${nombreDimension}`);
 
     if (response.status === 200) {
       const dimensionEncontrada = await response.json();
@@ -218,7 +218,7 @@ async function actualizarDescripcionEnBaseDeDatos(
 ) {
   try {
     // Realiza una solicitud PATCH para modificar la dimensión
-    const response = await fetch(`${apiUrl}/dimensions/${idDimension}`, {
+    const response = await fetch(`${apiUrl}/api/dimensions/${idDimension}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

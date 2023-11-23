@@ -108,7 +108,7 @@ modifyDesignButton.addEventListener("click", () => {
 /* ===========Botón Listado de Diseños ============================ */
 listDesignButton.addEventListener("click", async () => {
   // Realiza la solicitud al backend
-  const response = await fetch(`${apiUrl}/treads`);
+  const response = await fetch(`${apiUrl}/api/treads`);
   const designs = await response.json();
   //Limpia el contenido de la tabla
   while (tableBody.firstChild) {
@@ -136,7 +136,7 @@ async function agregarDesign(nuevoDesign) {
   // Realizar una solicitud POST para crear el diseño
 
   try {
-    const response = await fetch(`${apiUrl}/treads`, {
+    const response = await fetch(`${apiUrl}/api/treads`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -180,7 +180,7 @@ function limpiarResultados() {
 async function buscarDesignEnBaseDeDatos(nombreDesign) {
   try {
     // Realiza una solicitud al servidor para buscar el diseño
-    const response = await fetch(`${apiUrl}/treads/${nombreDesign}`);
+    const response = await fetch(`${apiUrl}/api/treads/${nombreDesign}`);
 
     if (response.status === 200) {
       const bandaEncontrada = await response.json();
@@ -212,7 +212,7 @@ async function buscarDesignEnBaseDeDatos(nombreDesign) {
 async function actualizarDescripcionEnBaseDeDatos(idDesign, nuevaDescripcion) {
   try {
     // Realiza una solicitud PATCH para modificar el diseño
-    const response = await fetch(`${apiUrl}/treads/${idDesign}`, {
+    const response = await fetch(`${apiUrl}/api/treads/${idDesign}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

@@ -127,7 +127,7 @@ modifyResolinspButton.addEventListener("click", () => {
 /* ===========Botón Listado de Resoluciones de inspección ============================ */
 listResolinspButton.addEventListener("click", async () => {
   // Realiza la solicitud al backend
-  const response = await fetch(`${apiUrl}/resolutionsInsp`);
+  const response = await fetch(`${apiUrl}/api/resolutionsInsp`);
   const resolinsp = await response.json();
   //Limpia el contenido de la tabla
   while (tableBody.firstChild) {
@@ -156,7 +156,7 @@ async function agregarResolinsp(nuevaResolinsp) {
   // Realizar una solicitud POST para crear la resolución de inspección
 
   try {
-    const response = await fetch(`${apiUrl}/resolutionsInsp`, {
+    const response = await fetch(`${apiUrl}/api/resolutionsInsp`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -208,7 +208,7 @@ async function buscarResolinspEnBaseDeDatos(codigoResolinsp) {
   try {
     // Realiza una solicitud al servidor para buscar la resolución de inspección por código
     const response = await fetch(
-      `${apiUrl}/resolutionsInsp/${codigoResolinsp}`
+      `${apiUrl}/api/resolutionsInsp/${codigoResolinsp}`
     );
 
     if (response.status === 200) {
@@ -249,13 +249,16 @@ async function actualizarDescripcionEnBaseDeDatos(
 ) {
   try {
     // Realiza una solicitud PATCH para modificar la resolución de inspección
-    const response = await fetch(`${apiUrl}/resolutionsInsp/${idResolinsp}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(resolinspModificada),
-    });
+    const response = await fetch(
+      `${apiUrl}/api/resolutionsInsp/${idResolinsp}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(resolinspModificada),
+      }
+    );
 
     if (response.status === 200) {
       // Éxito: resolución de inspección modificada
