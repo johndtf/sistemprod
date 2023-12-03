@@ -65,11 +65,11 @@ findDimensionButton.addEventListener("click", () => {
     findDimensionButton.classList.add("success-button");
     dimensionNameField.focus();
   } else {
-    // Obtener nombre de la dimension
-    const nombreDimension = dimensionNameField.value;
+    // Obtener  la dimension
+    const nombreDimension = { dimension: dimensionNameField.value };
 
     /* Verifica que sea un nombre valido */
-    if (!esCadenaNoVacia(nombreDimension)) {
+    if (!esCadenaNoVacia(nombreDimension.dimension)) {
       errorMessage.textContent =
         "La dimension debe contener una cadena de caractéres no vacía.";
       return;
@@ -180,7 +180,15 @@ function limpiarResultados() {
 async function buscarDimensionEnBaseDeDatos(nombreDimension) {
   try {
     // Realiza una solicitud al servidor para buscar la dimensión
-    const response = await fetch(`${apiUrl}/api/dimensions/${nombreDimension}`);
+    //mediante POST ya que existen dimensiones que tienen el caracter /
+    //y al enviar este caracter la api presenta error en el endpoint
+    const response = await fetch(`${apiUrl}/api/dimensions/dimension`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(nombreDimension),
+    });
 
     if (response.status === 200) {
       const dimensionEncontrada = await response.json();

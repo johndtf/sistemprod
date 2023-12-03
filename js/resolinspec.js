@@ -285,7 +285,7 @@ async function actualizarDescripcionEnBaseDeDatos(
     }
   } catch (error) {
     console.error("Error de red:", error);
-    alert("Ocurrió un error de red al modificar el empleado.");
+    alert("Ocurrió un error de red al modificar la resolución.");
   }
 }
 

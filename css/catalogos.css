@@ -25,14 +25,20 @@
 
 input[type="text"],
 input[type="password"],
-input[type="search"] {
+input[type="search"],
+textarea {
   width: 18rem;
   margin-bottom: 8px;
 }
 
-input[readonly] {
+input[readonly],
+textarea[readonly] {
   background-color: transparent;
   color: var(--text-light-color);
+}
+
+textarea {
+  resize: none;
 }
 
 select {
