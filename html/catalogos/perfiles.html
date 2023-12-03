@@ -16,25 +16,31 @@
     <form class="form">
       <h2>Actualizar Perfiles</h2>
       <div class="form-group">
-        <label for="profileName">Nombre:</label>
+        <label for="profileName" id="profileNameLabel">Nombre:</label>
+
         <input
           type="text"
           id="profileName"
           name="profileName"
           required
           readonly
+          oninput="this.value = this.value.toUpperCase()"
         />
       </div>
       <div class="form-group">
         <label for="profileDescription">Descripción:</label>
-        <input
-          type="text"
+        <textarea
           id="profileDescription"
           name="profileDescription"
-          required
           readonly
-        />
+          oninput="this.value = this.value.toUpperCase()"
+          rows="4"
+          cols="18"
+        ></textarea>
       </div>
+
+      <!-- Input para almacenar de manera invisible el id del perfil -->
+      <input type="hidden" id="profile-id" name="brand-id" />
 
       <div class="button-group">
         <button
@@ -48,6 +54,7 @@
           type="button"
           class="primary-button short-button"
           id="modifyProfile-btn"
+          disabled
         >
           Modificar
         </button>
@@ -66,6 +73,29 @@
           Cancelar
         </button>
       </div>
+
+      <button type="button" id="listProfile-btn" class="buttonLink">
+        Listado de Perfiles
+      </button>
+
+      <!-- Div para mensajes de error-->
+      <div id="error-message" class="error-message"></div>
+      <!-- Div para resultados -->
+      <div id="success-results" style="display: none"></div>
     </form>
+    <br />
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre del Perfil</th>
+          <th>Descripción del Perfil</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Las filas se agregarán dinámicamente aquí -->
+      </tbody>
+    </table>
+    <script src="../../js/perfiles.js" type="module"></script>
   </body>
 </html>

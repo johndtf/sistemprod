@@ -76,7 +76,8 @@ header {
 input[type="text"],
 input[type="password"],
 input[type="search"],
-select {
+select,
+textarea {
   width: 10rem;
   padding: 2px 2px;
   font-size: 1.2rem;
@@ -93,7 +94,8 @@ select {
 }
 
 /* Estilos para input en modo de solo lectura */
-input[readonly] {
+input[readonly],
+textarea[readonly] {
   background-color: var(--first-color);
   color: var(--text-light-color); /* Color del texto */
   border: thin solid var(--secondbackground-color);
