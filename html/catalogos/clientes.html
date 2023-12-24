@@ -17,143 +17,149 @@
     <form class="form">
       <h2>Actualizar Clientes</h2>
       <div class="form-group">
-        <label for="customerNames">Nombres:</label>
+        <label for="names">Nombres:</label>
         <input
           type="text"
-          id="customerNames"
-          name="customerNames"
-          value="NOMBRE1 NOMBRE2"
+          id="names"
+          name="names"
+          maxlength="45"
           required
           readonly
           oninput="this.value = this.value.toUpperCase()"
         />
       </div>
       <div class="form-group">
-        <label for="userlastnames">Apellidos:</label>
+        <label for="lastnames">Apellidos:</label>
+        <input
+          type="text"
+          id="lastnames"
+          name="lastnames"
+          maxlength="45"
+          required
+          readonly
+          oninput="this.value = this.value.toUpperCase()"
+        />
+      </div>
+      <!-- Input para almacenar de manera invisible el id del cliente -->
+      <input type="hidden" id="id" name="id" />
 
-        <input
-          type="text"
-          id="userlastnames"
-          name="userlastnames"
-          value="APELLIDO1 APELLIDO2"
-          required
-          readonly
-          oninput="this.value = this.value.toUpperCase()"
-        />
-      </div>
       <div class="form-group">
-        <label for="userid">Cédula/Nit:</label>
+        <label for="document">Cédula/Nit:</label>
         <div>
           <input
             type="text"
-            id="userid"
-            name="userid"
-            value="12345678901"
+            id="document"
+            name="document"
+            title="Ingrese la Cédula o NIT"
+            oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+            maxlength="10"
             required
             readonly
           />
-          <input type="text" id="userdv" name="userdv" value="1" readonly />
+          <!-- digito de verificación -->
+          <input
+            type="text"
+            id="dv"
+            name="dv"
+            oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+            maxlength="1"
+            readonly
+          />
         </div>
       </div>
 
       <div class="form-group">
         <label for="email">Correo electrónico:</label>
         <input
-          type="text"
+          type="email"
           id="email"
           name="email"
-          value="nombre1apellildo2@gmail.com"
-          readonly
-        />
-      </div>
-
-      <div class="form-group">
-        <label for="telefono">Teléfono:</label>
-        <input
-          type="text"
-          id="telefono"
-          name="telefono"
-          value="310 1234 567"
-          required
-          readonly
-        />
-      </div>
-      <div class="form-group">
-        <label for="direccion">Dirección:</label>
-        <input
-          type="text"
-          id="direccion"
-          name="direccion"
-          value="CALLE 5 # 6-180 BARRIO SANTA ELENA"
+          maxlength="100"
           required
           readonly
         />
       </div>
 
       <div class="form-group">
-        <label for="login">Usuario:</label>
+        <label for="phone">Teléfono:</label>
         <input
           type="text"
-          id="customerLogin"
-          name="login"
-          value="USUARIO-EJEMPLO"
+          id="phone"
+          name="phone"
+          title="Ingrese su número de teléfono"
+          oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+          maxlength="10"
+          required
           readonly
         />
       </div>
       <div class="form-group">
-        <label for="password">Contraseña:</label>
+        <label for="address">Dirección:</label>
         <input
-          type="password"
-          id="customerPassword"
-          name="password"
-          value="CONTRASEÑA"
+          type="text"
+          id="address"
+          name="address"
+          maxlength="100"
+          required
           readonly
         />
       </div>
 
       <div class="form-group">
-        <label for="customerState">Estado:</label>
-        <input
-          type="text"
-          id="customerState"
-          name="customerState"
-          value="A"
-          required
-          readonly
-        />
+        <label for="state">Estado:</label>
+        <select id="state" name="state" disabled>
+          <option value="A">ACTIVO</option>
+          <option value="I">INACTIVO</option>
+        </select>
       </div>
 
       <div class="button-group">
-        <button
-          type="button"
-          class="primary-button short-button"
-          id="newCustomer-btn"
-        >
+        <button type="button" class="primary-button short-button" id="new-btn">
           Agregar
         </button>
         <button
           type="button"
           class="primary-button short-button"
-          id="modifyCustomer-btn"
+          id="modify-btn"
+          disabled
         >
           Modificar
         </button>
-        <button
-          type="button"
-          class="primary-button short-button"
-          id="findCustomer-btn"
-        >
+        <button type="button" class="primary-button short-button" id="find-btn">
           Buscar
         </button>
         <button
           type="button"
           class="primary-button short-button"
-          id="cancelCustomer-btn"
+          id="cancel-btn"
         >
           Cancelar
         </button>
       </div>
+
+      <!-- Div para mensajes de error -->
+      <div id="error-message" class="error-message"></div>
+      <!-- Div para resultados de busqueda -->
+      <div id="success-results" style="display: none"></div>
     </form>
-    <script src="../../js/clientes.js"></script>
+
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombres</th>
+          <th>Apellidos</th>
+          <th>Cédula/Nit</th>
+          <th>dv</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th>direccion</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody id="customerTableBody"></tbody>
+    </table>
+
+    <script src="../../js/clientes.js" type="module"></script>
   </body>
 </html>

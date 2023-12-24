@@ -1,5 +1,3 @@
-//const apiUrl = "https://sistemprod-restapi-production.up.railway.app";
-//const apiUrl = "http://localhost:3000";
 const newBrandButton = document.getElementById("newBrand-btn");
 const cancelButton = document.getElementById("cancelBrand-btn");
 const findBrandButton = document.getElementById("findBrand-btn");

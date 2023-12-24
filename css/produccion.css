@@ -76,6 +76,8 @@ header {
 input[type="text"],
 input[type="password"],
 input[type="search"],
+input[type="email"],
+input[type="number"],
 select,
 textarea {
   width: 10rem;
@@ -95,8 +97,9 @@ select {
 
 /* Estilos para input en modo de solo lectura */
 input[readonly],
-textarea[readonly] {
-  background-color: var(--first-color);
+textarea[readonly],
+select[disabled] {
+  background-color: transparent;
   color: var(--text-light-color); /* Color del texto */
   border: thin solid var(--secondbackground-color);
   /* Otras propiedades visuales opcionales, como el cursor */

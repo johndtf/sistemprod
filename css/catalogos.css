@@ -26,23 +26,26 @@
 input[type="text"],
 input[type="password"],
 input[type="search"],
+input[type="email"],
+input[type="number"],
 textarea {
   width: 18rem;
   margin-bottom: 8px;
 }
 
-input[readonly],
+/* input[readonly],
 textarea[readonly] {
   background-color: transparent;
   color: var(--text-light-color);
-}
+} */
 
 textarea {
   resize: none;
 }
 
 select {
-  width: max-content;
+  /* width: max-content; */
+  width: 18rem;
 }
 
 .enterprice-logo {
@@ -82,6 +85,11 @@ table {
   margin-left: auto;
   margin-right: auto;
   display: none;
+  cursor: pointer;
+}
+/* Estilo para fila seleccionada */
+table tr.selected {
+  background-color: var(--second-color) !important;
 }
 
 @media (max-width: 540px) {
