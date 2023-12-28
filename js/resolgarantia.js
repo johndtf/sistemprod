@@ -1,23 +1,19 @@
-const newResolGarantButton = document.getElementById("newResolGarant-btn");
+const newButton = document.getElementById("newResolGarant-btn");
 const cancelButton = document.getElementById("cancelResolGarant-btn");
-const findResolGarantButton = document.getElementById("findResolGarant-btn");
-const modifyResolGarantButton = document.getElementById(
-  "modifyResolGarant-btn"
-);
-const listResolGarantButton = document.getElementById("listResolGarant-btn");
-const resolGarantCodeField = document.getElementById("resol-garantia-codigo");
-const resolGarantDescriptionField = document.getElementById(
-  "resol-garantia-Description"
-);
-const resolGarantIdField = document.getElementById("resol-garantia-id");
+const findButton = document.getElementById("findResolGarant-btn");
+const modifyButton = document.getElementById("modifyResolGarant-btn");
+
+const codeField = document.getElementById("resol-garantia-codigo");
+const nameField = document.getElementById("resol-garantia-Description");
+const idField = document.getElementById("resol-garantia-id");
 const errorMessage = document.getElementById("error-message");
 const succesResults = document.getElementById("success-results");
 const form = document.querySelector("form");
 const tableBody = document.querySelector("table tbody");
-const tableResolGarant = document.querySelector("table");
+const table = document.querySelector("table");
 
 import apiUrl from "./config.js";
-import { esCadenaNoVacia } from "./funcionesComunes.js";
+import { esCadenaNoVacia, cleanTable } from "./funcionesComunes.js";
 
 //Evitar que al darle enter envíe el formulario
 form.addEventListener("submit", (event) => {
@@ -26,25 +22,25 @@ form.addEventListener("submit", (event) => {
 
 /* ===========Botón agrega resolución de garantías=============================== */
 
-newResolGarantButton.addEventListener("click", () => {
-  if (newResolGarantButton.textContent.trim() === "Agregar") {
+newButton.addEventListener("click", () => {
+  if (newButton.textContent.trim() === "Agregar") {
     // Preparar pantalla para ingreso de datos
-    // deshabilita el botón de modificar
-    modifyResolGarantButton.disabled = true;
-    findResolGarantButton.disabled = true;
-    resolGarantCodeField.removeAttribute("readonly");
-    resolGarantCodeField.value = "";
-    resolGarantDescriptionField.removeAttribute("readonly");
-    resolGarantDescriptionField.value = ""; // Limpiar el valor del campo
-    newResolGarantButton.textContent = "Aceptar";
-    newResolGarantButton.classList.add("success-button");
+
+    modifyButton.disabled = true;
+    findButton.disabled = true;
+    codeField.removeAttribute("readonly");
+    codeField.value = "";
+    nameField.removeAttribute("readonly");
+    nameField.value = ""; // Limpiar el valor del campo
+    newButton.textContent = "Aceptar";
+    newButton.classList.add("success-button");
     limpiarResultados();
-    resolGarantCodeField.focus();
+    codeField.focus();
   } else {
     // Obtener código y nombre de la nueva resolución de garantía
     const nuevaResolGarant = {
-      codigo: resolGarantCodeField.value,
-      resol_garan: resolGarantDescriptionField.value,
+      codigo: codeField.value,
+      resol_garan: nameField.value,
     };
 
     /* Verifica que sea un código y descripción validos */
@@ -64,51 +60,49 @@ newResolGarantButton.addEventListener("click", () => {
   }
 });
 
-/* =================Botón Encontrar========================== */
-findResolGarantButton.addEventListener("click", () => {
-  if (findResolGarantButton.textContent.trim() === "Buscar") {
-    // Preparar pantalla para buscar una dimension
-    resolGarantCodeField.removeAttribute("readonly");
-    resolGarantCodeField.value = "";
+/* =================Botón Buscar========================== */
+findButton.addEventListener("click", () => {
+  if (findButton.textContent.trim() === "Buscar") {
+    // Preparar pantalla para buscar resoluciones
+    restaurarValoresIniciales();
+    codeField.removeAttribute("readonly");
+    nameField.removeAttribute("readonly");
+
     limpiarResultados(); // Ocultar resultados anteriores
 
-    findResolGarantButton.textContent = "Aceptar";
-    newResolGarantButton.disabled = true;
-    modifyResolGarantButton.disabled = true;
-    findResolGarantButton.classList.add("success-button");
-    resolGarantCodeField.focus();
+    findButton.textContent = "Aceptar";
+    newButton.disabled = true;
+    modifyButton.disabled = true;
+    findButton.classList.add("success-button");
+    codeField.focus();
   } else {
-    // Obtener nombre y código de la resolución
-    const codigoResolGarant = resolGarantCodeField.value;
+    // Crea la variable con los parámetros de búsqueda
+    const filtroResolucion = {
+      codigo: codeField.value,
+      resol_garan: nameField.value,
+    };
 
-    /* Verifica que sea un código valido */
-    if (!esCadenaNoVacia(codigoResolGarant)) {
-      errorMessage.textContent =
-        "El código de la resolución deben contener información.";
-      return;
-    }
-
-    buscarResolgarantEnBaseDeDatos(codigoResolGarant);
+    findResolutions(filtroResolucion);
   }
 });
 
 /* ============Botón Modificar==================================== */
-modifyResolGarantButton.addEventListener("click", () => {
-  if (modifyResolGarantButton.textContent.trim() === "Modificar") {
+modifyButton.addEventListener("click", () => {
+  if (modifyButton.textContent.trim() === "Modificar") {
     // Cambiar a modo de edición
-    newResolGarantButton.disabled = true;
-    findResolGarantButton.disabled = true;
-    modifyResolGarantButton.textContent = "Aceptar";
-    modifyResolGarantButton.classList.add("success-button");
-    resolGarantCodeField.removeAttribute("readonly");
-    resolGarantDescriptionField.removeAttribute("readonly");
-    resolGarantCodeField.focus();
+    newButton.disabled = true;
+    findButton.disabled = true;
+    modifyButton.textContent = "Aceptar";
+    modifyButton.classList.add("success-button");
+    codeField.removeAttribute("readonly");
+    nameField.removeAttribute("readonly");
+    codeField.focus();
   } else {
     // Obtener el ID de la resolución de garantía y la nueva descripción
-    const idResolGarant = parseInt(resolGarantIdField.value);
+    const idResolGarant = parseInt(idField.value);
     const resolGarantModificada = {
-      codigo: resolGarantCodeField.value,
-      resol_garan: resolGarantDescriptionField.value,
+      codigo: codeField.value,
+      resol_garan: nameField.value,
     };
 
     // Asegurarse de tener valores válidos antes de continuar
@@ -124,29 +118,6 @@ modifyResolGarantButton.addEventListener("click", () => {
 
     actualizarDescripcionEnBaseDeDatos(idResolGarant, resolGarantModificada);
   }
-});
-
-/* ===========Botón Listado de Resoluciones de garantía ============================ */
-listResolGarantButton.addEventListener("click", async () => {
-  // Realiza la solicitud al backend
-  const response = await fetch(`${apiUrl}/api/resolutionsWarranty`);
-  const resolgarant = await response.json();
-  //Limpia el contenido de la tabla
-  while (tableBody.firstChild) {
-    // Mientras haya nodos hijos en tbody, elimínalos
-    tableBody.removeChild(tableBody.firstChild);
-  }
-  //Carga el contenido de la consulta en la tabla
-  resolgarant.forEach((resolgarant) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-    <td>${resolgarant.id_resol_g}</td>
-    <td>${resolgarant.codigo}</td>
-    <td>${resolgarant.resol_garan}</td>
-  `;
-    tableBody.appendChild(row);
-  });
-  tableResolGarant.style.display = "table";
 });
 
 /* ============Botón Cancelar==================================== */
@@ -205,41 +176,50 @@ function limpiarResultados() {
   succesResults.innerHTML = ""; // Limpiar resultados anteriores
 }
 
-/*---------- Función para buscar la resolución de garantía en la base de datos ------------*/
-async function buscarResolgarantEnBaseDeDatos(codigoResolgarant) {
+/*---------- Función para buscar resoluciones de garantía en la base de datos ------------*/
+async function findResolutions(filtroResolucion) {
   try {
-    // Realiza una solicitud al servidor para buscar la resolución de garantía por código
+    // Realiza una solicitud al servidor para obtener la lista de resoluciones
     const response = await fetch(
-      `${apiUrl}/api/resolutionsWarranty/${codigoResolgarant}`
+      `${apiUrl}/api/resolutionsWarranty/resolutionslist`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(filtroResolucion),
+      }
     );
 
     if (response.status === 200) {
-      const resolgarantEncontrada = await response.json();
+      // carga la información en la tabla del formulario
+      const listaresoluciones = await response.json();
 
-      // Muestra la resolución de garantía encontrada
-
-      //console.log(resolgarantEncontrada);
-
-      // Modifica la pantalla con la resolución de garantía encontrada
-      restaurarValoresIniciales();
-      resolGarantCodeField.value = resolgarantEncontrada.codigo;
-      resolGarantDescriptionField.value = resolgarantEncontrada.resol_garan;
-      resolGarantIdField.value = resolgarantEncontrada.id_resol_g;
-      mostrarResultados(
-        `Resolución encontrada: ${resolgarantEncontrada.resol_garan}`
-      );
-      modifyResolGarantButton.disabled = false;
-    } else if (response.status === 404) {
-      errorMessage.textContent = `La resolución de garantía código: ${codigoResolgarant} no fue encontrada`;
-    } else {
+      //Limpia el contenido de la tabla
+      cleanTable(tableBody);
+      //Carga el contenido de la consulta en la tabla
+      listaresoluciones.forEach((listaresolucion) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+    <td>${listaresolucion.id_resol_g}</td>
+    <td>${listaresolucion.codigo}</td>
+    <td>${listaresolucion.resol_garan}</td>
+  `;
+        tableBody.appendChild(row);
+      });
+      table.style.display = "table";
+    } else if (response.status === 400) {
       errorMessage.textContent =
-        "Ocurrió un error al obtener la resolución de garantía";
-      console.error("Error al obtener la resolución de garantía:", error);
+        "Por favor, proporciona información válida para la búsqueda.";
+    } else {
+      // Otro error en el servidor
+      errorMessage.textContent =
+        "Ocurrió un error en el servidor al hacer la consulta.";
     }
   } catch (error) {
     console.error("Error de red:", error);
     errorMessage.textContent =
-      "Ocurrió un error de red al buscar la resolución de garantía.";
+      "Ocurrió un error de red al hacer la consulta. Por favor, verifica tu conexión a Internet.";
   }
 }
 
@@ -291,28 +271,61 @@ async function actualizarDescripcionEnBaseDeDatos(
   }
 }
 
+/* --------------Función para poner el registro seleccionado en pantalla -------*/
+
+// Añadir un evento de clic a las filas de la tabla
+tableBody.addEventListener("click", (event) => {
+  // Obtener el elemento padre (fila) más cercano desde el objetivo del evento
+  const closestRow = event.target.closest("tr");
+
+  // Verificar si se encontró una fila
+  if (closestRow) {
+    // Obtener los datos de la fila seleccionada
+    const rowData = Array.from(closestRow.cells).map(
+      (cell) => cell.textContent
+    );
+
+    // Elimina la clase 'selected' de otras filas si existe
+    const filasSeleccionadas = table.querySelectorAll(".selected");
+    filasSeleccionadas.forEach(function (filaSeleccionada) {
+      filaSeleccionada.classList.remove("selected");
+    });
+
+    // Agrega la clase 'selected' a la fila actual
+
+    closestRow.classList.add("selected");
+
+    restaurarValoresIniciales();
+    table.style.display = "table";
+
+    // Llenar los campos del formulario con los datos obtenidos
+
+    idField.value = rowData[0];
+    codeField.value = rowData[1];
+    nameField.value = rowData[2];
+
+    // Habilitar el botón de modificar si ya se seleccionó un cliente
+    modifyButton.disabled = false;
+  }
+});
+
 /* -------------función restaura formulario ------------------------------------- */
 function restaurarValoresIniciales() {
-  resolGarantCodeField.value = "";
-  resolGarantDescriptionField.value = "";
-  resolGarantCodeField.setAttribute("readonly", "");
-  resolGarantDescriptionField.setAttribute("readonly", "");
-  newResolGarantButton.textContent = "Agregar";
-  findResolGarantButton.textContent = "Buscar";
-  modifyResolGarantButton.textContent = "Modificar";
-  findResolGarantButton.disabled = false;
-  newResolGarantButton.disabled = false;
-  modifyResolGarantButton.disabled = true; // deshabilita el botón de modificar
-  newResolGarantButton.classList.remove("success-button");
-  findResolGarantButton.classList.remove("success-button");
-  modifyResolGarantButton.classList.remove("success-button");
+  codeField.value = "";
+  nameField.value = "";
+  codeField.setAttribute("readonly", "");
+  nameField.setAttribute("readonly", "");
+  newButton.textContent = "Agregar";
+  findButton.textContent = "Buscar";
+  modifyButton.textContent = "Modificar";
+  findButton.disabled = false;
+  newButton.disabled = false;
+  modifyButton.disabled = true; // deshabilita el botón de modificar
+  newButton.classList.remove("success-button");
+  findButton.classList.remove("success-button");
+  modifyButton.classList.remove("success-button");
   errorMessage.textContent = "";
-  tableResolGarant.style.display = "none";
-  //Limpia el contenido de la tabla
-  while (tableBody.firstChild) {
-    // Mientras haya nodos hijos en tbody, elimínalos
-    tableBody.removeChild(tableBody.firstChild);
-  }
+  table.style.display = "none";
 
   limpiarResultados();
 }

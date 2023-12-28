@@ -51,8 +51,8 @@
             id="document"
             name="document"
             title="Ingrese la Cédula o NIT"
-            oninput="this.value = this.value.replace(/[^0-9]/g, '');"
             maxlength="10"
+            oninput="this.value = this.value.replace(/[^0-9]/g, '');"
             required
             readonly
           />
@@ -157,7 +157,9 @@
           <th>Estado</th>
         </tr>
       </thead>
-      <tbody id="customerTableBody"></tbody>
+      <tbody>
+        <!-- Las filas se agregarán dinámicamente aquí -->
+      </tbody>
     </table>
 
     <script src="../../js/clientes.js" type="module"></script>

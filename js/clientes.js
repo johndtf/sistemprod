@@ -18,7 +18,7 @@ const stateField = document.getElementById("state");
 const errorMessage = document.getElementById("error-message");
 const successResults = document.getElementById("success-results");
 const form = document.querySelector("form");
-const tableBody = document.getElementById("customerTableBody");
+const tableBody = document.getElementById("table tbody");
 const table = document.querySelector("table");
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expresión regular para validar el formato de correo electrónico
@@ -44,7 +44,7 @@ newButton.addEventListener("click", () => {
     modifyButton.disabled = true;
     findButton.disabled = true;
 
-    stateField.value = "A";
+    stateField.style.color = "transparent";
 
     namesField.focus();
   } else {
@@ -112,6 +112,7 @@ modifyButton.addEventListener("click", () => {
       field.removeAttribute("readonly");
     });
     stateField.disabled = false;
+    stateField.style.color = "black";
     namesField.focus();
   } else {
     // Validar los campos antes de agregar el cliente
@@ -314,7 +315,7 @@ function limpiarResultados() {
   successResults.innerHTML = ""; // Limpiar resultados anteriores
 }
 
-/* --------------Función para poner el cliente seleccionado en pantalla -------*/
+/* --------------Función para poner el registro seleccionado en pantalla -------*/
 
 // Añadir un evento de clic a las filas de la tabla
 tableBody.addEventListener("click", (event) => {
@@ -335,7 +336,7 @@ tableBody.addEventListener("click", (event) => {
     });
 
     // Agrega la clase 'selected' a la fila actual
-    console.log(closestRow);
+
     closestRow.classList.add("selected");
 
     restaurarValoresIniciales();
@@ -355,6 +356,9 @@ tableBody.addEventListener("click", (event) => {
 
     // Habilitar el botón de modificar si ya se seleccionó un cliente
     modifyButton.disabled = false;
+
+    //Visible el color de texto de el select de Estado
+    stateField.style.color = "white";
   }
 });
 
@@ -379,6 +383,8 @@ function restaurarValoresIniciales() {
   modifyButton.classList.remove("success-button");
   errorMessage.textContent = "";
   table.style.display = "none";
+
+  stateField.style.color = "transparent";
 
   limpiarResultados();
 }

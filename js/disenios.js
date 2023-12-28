@@ -1,18 +1,19 @@
-const newDesignButton = document.getElementById("newDesign-btn");
+const newButton = document.getElementById("newDesign-btn");
 const cancelButton = document.getElementById("cancelDesign-btn");
-const findDesignButton = document.getElementById("findDesign-btn");
-const modifyDesignButton = document.getElementById("modifyDesign-btn");
-const listDesignButton = document.getElementById("listDesign-btn");
-const designNameField = document.getElementById("designName");
-const designIdField = document.getElementById("design-id");
+const findButton = document.getElementById("findDesign-btn");
+const modifyButton = document.getElementById("modifyDesign-btn");
+
+const nameField = document.getElementById("designName");
+const idField = document.getElementById("design-id");
+
 const errorMessage = document.getElementById("error-message");
 const succesResults = document.getElementById("success-results");
 const form = document.querySelector("form");
 const tableBody = document.querySelector("table tbody");
-const tableDesigns = document.querySelector("table");
+const table = document.querySelector("table");
 
 import apiUrl from "./config.js";
-import { esCadenaNoVacia } from "./funcionesComunes.js";
+import { esCadenaNoVacia, cleanTable } from "./funcionesComunes.js";
 
 //Evitar que al darle enter envíe el formulario
 form.addEventListener("submit", (event) => {
@@ -21,22 +22,22 @@ form.addEventListener("submit", (event) => {
 
 /* ===========Botón agrega diseño=============================== */
 
-newDesignButton.addEventListener("click", () => {
-  if (newDesignButton.textContent.trim() === "Agregar") {
+newButton.addEventListener("click", () => {
+  if (newButton.textContent.trim() === "Agregar") {
     // Preparar pantalla para ingreso de datos
     // deshabilita el botón de modificar
-    modifyDesignButton.disabled = true;
-    findDesignButton.disabled = true;
-    designNameField.removeAttribute("readonly");
-    designNameField.value = ""; // Limpiar el valor del campo
-    newDesignButton.textContent = "Aceptar";
-    newDesignButton.classList.add("success-button");
+    modifyButton.disabled = true;
+    findButton.disabled = true;
+    nameField.removeAttribute("readonly");
+    nameField.value = ""; // Limpiar el valor del campo
+    newButton.textContent = "Aceptar";
+    newButton.classList.add("success-button");
     limpiarResultados();
-    designNameField.focus();
+    nameField.focus();
   } else {
     // Obtener nombre del nuevo diseño
     const nuevoDesign = {
-      banda: designNameField.value,
+      banda: nameField.value,
     };
 
     /* Verifica que sea un nombre valido */
@@ -52,47 +53,42 @@ newDesignButton.addEventListener("click", () => {
 });
 
 /* =================Botón Encontrar========================== */
-findDesignButton.addEventListener("click", () => {
-  if (findDesignButton.textContent.trim() === "Buscar") {
+findButton.addEventListener("click", () => {
+  if (findButton.textContent.trim() === "Buscar") {
     // Preparar pantalla para buscar un diseño
-    designNameField.removeAttribute("readonly");
-    designNameField.value = ""; // Limpiar el valor del campo
+    nameField.removeAttribute("readonly");
+    nameField.value = ""; // Limpiar el valor del campo
     limpiarResultados(); // Ocultar resultados anteriores
 
-    findDesignButton.textContent = "Aceptar";
-    newDesignButton.disabled = true;
-    modifyDesignButton.disabled = true;
-    findDesignButton.classList.add("success-button");
-    designNameField.focus();
+    findButton.textContent = "Aceptar";
+    newButton.disabled = true;
+    modifyButton.disabled = true;
+    findButton.classList.add("success-button");
+    nameField.focus();
   } else {
     // Obtener nombre del diseño
-    const nombreDesign = designNameField.value;
-
-    /* Verifica que sea un nombre valido */
-    if (!esCadenaNoVacia(nombreDesign)) {
-      errorMessage.textContent =
-        "El diseño debe contener una cadena de caractéres no vacía.";
-      return;
-    }
+    const nombreDesign = {
+      banda: nameField.value,
+    };
 
     buscarDesignEnBaseDeDatos(nombreDesign);
   }
 });
 
 /* ============Botón Modificar==================================== */
-modifyDesignButton.addEventListener("click", () => {
-  if (modifyDesignButton.textContent.trim() === "Modificar") {
+modifyButton.addEventListener("click", () => {
+  if (modifyButton.textContent.trim() === "Modificar") {
     // Cambiar a modo de edición
-    newDesignButton.disabled = true;
-    findDesignButton.disabled = true;
-    modifyDesignButton.textContent = "Aceptar";
-    modifyDesignButton.classList.add("success-button");
-    designNameField.removeAttribute("readonly");
-    designNameField.focus();
+    newButton.disabled = true;
+    findButton.disabled = true;
+    modifyButton.textContent = "Aceptar";
+    modifyButton.classList.add("success-button");
+    nameField.removeAttribute("readonly");
+    nameField.focus();
   } else {
     // Obtener el ID de la diseño y la nueva descripción
-    const idDesign = parseInt(designIdField.value);
-    const nuevaDescripcion = { banda: designNameField.value };
+    const idDesign = parseInt(idField.value);
+    const nuevaDescripcion = { banda: nameField.value };
 
     // Asegurarse de tener valores válidos antes de continuar
     if (!idDesign || !esCadenaNoVacia(nuevaDescripcion.banda)) {
@@ -103,28 +99,6 @@ modifyDesignButton.addEventListener("click", () => {
 
     actualizarDescripcionEnBaseDeDatos(idDesign, nuevaDescripcion);
   }
-});
-
-/* ===========Botón Listado de Diseños ============================ */
-listDesignButton.addEventListener("click", async () => {
-  // Realiza la solicitud al backend
-  const response = await fetch(`${apiUrl}/api/treads`);
-  const designs = await response.json();
-  //Limpia el contenido de la tabla
-  while (tableBody.firstChild) {
-    // Mientras haya nodos hijos en tbody, elimínalos
-    tableBody.removeChild(tableBody.firstChild);
-  }
-  //Carga el contenido de la consulta en la tabla
-  designs.forEach((disenio) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-    <td>${disenio.id_banda}</td>
-    <td>${disenio.banda}</td>
-  `;
-    tableBody.appendChild(row);
-  });
-  tableDesigns.style.display = "table";
 });
 
 /* ============Botón Cancelar==================================== */
@@ -180,30 +154,44 @@ function limpiarResultados() {
 async function buscarDesignEnBaseDeDatos(nombreDesign) {
   try {
     // Realiza una solicitud al servidor para buscar el diseño
-    const response = await fetch(`${apiUrl}/api/treads/${nombreDesign}`);
+
+    const response = await fetch(`${apiUrl}/api/treads/treadslist`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(nombreDesign),
+    });
 
     if (response.status === 200) {
-      const bandaEncontrada = await response.json();
+      // carga la información en la tabla del formulario
+      const datalist = await response.json();
 
-      // Muestra la banda encontrada
-
-      console.log(bandaEncontrada);
-
-      // Modifica la pantalla con el diseño encontrado
-      restaurarValoresIniciales();
-      designNameField.value = bandaEncontrada.banda;
-      designIdField.value = bandaEncontrada.id_banda;
-      mostrarResultados(`Banda encontrada: ${bandaEncontrada.banda}`);
-      modifyDesignButton.disabled = false;
-    } else if (response.status === 404) {
-      errorMessage.textContent = `El diseño: ${nombreDesign} no fue encontrado`;
+      //Limpia el contenido de la tabla
+      cleanTable(tableBody);
+      //Carga el contenido de la consulta en la tabla
+      datalist.forEach((dataelement) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+    <td>${dataelement.id_banda}</td>
+    <td>${dataelement.banda}</td>
+    
+  `;
+        tableBody.appendChild(row);
+      });
+      table.style.display = "table";
+    } else if (response.status === 400) {
+      errorMessage.textContent =
+        "Por favor, proporciona información válida para la búsqueda.";
     } else {
-      errorMessage.textContent = "Ocurrió un error al obtener el diseño";
-      console.error("Error al obtener el diseño:", error);
+      // Otro error en el servidor
+      errorMessage.textContent =
+        "Ocurrió un error en el servidor al hacer la consulta.";
     }
   } catch (error) {
     console.error("Error de red:", error);
-    errorMessage.textContent = "Ocurrió un error de red al buscar el diseño.";
+    errorMessage.textContent =
+      "Ocurrió un error de red al hacer la consulta. Por favor, verifica tu conexión a Internet.";
   }
 }
 
@@ -244,26 +232,58 @@ async function actualizarDescripcionEnBaseDeDatos(idDesign, nuevaDescripcion) {
   }
 }
 
+/* --------------Función para poner el registro seleccionado en pantalla -------*/
+
+// Añadir un evento de clic a las filas de la tabla
+tableBody.addEventListener("click", (event) => {
+  // Obtener el elemento padre (fila) más cercano desde el objetivo del evento
+  const closestRow = event.target.closest("tr");
+
+  // Verificar si se encontró una fila
+  if (closestRow) {
+    // Obtener los datos de la fila seleccionada
+    const rowData = Array.from(closestRow.cells).map(
+      (cell) => cell.textContent
+    );
+
+    // Elimina la clase 'selected' de otras filas si existe
+    const filasSeleccionadas = table.querySelectorAll(".selected");
+    filasSeleccionadas.forEach(function (filaSeleccionada) {
+      filaSeleccionada.classList.remove("selected");
+    });
+
+    // Agrega la clase 'selected' a la fila actual
+
+    closestRow.classList.add("selected");
+
+    restaurarValoresIniciales();
+    table.style.display = "table";
+
+    // Llenar los campos del formulario con los datos obtenidos
+
+    idField.value = rowData[0];
+    nameField.value = rowData[1];
+
+    // Habilitar el botón de modificar
+    modifyButton.disabled = false;
+  }
+});
+
 /* -------------función restaura formulario ------------------------------------- */
 function restaurarValoresIniciales() {
-  designNameField.value = "";
-  designNameField.setAttribute("readonly", "");
-  newDesignButton.textContent = "Agregar";
-  findDesignButton.textContent = "Buscar";
-  modifyDesignButton.textContent = "Modificar";
-  findDesignButton.disabled = false;
-  newDesignButton.disabled = false;
-  modifyDesignButton.disabled = true; // deshabilita el botón de modificar
-  newDesignButton.classList.remove("success-button");
-  findDesignButton.classList.remove("success-button");
-  modifyDesignButton.classList.remove("success-button");
+  nameField.value = "";
+  nameField.setAttribute("readonly", "");
+  newButton.textContent = "Agregar";
+  findButton.textContent = "Buscar";
+  modifyButton.textContent = "Modificar";
+  findButton.disabled = false;
+  newButton.disabled = false;
+  modifyButton.disabled = true; // deshabilita el botón de modificar
+  newButton.classList.remove("success-button");
+  findButton.classList.remove("success-button");
+  modifyButton.classList.remove("success-button");
   errorMessage.textContent = "";
-  tableDesigns.style.display = "none";
-  //Limpia el contenido de la tabla
-  while (tableBody.firstChild) {
-    // Mientras haya nodos hijos en tbody, elimínalos
-    tableBody.removeChild(tableBody.firstChild);
-  }
+  table.style.display = "none";
 
   limpiarResultados();
 }

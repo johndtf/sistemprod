@@ -1,18 +1,19 @@
-const newDimensionButton = document.getElementById("newDimension-btn");
+const newButton = document.getElementById("newDimension-btn");
 const cancelButton = document.getElementById("cancelDimension-btn");
-const findDimensionButton = document.getElementById("findDimension-btn");
-const modifyDimensionButton = document.getElementById("modifyDimension-btn");
-const listDimensionButton = document.getElementById("listDimension-btn");
-const dimensionNameField = document.getElementById("dimensionName");
-const dimensionIdField = document.getElementById("dimension-id");
+const findButton = document.getElementById("findDimension-btn");
+const modifyButton = document.getElementById("modifyDimension-btn");
+
+const nameField = document.getElementById("dimensionName");
+const idField = document.getElementById("dimension-id");
+
 const errorMessage = document.getElementById("error-message");
 const succesResults = document.getElementById("success-results");
 const form = document.querySelector("form");
 const tableBody = document.querySelector("table tbody");
-const tableDimensions = document.querySelector("table");
+const table = document.querySelector("table");
 
 import apiUrl from "./config.js";
-import { esCadenaNoVacia } from "./funcionesComunes.js";
+import { esCadenaNoVacia, cleanTable } from "./funcionesComunes.js";
 
 //Evitar que al darle enter envíe el formulario
 form.addEventListener("submit", (event) => {
@@ -21,22 +22,22 @@ form.addEventListener("submit", (event) => {
 
 /* ===========Botón agrega dimensión=============================== */
 
-newDimensionButton.addEventListener("click", () => {
-  if (newDimensionButton.textContent.trim() === "Agregar") {
+newButton.addEventListener("click", () => {
+  if (newButton.textContent.trim() === "Agregar") {
     // Preparar pantalla para ingreso de datos
     // deshabilita el botón de modificar
-    modifyDimensionButton.disabled = true;
-    findDimensionButton.disabled = true;
-    dimensionNameField.removeAttribute("readonly");
-    dimensionNameField.value = ""; // Limpiar el valor del campo
-    newDimensionButton.textContent = "Aceptar";
-    newDimensionButton.classList.add("success-button");
+    modifyButton.disabled = true;
+    findButton.disabled = true;
+    nameField.removeAttribute("readonly");
+    nameField.value = ""; // Limpiar el valor del campo
+    newButton.textContent = "Aceptar";
+    newButton.classList.add("success-button");
     limpiarResultados();
-    dimensionNameField.focus();
+    nameField.focus();
   } else {
     // Obtener nombre de la nueva dimensión
     const nuevaDimension = {
-      dimension: dimensionNameField.value,
+      dimension: nameField.value,
     };
 
     /* Verifica que sea un nombre valido */
@@ -52,47 +53,40 @@ newDimensionButton.addEventListener("click", () => {
 });
 
 /* =================Botón Encontrar========================== */
-findDimensionButton.addEventListener("click", () => {
-  if (findDimensionButton.textContent.trim() === "Buscar") {
+findButton.addEventListener("click", () => {
+  if (findButton.textContent.trim() === "Buscar") {
     // Preparar pantalla para buscar una dimension
-    dimensionNameField.removeAttribute("readonly");
-    dimensionNameField.value = ""; // Limpiar el valor del campo
+    nameField.removeAttribute("readonly");
+    nameField.value = ""; // Limpiar el valor del campo
     limpiarResultados(); // Ocultar resultados anteriores
 
-    findDimensionButton.textContent = "Aceptar";
-    newDimensionButton.disabled = true;
-    modifyDimensionButton.disabled = true;
-    findDimensionButton.classList.add("success-button");
-    dimensionNameField.focus();
+    findButton.textContent = "Aceptar";
+    newButton.disabled = true;
+    modifyButton.disabled = true;
+    findButton.classList.add("success-button");
+    nameField.focus();
   } else {
     // Obtener  la dimension
-    const nombreDimension = { dimension: dimensionNameField.value };
-
-    /* Verifica que sea un nombre valido */
-    if (!esCadenaNoVacia(nombreDimension.dimension)) {
-      errorMessage.textContent =
-        "La dimension debe contener una cadena de caractéres no vacía.";
-      return;
-    }
+    const nombreDimension = { dimension: nameField.value };
 
     buscarDimensionEnBaseDeDatos(nombreDimension);
   }
 });
 
 /* ============Botón Modificar==================================== */
-modifyDimensionButton.addEventListener("click", () => {
-  if (modifyDimensionButton.textContent.trim() === "Modificar") {
+modifyButton.addEventListener("click", () => {
+  if (modifyButton.textContent.trim() === "Modificar") {
     // Cambiar a modo de edición
-    newDimensionButton.disabled = true;
-    findDimensionButton.disabled = true;
-    modifyDimensionButton.textContent = "Aceptar";
-    modifyDimensionButton.classList.add("success-button");
-    dimensionNameField.removeAttribute("readonly");
-    dimensionNameField.focus();
+    newButton.disabled = true;
+    findButton.disabled = true;
+    modifyButton.textContent = "Aceptar";
+    modifyButton.classList.add("success-button");
+    nameField.removeAttribute("readonly");
+    nameField.focus();
   } else {
     // Obtener el ID de la dimensión y la nueva descripción
-    const idDimension = parseInt(dimensionIdField.value);
-    const nuevaDescripcion = { dimension: dimensionNameField.value };
+    const idDimension = parseInt(idField.value);
+    const nuevaDescripcion = { dimension: nameField.value };
 
     // Asegurarse de tener valores válidos antes de continuar
     if (!idDimension || !esCadenaNoVacia(nuevaDescripcion.dimension)) {
@@ -103,28 +97,6 @@ modifyDimensionButton.addEventListener("click", () => {
 
     actualizarDescripcionEnBaseDeDatos(idDimension, nuevaDescripcion);
   }
-});
-
-/* ===========Botón Listado de Dimensiones ============================ */
-listDimensionButton.addEventListener("click", async () => {
-  // Realiza la solicitud al backend
-  const response = await fetch(`${apiUrl}/api/dimensions`);
-  const dimensiones = await response.json();
-  //Limpia el contenido de la tabla
-  while (tableBody.firstChild) {
-    // Mientras haya nodos hijos en tbody, elimínalos
-    tableBody.removeChild(tableBody.firstChild);
-  }
-  //Carga el contenido de la consulta en la tabla
-  dimensiones.forEach((dimension) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-    <td>${dimension.id_dimension}</td>
-    <td>${dimension.dimension}</td>
-  `;
-    tableBody.appendChild(row);
-  });
-  tableDimensions.style.display = "table";
 });
 
 /* ============Botón Cancelar==================================== */
@@ -182,7 +154,7 @@ async function buscarDimensionEnBaseDeDatos(nombreDimension) {
     // Realiza una solicitud al servidor para buscar la dimensión
     //mediante POST ya que existen dimensiones que tienen el caracter /
     //y al enviar este caracter la api presenta error en el endpoint
-    const response = await fetch(`${apiUrl}/api/dimensions/dimension`, {
+    const response = await fetch(`${apiUrl}/api/dimensions/dimensionslist`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -191,30 +163,34 @@ async function buscarDimensionEnBaseDeDatos(nombreDimension) {
     });
 
     if (response.status === 200) {
-      const dimensionEncontrada = await response.json();
+      // carga la información en la tabla del formulario
+      const datalist = await response.json();
 
-      // Muestra la dimensión encontrada
-
-      console.log(dimensionEncontrada);
-
-      // Modifica la pantalla con la dimensión encontrada
-      restaurarValoresIniciales();
-      dimensionNameField.value = dimensionEncontrada.dimension;
-      dimensionIdField.value = dimensionEncontrada.id_dimension;
-      mostrarResultados(
-        `Dimensión encontrada: ${dimensionEncontrada.dimension}`
-      );
-      modifyDimensionButton.disabled = false;
-    } else if (response.status === 404) {
-      errorMessage.textContent = `La dimensión: ${nombreDimension} no fue encontrada`;
+      //Limpia el contenido de la tabla
+      cleanTable(tableBody);
+      //Carga el contenido de la consulta en la tabla
+      datalist.forEach((dataelement) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+    <td>${dataelement.id_dimension}</td>
+    <td>${dataelement.dimension}</td>
+    
+  `;
+        tableBody.appendChild(row);
+      });
+      table.style.display = "table";
+    } else if (response.status === 400) {
+      errorMessage.textContent =
+        "Por favor, proporciona información válida para la búsqueda.";
     } else {
-      errorMessage.textContent = "Ocurrió un error al obtener la dimensión";
-      console.error("Error al obtener la dimensión:", error);
+      // Otro error en el servidor
+      errorMessage.textContent =
+        "Ocurrió un error en el servidor al hacer la consulta.";
     }
   } catch (error) {
     console.error("Error de red:", error);
     errorMessage.textContent =
-      "Ocurrió un error de red al buscar la dimensión.";
+      "Ocurrió un error de red al hacer la consulta. Por favor, verifica tu conexión a Internet.";
   }
 }
 
@@ -258,26 +234,58 @@ async function actualizarDescripcionEnBaseDeDatos(
   }
 }
 
+/* --------------Función para poner el registro seleccionado en pantalla -------*/
+
+// Añadir un evento de clic a las filas de la tabla
+tableBody.addEventListener("click", (event) => {
+  // Obtener el elemento padre (fila) más cercano desde el objetivo del evento
+  const closestRow = event.target.closest("tr");
+
+  // Verificar si se encontró una fila
+  if (closestRow) {
+    // Obtener los datos de la fila seleccionada
+    const rowData = Array.from(closestRow.cells).map(
+      (cell) => cell.textContent
+    );
+
+    // Elimina la clase 'selected' de otras filas si existe
+    const filasSeleccionadas = table.querySelectorAll(".selected");
+    filasSeleccionadas.forEach(function (filaSeleccionada) {
+      filaSeleccionada.classList.remove("selected");
+    });
+
+    // Agrega la clase 'selected' a la fila actual
+
+    closestRow.classList.add("selected");
+
+    restaurarValoresIniciales();
+    table.style.display = "table";
+
+    // Llenar los campos del formulario con los datos obtenidos
+
+    idField.value = rowData[0];
+    nameField.value = rowData[1];
+
+    // Habilitar el botón de modificar
+    modifyButton.disabled = false;
+  }
+});
+
 /* -------------función restaura formulario ------------------------------------- */
 function restaurarValoresIniciales() {
-  dimensionNameField.value = "";
-  dimensionNameField.setAttribute("readonly", "");
-  newDimensionButton.textContent = "Agregar";
-  findDimensionButton.textContent = "Buscar";
-  modifyDimensionButton.textContent = "Modificar";
-  findDimensionButton.disabled = false;
-  newDimensionButton.disabled = false;
-  modifyDimensionButton.disabled = true; // deshabilita el botón de modificar
-  newDimensionButton.classList.remove("success-button");
-  findDimensionButton.classList.remove("success-button");
-  modifyDimensionButton.classList.remove("success-button");
+  nameField.value = "";
+  nameField.setAttribute("readonly", "");
+  newButton.textContent = "Agregar";
+  findButton.textContent = "Buscar";
+  modifyButton.textContent = "Modificar";
+  findButton.disabled = false;
+  newButton.disabled = false;
+  modifyButton.disabled = true; // deshabilita el botón de modificar
+  newButton.classList.remove("success-button");
+  findButton.classList.remove("success-button");
+  modifyButton.classList.remove("success-button");
   errorMessage.textContent = "";
-  tableDimensions.style.display = "none";
-  //Limpia el contenido de la tabla
-  while (tableBody.firstChild) {
-    // Mientras haya nodos hijos en tbody, elimínalos
-    tableBody.removeChild(tableBody.firstChild);
-  }
+  table.style.display = "none";
 
   limpiarResultados();
 }
