@@ -28,11 +28,15 @@ input[type="password"],
 input[type="search"],
 input[type="email"],
 input[type="number"],
-textarea {
+textarea,
+select {
   width: 18rem;
   margin-bottom: 8px;
 }
 
+select:disabled {
+  color: transparent;
+}
 /* input[readonly],
 textarea[readonly] {
   background-color: transparent;
@@ -41,11 +45,6 @@ textarea[readonly] {
 
 textarea {
   resize: none;
-}
-
-select {
-  /* width: max-content; */
-  width: 18rem;
 }
 
 .enterprice-logo {

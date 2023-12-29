@@ -1,21 +1,19 @@
-const newResolinspButton = document.getElementById("newResolinsp-btn");
+const newButton = document.getElementById("newResolinsp-btn");
 const cancelButton = document.getElementById("cancelResolinsp-btn");
-const findResolinspButton = document.getElementById("findResolinsp-btn");
-const modifyResolinspButton = document.getElementById("modifyResolinsp-btn");
-const listResolinspButton = document.getElementById("listResolinsp-btn");
-const resolinspCodeField = document.getElementById("resol-insp-codigo");
-const resolinspDescriptionField = document.getElementById(
-  "resolinspDescription"
-);
-const resolinspIdField = document.getElementById("resolinsp-id");
+const findButton = document.getElementById("findResolinsp-btn");
+const modifyButton = document.getElementById("modifyResolinsp-btn");
+
+const codeField = document.getElementById("resol-insp-codigo");
+const nameField = document.getElementById("resolinspDescription");
+const idField = document.getElementById("resolinsp-id");
 const errorMessage = document.getElementById("error-message");
 const succesResults = document.getElementById("success-results");
 const form = document.querySelector("form");
 const tableBody = document.querySelector("table tbody");
-const tableResolinsps = document.querySelector("table");
+const table = document.querySelector("table");
 
 import apiUrl from "./config.js";
-import { esCadenaNoVacia } from "./funcionesComunes.js";
+import { esCadenaNoVacia, cleanTable } from "./funcionesComunes.js";
 
 //Evitar que al darle enter envíe el formulario
 form.addEventListener("submit", (event) => {
@@ -24,25 +22,25 @@ form.addEventListener("submit", (event) => {
 
 /* ===========Botón agrega resolución de inspección=============================== */
 
-newResolinspButton.addEventListener("click", () => {
-  if (newResolinspButton.textContent.trim() === "Agregar") {
+newButton.addEventListener("click", () => {
+  if (newButton.textContent.trim() === "Agregar") {
     // Preparar pantalla para ingreso de datos
     // deshabilita el botón de modificar
-    modifyResolinspButton.disabled = true;
-    findResolinspButton.disabled = true;
-    resolinspCodeField.removeAttribute("readonly");
-    resolinspCodeField.value = "";
-    resolinspDescriptionField.removeAttribute("readonly");
-    resolinspDescriptionField.value = ""; // Limpiar el valor del campo
-    newResolinspButton.textContent = "Aceptar";
-    newResolinspButton.classList.add("success-button");
+    modifyButton.disabled = true;
+    findButton.disabled = true;
+    codeField.removeAttribute("readonly");
+    codeField.value = "";
+    nameField.removeAttribute("readonly");
+    nameField.value = ""; // Limpiar el valor del campo
+    newButton.textContent = "Aceptar";
+    newButton.classList.add("success-button");
     limpiarResultados();
-    resolinspCodeField.focus();
+    codeField.focus();
   } else {
     // Obtener código y nombre de la nueva resolución de inspección
     const nuevaResolinsp = {
-      codigo: resolinspCodeField.value,
-      resol_inspec: resolinspDescriptionField.value,
+      codigo: codeField.value,
+      resol_inspec: nameField.value,
     };
 
     /* Verifica que sea un código y descripción validos */
@@ -62,51 +60,48 @@ newResolinspButton.addEventListener("click", () => {
   }
 });
 
-/* =================Botón Encontrar========================== */
-findResolinspButton.addEventListener("click", () => {
-  if (findResolinspButton.textContent.trim() === "Buscar") {
-    // Preparar pantalla para buscar una dimension
-    resolinspCodeField.removeAttribute("readonly");
-    resolinspCodeField.value = "";
+/* =================Botón Buscar========================== */
+findButton.addEventListener("click", () => {
+  if (findButton.textContent.trim() === "Buscar") {
+    // Preparar pantalla para buscar resoluciones
+    restaurarValoresIniciales();
+    codeField.removeAttribute("readonly");
+    nameField.removeAttribute("readonly");
+
     limpiarResultados(); // Ocultar resultados anteriores
 
-    findResolinspButton.textContent = "Aceptar";
-    newResolinspButton.disabled = true;
-    modifyResolinspButton.disabled = true;
-    findResolinspButton.classList.add("success-button");
-    resolinspCodeField.focus();
+    findButton.textContent = "Aceptar";
+    newButton.disabled = true;
+    modifyButton.disabled = true;
+    findButton.classList.add("success-button");
+    codeField.focus();
   } else {
-    // Obtener nombre y código de la resolución
-    const codigoResolinsp = resolinspCodeField.value;
+    // Crea la variable con los parámetros de búsqueda
+    const filtroResolucion = {
+      codigo: codeField.value,
+      resol_garan: nameField.value,
+    };
 
-    /* Verifica que sea un código valido */
-    if (!esCadenaNoVacia(codigoResolinsp)) {
-      errorMessage.textContent =
-        "El código de la resolución deben contener información.";
-      return;
-    }
-
-    buscarResolinspEnBaseDeDatos(codigoResolinsp);
+    findResolutions(filtroResolucion);
   }
 });
-
 /* ============Botón Modificar==================================== */
-modifyResolinspButton.addEventListener("click", () => {
-  if (modifyResolinspButton.textContent.trim() === "Modificar") {
+modifyButton.addEventListener("click", () => {
+  if (modifyButton.textContent.trim() === "Modificar") {
     // Cambiar a modo de edición
-    newResolinspButton.disabled = true;
-    findResolinspButton.disabled = true;
-    modifyResolinspButton.textContent = "Aceptar";
-    modifyResolinspButton.classList.add("success-button");
-    resolinspCodeField.removeAttribute("readonly");
-    resolinspDescriptionField.removeAttribute("readonly");
-    resolinspCodeField.focus();
+    newButton.disabled = true;
+    findButton.disabled = true;
+    modifyButton.textContent = "Aceptar";
+    modifyButton.classList.add("success-button");
+    codeField.removeAttribute("readonly");
+    nameField.removeAttribute("readonly");
+    codeField.focus();
   } else {
     // Obtener el ID de la resolución de inspección y la nueva descripción
-    const idResolinsp = parseInt(resolinspIdField.value);
+    const idResolinsp = parseInt(idField.value);
     const resolinspModificada = {
-      codigo: resolinspCodeField.value,
-      resol_inspec: resolinspDescriptionField.value,
+      codigo: codeField.value,
+      resol_inspec: nameField.value,
     };
 
     // Asegurarse de tener valores válidos antes de continuar
@@ -122,29 +117,6 @@ modifyResolinspButton.addEventListener("click", () => {
 
     actualizarDescripcionEnBaseDeDatos(idResolinsp, resolinspModificada);
   }
-});
-
-/* ===========Botón Listado de Resoluciones de inspección ============================ */
-listResolinspButton.addEventListener("click", async () => {
-  // Realiza la solicitud al backend
-  const response = await fetch(`${apiUrl}/api/resolutionsInsp`);
-  const resolinsp = await response.json();
-  //Limpia el contenido de la tabla
-  while (tableBody.firstChild) {
-    // Mientras haya nodos hijos en tbody, elimínalos
-    tableBody.removeChild(tableBody.firstChild);
-  }
-  //Carga el contenido de la consulta en la tabla
-  resolinsp.forEach((resolinsp) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-    <td>${resolinsp.id_inspec}</td>
-    <td>${resolinsp.codigo}</td>
-    <td>${resolinsp.resol_inspec}</td>
-  `;
-    tableBody.appendChild(row);
-  });
-  tableResolinsps.style.display = "table";
 });
 
 /* ============Botón Cancelar==================================== */
@@ -203,41 +175,50 @@ function limpiarResultados() {
   succesResults.innerHTML = ""; // Limpiar resultados anteriores
 }
 
-/*---------- Función para buscar la resolución de inspección en la base de datos ------------*/
-async function buscarResolinspEnBaseDeDatos(codigoResolinsp) {
+/*---------- Función para buscar resoluciones de garantía en la base de datos ------------*/
+async function findResolutions(filtroResolucion) {
   try {
-    // Realiza una solicitud al servidor para buscar la resolución de inspección por código
+    // Realiza una solicitud al servidor para obtener la lista de resoluciones
     const response = await fetch(
-      `${apiUrl}/api/resolutionsInsp/${codigoResolinsp}`
+      `${apiUrl}/api/resolutionsInsp/resolutionslist`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(filtroResolucion),
+      }
     );
 
     if (response.status === 200) {
-      const resolinspEncontrada = await response.json();
+      // carga la información en la tabla del formulario
+      const listaresoluciones = await response.json();
 
-      // Muestra la resolución de inspección encontrada
-
-      console.log(resolinspEncontrada);
-
-      // Modifica la pantalla con la resolución de inspección encontrada
-      restaurarValoresIniciales();
-      resolinspCodeField.value = resolinspEncontrada.codigo;
-      resolinspDescriptionField.value = resolinspEncontrada.resol_inspec;
-      resolinspIdField.value = resolinspEncontrada.id_inspec;
-      mostrarResultados(
-        `Resolución encontrada: ${resolinspEncontrada.resol_inspec}`
-      );
-      modifyResolinspButton.disabled = false;
-    } else if (response.status === 404) {
-      errorMessage.textContent = `La resolución de inspección código: ${codigoResolinsp} no fue encontrada`;
-    } else {
+      //Limpia el contenido de la tabla
+      cleanTable(tableBody);
+      //Carga el contenido de la consulta en la tabla
+      listaresoluciones.forEach((listaresolucion) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+    <td>${listaresolucion.id_inspec}</td>
+    <td>${listaresolucion.codigo}</td>
+    <td>${listaresolucion.resol_inspec}</td>
+  `;
+        tableBody.appendChild(row);
+      });
+      table.style.display = "table";
+    } else if (response.status === 400) {
       errorMessage.textContent =
-        "Ocurrió un error al obtener la resolución de inspección";
-      console.error("Error al obtener la resolución de inspección:", error);
+        "Por favor, proporciona información válida para la búsqueda.";
+    } else {
+      // Otro error en el servidor
+      errorMessage.textContent =
+        "Ocurrió un error en el servidor al hacer la consulta.";
     }
   } catch (error) {
     console.error("Error de red:", error);
     errorMessage.textContent =
-      "Ocurrió un error de red al buscar la resolución de inspección.";
+      "Ocurrió un error de red al hacer la consulta. Por favor, verifica tu conexión a Internet.";
   }
 }
 
@@ -289,28 +270,61 @@ async function actualizarDescripcionEnBaseDeDatos(
   }
 }
 
+/* --------------Función para poner el registro seleccionado en pantalla -------*/
+
+// Añadir un evento de clic a las filas de la tabla
+tableBody.addEventListener("click", (event) => {
+  // Obtener el elemento padre (fila) más cercano desde el objetivo del evento
+  const closestRow = event.target.closest("tr");
+
+  // Verificar si se encontró una fila
+  if (closestRow) {
+    // Obtener los datos de la fila seleccionada
+    const rowData = Array.from(closestRow.cells).map(
+      (cell) => cell.textContent
+    );
+
+    // Elimina la clase 'selected' de otras filas si existe
+    const filasSeleccionadas = table.querySelectorAll(".selected");
+    filasSeleccionadas.forEach(function (filaSeleccionada) {
+      filaSeleccionada.classList.remove("selected");
+    });
+
+    // Agrega la clase 'selected' a la fila actual
+
+    closestRow.classList.add("selected");
+
+    restaurarValoresIniciales();
+    table.style.display = "table";
+
+    // Llenar los campos del formulario con los datos obtenidos
+
+    idField.value = rowData[0];
+    codeField.value = rowData[1];
+    nameField.value = rowData[2];
+
+    // Habilitar el botón de modificar si ya se seleccionó un cliente
+    modifyButton.disabled = false;
+  }
+});
+
 /* -------------función restaura formulario ------------------------------------- */
 function restaurarValoresIniciales() {
-  resolinspCodeField.value = "";
-  resolinspDescriptionField.value = "";
-  resolinspCodeField.setAttribute("readonly", "");
-  resolinspDescriptionField.setAttribute("readonly", "");
-  newResolinspButton.textContent = "Agregar";
-  findResolinspButton.textContent = "Buscar";
-  modifyResolinspButton.textContent = "Modificar";
-  findResolinspButton.disabled = false;
-  newResolinspButton.disabled = false;
-  modifyResolinspButton.disabled = true; // deshabilita el botón de modificar
-  newResolinspButton.classList.remove("success-button");
-  findResolinspButton.classList.remove("success-button");
-  modifyResolinspButton.classList.remove("success-button");
+  codeField.value = "";
+  nameField.value = "";
+  codeField.setAttribute("readonly", "");
+  nameField.setAttribute("readonly", "");
+  newButton.textContent = "Agregar";
+  findButton.textContent = "Buscar";
+  modifyButton.textContent = "Modificar";
+  findButton.disabled = false;
+  newButton.disabled = false;
+  modifyButton.disabled = true; // deshabilita el botón de modificar
+  newButton.classList.remove("success-button");
+  findButton.classList.remove("success-button");
+  modifyButton.classList.remove("success-button");
   errorMessage.textContent = "";
-  tableResolinsps.style.display = "none";
-  //Limpia el contenido de la tabla
-  while (tableBody.firstChild) {
-    // Mientras haya nodos hijos en tbody, elimínalos
-    tableBody.removeChild(tableBody.firstChild);
-  }
+  table.style.display = "none";
 
   limpiarResultados();
 }

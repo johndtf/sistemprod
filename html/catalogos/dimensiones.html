@@ -23,6 +23,7 @@
           name="dimensionName"
           required
           readonly
+          maxlength="20"
           oninput="this.value = this.value.toUpperCase()"
         />
       </div>
@@ -60,10 +61,6 @@
           Cancelar
         </button>
       </div>
-
-      <button type="button" id="listDimension-btn" class="buttonLink">
-        Listado de Dimensiones
-      </button>
 
       <!-- Div para mensajes de error -->
       <div id="error-message" class="error-message"></div>

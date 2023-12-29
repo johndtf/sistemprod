@@ -1,18 +1,19 @@
-const newBrandButton = document.getElementById("newBrand-btn");
+const newButton = document.getElementById("newBrand-btn");
 const cancelButton = document.getElementById("cancelBrand-btn");
-const findBrandButton = document.getElementById("findBrand-btn");
-const modifyBrandButton = document.getElementById("modifyBrand-btn");
-const listBrandButton = document.getElementById("listBrand-btn");
-const brandNameField = document.getElementById("brandName");
-const brandIdField = document.getElementById("brand-id");
+const findButton = document.getElementById("findBrand-btn");
+const modifyButton = document.getElementById("modifyBrand-btn");
+
+const nameField = document.getElementById("brandName");
+const idField = document.getElementById("brand-id");
+
 const errorMessage = document.getElementById("error-message");
 const succesResults = document.getElementById("success-results");
 const form = document.querySelector("form");
 const tableBody = document.querySelector("table tbody");
-const tableBrands = document.querySelector("table");
+const table = document.querySelector("table");
 
 import apiUrl from "./config.js";
-import { esCadenaNoVacia } from "./funcionesComunes.js";
+import { esCadenaNoVacia, cleanTable } from "./funcionesComunes.js";
 
 //Evitar que al darle enter envíe el formulario
 form.addEventListener("submit", (event) => {
@@ -21,22 +22,22 @@ form.addEventListener("submit", (event) => {
 
 /* ===========Botón agrega marca=============================== */
 
-newBrandButton.addEventListener("click", () => {
-  if (newBrandButton.textContent.trim() === "Agregar") {
+newButton.addEventListener("click", () => {
+  if (newButton.textContent.trim() === "Agregar") {
     // Preparar pantalla para ingreso de datos
     // deshabilita el botón de modificar
-    modifyBrandButton.disabled = true;
-    findBrandButton.disabled = true;
-    brandNameField.removeAttribute("readonly");
-    brandNameField.value = ""; // Limpiar el valor del campo
-    newBrandButton.textContent = "Aceptar";
-    newBrandButton.classList.add("success-button");
+    modifyButton.disabled = true;
+    findButton.disabled = true;
+    nameField.removeAttribute("readonly");
+    nameField.value = ""; // Limpiar el valor del campo
+    newButton.textContent = "Aceptar";
+    newButton.classList.add("success-button");
     limpiarResultados();
-    brandNameField.focus();
+    nameField.focus();
   } else {
     // Obtener nombre de la nueva marca
     const nuevaMarca = {
-      marca: brandNameField.value,
+      marca: nameField.value,
     };
 
     /* Verifica que sea un nombre valido */
@@ -51,48 +52,43 @@ newBrandButton.addEventListener("click", () => {
   }
 });
 
-/* =================Botón Encontrar========================== */
-findBrandButton.addEventListener("click", () => {
-  if (findBrandButton.textContent.trim() === "Buscar") {
+/* =================Botón Buscar========================== */
+findButton.addEventListener("click", () => {
+  if (findButton.textContent.trim() === "Buscar") {
     // Preparar pantalla para buscar una marca
-    brandNameField.removeAttribute("readonly");
-    brandNameField.value = ""; // Limpiar el valor del campo
+    nameField.removeAttribute("readonly");
+    nameField.value = ""; // Limpiar el valor del campo
     limpiarResultados(); // Ocultar resultados anteriores
 
-    findBrandButton.textContent = "Aceptar";
-    newBrandButton.disabled = true;
-    modifyBrandButton.disabled = true;
-    findBrandButton.classList.add("success-button");
-    brandNameField.focus();
+    findButton.textContent = "Aceptar";
+    newButton.disabled = true;
+    modifyButton.disabled = true;
+    findButton.classList.add("success-button");
+    nameField.focus();
   } else {
     // Obtener nombre de la marca
-    const nombreMarca = brandNameField.value;
-
-    /* Verifica que sea un nombre valido */
-    if (!esCadenaNoVacia(nombreMarca)) {
-      errorMessage.textContent =
-        "La marca debe contener una cadena de caractéres no vacía.";
-      return;
-    }
+    const nombreMarca = {
+      marca: nameField.value,
+    };
 
     buscarMarcaEnBaseDeDatos(nombreMarca);
   }
 });
 
 /* ============Botón Modificar==================================== */
-modifyBrandButton.addEventListener("click", () => {
-  if (modifyBrandButton.textContent.trim() === "Modificar") {
+modifyButton.addEventListener("click", () => {
+  if (modifyButton.textContent.trim() === "Modificar") {
     // Cambiar a modo de edición
-    newBrandButton.disabled = true;
-    findBrandButton.disabled = true;
-    modifyBrandButton.textContent = "Aceptar";
-    modifyBrandButton.classList.add("success-button");
-    brandNameField.removeAttribute("readonly");
-    brandNameField.focus();
+    newButton.disabled = true;
+    findButton.disabled = true;
+    modifyButton.textContent = "Aceptar";
+    modifyButton.classList.add("success-button");
+    nameField.removeAttribute("readonly");
+    nameField.focus();
   } else {
     // Obtener el ID de la marca y la nueva descripción
-    const idMarca = parseInt(brandIdField.value);
-    const nuevaDescripcion = { marca: brandNameField.value };
+    const idMarca = parseInt(idField.value);
+    const nuevaDescripcion = { marca: nameField.value };
 
     // Asegurarse de tener valores válidos antes de continuar
     if (!idMarca || !esCadenaNoVacia(nuevaDescripcion.marca)) {
@@ -103,28 +99,6 @@ modifyBrandButton.addEventListener("click", () => {
 
     actualizarDescripcionEnBaseDeDatos(idMarca, nuevaDescripcion);
   }
-});
-
-/* ===========Botón Listado de Marcas ============================ */
-listBrandButton.addEventListener("click", async () => {
-  // Realiza la solicitud al backend
-  const response = await fetch(`${apiUrl}/api/brands`);
-  const marcas = await response.json();
-  //Limpia el contenido de la tabla
-  while (tableBody.firstChild) {
-    // Mientras haya nodos hijos en tbody, elimínalos
-    tableBody.removeChild(tableBody.firstChild);
-  }
-  //Carga el contenido de la consulta en la tabla
-  marcas.forEach((marca) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-    <td>${marca.id_marca}</td>
-    <td>${marca.marca}</td>
-  `;
-    tableBody.appendChild(row);
-  });
-  tableBrands.style.display = "table";
 });
 
 /* ============Botón Cancelar==================================== */
@@ -180,30 +154,44 @@ function limpiarResultados() {
 async function buscarMarcaEnBaseDeDatos(nombreMarca) {
   try {
     // Realiza una solicitud al servidor para buscar la marca
-    const response = await fetch(`${apiUrl}/api/brands/${nombreMarca}`);
+
+    const response = await fetch(`${apiUrl}/api/brands/brandslist`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(nombreMarca),
+    });
 
     if (response.status === 200) {
-      const marcaEncontrada = await response.json();
+      // carga la información en la tabla del formulario
+      const datalist = await response.json();
 
-      // Muestra la marca encontrada
-
-      console.log(marcaEncontrada);
-
-      // Modifica la pantalla con la marca encontrada
-      restaurarValoresIniciales();
-      brandNameField.value = marcaEncontrada.marca;
-      brandIdField.value = marcaEncontrada.id_marca;
-      mostrarResultados(`Marca encontrada: ${marcaEncontrada.marca}`);
-      modifyBrandButton.disabled = false;
-    } else if (response.status === 404) {
-      errorMessage.textContent = `La marca: ${nombreMarca} no fue encontrada`;
+      //Limpia el contenido de la tabla
+      cleanTable(tableBody);
+      //Carga el contenido de la consulta en la tabla
+      datalist.forEach((dataelement) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+    <td>${dataelement.id_marca}</td>
+    <td>${dataelement.marca}</td>
+    
+  `;
+        tableBody.appendChild(row);
+      });
+      table.style.display = "table";
+    } else if (response.status === 400) {
+      errorMessage.textContent =
+        "Por favor, proporciona información válida para la búsqueda.";
     } else {
-      errorMessage.textContent = "Ocurrió un error al obtener la marca";
-      console.error("Error al obtener la marca:", error);
+      // Otro error en el servidor
+      errorMessage.textContent =
+        "Ocurrió un error en el servidor al hacer la consulta.";
     }
   } catch (error) {
     console.error("Error de red:", error);
-    errorMessage.textContent = "Ocurrió un error de red al buscar la marca.";
+    errorMessage.textContent =
+      "Ocurrió un error de red al hacer la consulta. Por favor, verifica tu conexión a Internet.";
   }
 }
 
@@ -244,26 +232,58 @@ async function actualizarDescripcionEnBaseDeDatos(idMarca, nuevaDescripcion) {
   }
 }
 
+/* --------------Función para poner el registro seleccionado en pantalla -------*/
+
+// Añadir un evento de clic a las filas de la tabla
+tableBody.addEventListener("click", (event) => {
+  // Obtener el elemento padre (fila) más cercano desde el objetivo del evento
+  const closestRow = event.target.closest("tr");
+
+  // Verificar si se encontró una fila
+  if (closestRow) {
+    // Obtener los datos de la fila seleccionada
+    const rowData = Array.from(closestRow.cells).map(
+      (cell) => cell.textContent
+    );
+
+    // Elimina la clase 'selected' de otras filas si existe
+    const filasSeleccionadas = table.querySelectorAll(".selected");
+    filasSeleccionadas.forEach(function (filaSeleccionada) {
+      filaSeleccionada.classList.remove("selected");
+    });
+
+    // Agrega la clase 'selected' a la fila actual
+
+    closestRow.classList.add("selected");
+
+    restaurarValoresIniciales();
+    table.style.display = "table";
+
+    // Llenar los campos del formulario con los datos obtenidos
+
+    idField.value = rowData[0];
+    nameField.value = rowData[1];
+
+    // Habilitar el botón de modificar
+    modifyButton.disabled = false;
+  }
+});
+
 /* -------------función restaura formulario ------------------------------------- */
 function restaurarValoresIniciales() {
-  brandNameField.value = "";
-  brandNameField.setAttribute("readonly", "");
-  newBrandButton.textContent = "Agregar";
-  findBrandButton.textContent = "Buscar";
-  modifyBrandButton.textContent = "Modificar";
-  findBrandButton.disabled = false;
-  newBrandButton.disabled = false;
-  modifyBrandButton.disabled = true; // deshabilita el botón de modificar
-  newBrandButton.classList.remove("success-button");
-  findBrandButton.classList.remove("success-button");
-  modifyBrandButton.classList.remove("success-button");
+  nameField.value = "";
+  nameField.setAttribute("readonly", "");
+  newButton.textContent = "Agregar";
+  findButton.textContent = "Buscar";
+  modifyButton.textContent = "Modificar";
+  findButton.disabled = false;
+  newButton.disabled = false;
+  modifyButton.disabled = true; // deshabilita el botón de modificar
+  newButton.classList.remove("success-button");
+  findButton.classList.remove("success-button");
+  modifyButton.classList.remove("success-button");
   errorMessage.textContent = "";
-  tableBrands.style.display = "none";
-  //Limpia el contenido de la tabla
-  while (tableBody.firstChild) {
-    // Mientras haya nodos hijos en tbody, elimínalos
-    tableBody.removeChild(tableBody.firstChild);
-  }
+  table.style.display = "none";
 
   limpiarResultados();
 }

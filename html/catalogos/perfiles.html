@@ -24,6 +24,7 @@
           name="profileName"
           required
           readonly
+          maxlength="45"
           oninput="this.value = this.value.toUpperCase()"
         />
       </div>
@@ -36,6 +37,7 @@
           oninput="this.value = this.value.toUpperCase()"
           rows="4"
           cols="18"
+          maxlength="120"
         ></textarea>
       </div>
 
@@ -73,10 +75,6 @@
           Cancelar
         </button>
       </div>
-
-      <button type="button" id="listProfile-btn" class="buttonLink">
-        Listado de Perfiles
-      </button>
 
       <!-- Div para mensajes de error-->
       <div id="error-message" class="error-message"></div>

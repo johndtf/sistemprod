@@ -23,6 +23,7 @@
           name="resol-garantia-codigo"
           required
           readonly
+          maxlength="2"
           oninput="this.value = this.value.toUpperCase()"
         />
       </div>
@@ -34,6 +35,7 @@
           name="resol-garantia-Description"
           required
           readonly
+          maxlength="45"
           oninput="this.value = this.value.toUpperCase()"
         />
       </div>
@@ -72,10 +74,6 @@
           Cancelar
         </button>
       </div>
-
-      <button type="button" id="listResolGarant-btn" class="buttonLink">
-        Listado de Resoluciones
-      </button>
 
       <!-- Div para mensajes de error-->
       <div id="error-message" class="error-message"></div>

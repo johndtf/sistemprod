@@ -1,20 +1,20 @@
-const newProfileButton = document.getElementById("newProfile-btn");
+const newButton = document.getElementById("newProfile-btn");
 const cancelButton = document.getElementById("cancelProfile-btn");
-const findProfileButton = document.getElementById("findProfile-btn");
-const modifyProfileButton = document.getElementById("modifyProfile-btn");
-const listProfileButton = document.getElementById("listProfile-btn");
-const profileNameLabel = document.getElementById("profileNameLabel");
-const profileNameField = document.getElementById("profileName");
-const profileDescriptionField = document.getElementById("profileDescription");
-const profileIdField = document.getElementById("profile-id");
+const findButton = document.getElementById("findProfile-btn");
+const modifyButton = document.getElementById("modifyProfile-btn");
+
+const nameField = document.getElementById("profileName");
+const descriptionField = document.getElementById("profileDescription");
+const idField = document.getElementById("profile-id");
+
 const errorMessage = document.getElementById("error-message");
 const succesResults = document.getElementById("success-results");
 const form = document.querySelector("form");
 const tableBody = document.querySelector("table tbody");
-const tableProfiles = document.querySelector("table");
+const table = document.querySelector("table");
 
 import apiUrl from "./config.js";
-import { esCadenaNoVacia } from "./funcionesComunes.js";
+import { esCadenaNoVacia, cleanTable } from "./funcionesComunes.js";
 
 //Evitar que al darle enter envíe el formulario
 form.addEventListener("submit", (event) => {
@@ -23,25 +23,25 @@ form.addEventListener("submit", (event) => {
 
 /* ===========Botón agrega perfil=============================== */
 
-newProfileButton.addEventListener("click", () => {
-  if (newProfileButton.textContent.trim() === "Agregar") {
+newButton.addEventListener("click", () => {
+  if (newButton.textContent.trim() === "Agregar") {
     // Preparar pantalla para ingreso de datos
     // deshabilita el botón de modificar
-    modifyProfileButton.disabled = true;
-    findProfileButton.disabled = true;
-    profileNameField.removeAttribute("readonly");
-    profileDescriptionField.removeAttribute("readonly");
-    profileNameField.value = ""; // Limpiar el valor del campo
-    profileDescriptionField.value = "";
-    newProfileButton.textContent = "Aceptar";
-    newProfileButton.classList.add("success-button");
+    modifyButton.disabled = true;
+    findButton.disabled = true;
+    nameField.removeAttribute("readonly");
+    descriptionField.removeAttribute("readonly");
+    nameField.value = ""; // Limpiar el valor del campo
+    descriptionField.value = "";
+    newButton.textContent = "Aceptar";
+    newButton.classList.add("success-button");
     limpiarResultados();
-    profileNameField.focus();
+    nameField.focus();
   } else {
     // Obtener la información del nuevo perfil
     const nuevoPerfil = {
-      perfil: profileNameField.value,
-      descripcion: profileDescriptionField.value,
+      perfil: nameField.value,
+      descripcion: descriptionField.value,
     };
 
     /* Verifica que sea un nombre y descripción validos */
@@ -61,53 +61,50 @@ newProfileButton.addEventListener("click", () => {
   }
 });
 
-/* =================Botón Encontrar========================== */
-findProfileButton.addEventListener("click", () => {
-  if (findProfileButton.textContent.trim() === "Buscar") {
+/* =================Botón Buscar========================== */
+findButton.addEventListener("click", () => {
+  if (findButton.textContent.trim() === "Buscar") {
     // Preparar pantalla para buscar un perfil
-    profileNameField.removeAttribute("readonly");
-    profileNameLabel.textContent = "Digita el id del Perfil";
-    profileNameField.value = ""; // Limpiar el valor del campo
-    profileDescriptionField.value = "";
+    nameField.removeAttribute("readonly");
+    nameField.value = ""; // Limpiar el valor del campo
+    descriptionField.removeAttribute("readonly");
+    descriptionField.value = "";
     limpiarResultados(); // Ocultar resultados anteriores
 
-    findProfileButton.textContent = "Aceptar";
-    newProfileButton.disabled = true;
-    modifyProfileButton.disabled = true;
-    findProfileButton.classList.add("success-button");
-    profileNameField.focus();
+    findButton.textContent = "Aceptar";
+    newButton.disabled = true;
+    modifyButton.disabled = true;
+    findButton.classList.add("success-button");
+    nameField.focus();
   } else {
     // Obtener nombre del perfil
-    const nombrePerfil = profileNameField.value;
 
-    /* Verifica que sea un nombre valido */
-    if (!esCadenaNoVacia(nombrePerfil)) {
-      errorMessage.textContent =
-        "El perfil debe contener una cadena de caractéres no vacía.";
-      return;
-    }
+    const filtroPerfil = {
+      perfil: nameField.value,
+      descripcion: descriptionField.value,
+    };
 
-    buscarPerfilEnBaseDeDatos(nombrePerfil);
+    buscarPerfilEnBaseDeDatos(filtroPerfil);
   }
 });
 
 /* ============Botón Modificar==================================== */
-modifyProfileButton.addEventListener("click", () => {
-  if (modifyProfileButton.textContent.trim() === "Modificar") {
+modifyButton.addEventListener("click", () => {
+  if (modifyButton.textContent.trim() === "Modificar") {
     // Cambiar a modo de edición
-    newProfileButton.disabled = true;
-    findProfileButton.disabled = true;
-    modifyProfileButton.textContent = "Aceptar";
-    modifyProfileButton.classList.add("success-button");
-    profileNameField.removeAttribute("readonly");
-    profileDescriptionField.removeAttribute("readonly");
-    profileNameField.focus();
+    newButton.disabled = true;
+    findButton.disabled = true;
+    modifyButton.textContent = "Aceptar";
+    modifyButton.classList.add("success-button");
+    nameField.removeAttribute("readonly");
+    descriptionField.removeAttribute("readonly");
+    nameField.focus();
   } else {
     // Obtener la información del perfil modificado
-    const idPerfil = parseInt(profileIdField.value);
+    const idPerfil = parseInt(idField.value);
     const perfilModificado = {
-      perfil: profileNameField.value,
-      descripcion: profileDescriptionField.value,
+      perfil: nameField.value,
+      descripcion: descriptionField.value,
     };
 
     // Asegurarse de tener valores válidos antes de continuar
@@ -123,30 +120,6 @@ modifyProfileButton.addEventListener("click", () => {
 
     actualizarDescripcionEnBaseDeDatos(idPerfil, perfilModificado);
   }
-});
-
-/* ===========Botón Listado de Perfiles ============================ */
-listProfileButton.addEventListener("click", async () => {
-  // Realiza la solicitud al backend
-  const response = await fetch(`${apiUrl}/api/profiles`);
-  const perfiles = await response.json();
-  //Limpia el contenido de la tabla
-  while (tableBody.firstChild) {
-    // Mientras haya nodos hijos en tbody, elimínalos
-    tableBody.removeChild(tableBody.firstChild);
-  }
-  //Carga el contenido de la consulta en la tabla
-  perfiles.forEach((perfil) => {
-    const row = document.createElement("tr");
-    row.innerHTML = `
-    <td>${perfil.id_perfil}</td>
-    <td>${perfil.perfil}</td>
-    <td>${perfil.descripcion}</td>
-
-  `;
-    tableBody.appendChild(row);
-  });
-  tableProfiles.style.display = "table";
 });
 
 /* ============Botón Cancelar==================================== */
@@ -197,38 +170,49 @@ function limpiarResultados() {
   succesResults.innerHTML = ""; // Limpiar resultados anteriores
 }
 
-/*---------- Función para buscar el perfil por id en la base de datos ------------*/
-async function buscarPerfilEnBaseDeDatos(idPerfil) {
+/*---------- Función para buscar el perfil en la base de datos ------------*/
+async function buscarPerfilEnBaseDeDatos(filtroPerfil) {
   try {
-    // Realiza una solicitud al servidor para buscar el perfil
-    const response = await fetch(`${apiUrl}/api/profiles/${idPerfil}`);
+    // Realiza una solicitud al servidor para obtener la lista de resoluciones
+    const response = await fetch(`${apiUrl}/api/profiles/profileslist`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(filtroPerfil),
+    });
 
     if (response.status === 200) {
-      const perfilEncontrado = await response.json();
+      // carga la información en la tabla del formulario
+      const listaperfiles = await response.json();
 
-      // Muestra el perfil encontrada
-
-      console.log(perfilEncontrado);
-
-      // Modifica la pantalla con el perfil encontrada
-      restaurarValoresIniciales();
-      profileNameField.value = perfilEncontrado.perfil;
-      profileDescriptionField.value = perfilEncontrado.descripcion;
-      profileIdField.value = perfilEncontrado.id_perfil;
-      mostrarResultados(`Perfil encontrado: ${perfilEncontrado.perfil}`);
-      modifyProfileButton.disabled = false;
-    } else if (response.status === 404) {
-      errorMessage.textContent = `El perfil con id: ${idPerfil} no fue encontrado`;
+      //Limpia el contenido de la tabla
+      cleanTable(tableBody);
+      //Carga el contenido de la consulta en la tabla
+      listaperfiles.forEach((perfil) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+    <td>${perfil.id_perfil}</td>
+    <td>${perfil.perfil}</td>
+    <td>${perfil.descripcion}</td>
+  `;
+        tableBody.appendChild(row);
+      });
+      table.style.display = "table";
+    } else if (response.status === 400) {
+      errorMessage.textContent =
+        "Por favor, proporciona información válida para la búsqueda.";
     } else {
-      errorMessage.textContent = "Ocurrió un error al obtener el perfil";
-      console.error("Error al obtener el perfil:", error);
+      // Otro error en el servidor
+      errorMessage.textContent =
+        "Ocurrió un error en el servidor al hacer la consulta.";
     }
   } catch (error) {
     console.error("Error de red:", error);
-    errorMessage.textContent = "Ocurrió un error de red al buscar el perfil.";
+    errorMessage.textContent =
+      "Ocurrió un error de red al hacer la consulta. Por favor, verifica tu conexión a Internet.";
   }
 }
-
 /* -----------------Función Actualizar la descripción de el perfil------------ */
 
 async function actualizarDescripcionEnBaseDeDatos(idPerfil, perfilModificado) {
@@ -266,29 +250,61 @@ async function actualizarDescripcionEnBaseDeDatos(idPerfil, perfilModificado) {
   }
 }
 
+/* --------------Función para poner el registro seleccionado en pantalla -------*/
+
+// Añadir un evento de clic a las filas de la tabla
+tableBody.addEventListener("click", (event) => {
+  // Obtener el elemento padre (fila) más cercano desde el objetivo del evento
+  const closestRow = event.target.closest("tr");
+
+  // Verificar si se encontró una fila
+  if (closestRow) {
+    // Obtener los datos de la fila seleccionada
+    const rowData = Array.from(closestRow.cells).map(
+      (cell) => cell.textContent
+    );
+
+    // Elimina la clase 'selected' de otras filas si existe
+    const filasSeleccionadas = table.querySelectorAll(".selected");
+    filasSeleccionadas.forEach(function (filaSeleccionada) {
+      filaSeleccionada.classList.remove("selected");
+    });
+
+    // Agrega la clase 'selected' a la fila actual
+
+    closestRow.classList.add("selected");
+
+    restaurarValoresIniciales();
+    table.style.display = "table";
+
+    // Llenar los campos del formulario con los datos obtenidos
+
+    idField.value = rowData[0];
+    nameField.value = rowData[1];
+    descriptionField.value = rowData[2];
+
+    // Habilitar el botón de modificar
+    modifyButton.disabled = false;
+  }
+});
 /* -------------función restaura formulario ------------------------------------- */
 function restaurarValoresIniciales() {
   profileNameLabel.textContent = "Nombre:";
-  profileNameField.value = "";
-  profileDescriptionField.value = "";
-  profileNameField.setAttribute("readonly", "");
-  profileDescriptionField.setAttribute("readonly", "");
-  newProfileButton.textContent = "Agregar";
-  findProfileButton.textContent = "Buscar";
-  modifyProfileButton.textContent = "Modificar";
-  findProfileButton.disabled = false;
-  newProfileButton.disabled = false;
-  modifyProfileButton.disabled = true; // deshabilita el botón de modificar
-  newProfileButton.classList.remove("success-button");
-  findProfileButton.classList.remove("success-button");
-  modifyProfileButton.classList.remove("success-button");
+  nameField.value = "";
+  descriptionField.value = "";
+  nameField.setAttribute("readonly", "");
+  descriptionField.setAttribute("readonly", "");
+  newButton.textContent = "Agregar";
+  findButton.textContent = "Buscar";
+  modifyButton.textContent = "Modificar";
+  findButton.disabled = false;
+  newButton.disabled = false;
+  modifyButton.disabled = true; // deshabilita el botón de modificar
+  newButton.classList.remove("success-button");
+  findButton.classList.remove("success-button");
+  modifyButton.classList.remove("success-button");
   errorMessage.textContent = "";
-  tableProfiles.style.display = "none";
-  //Limpia el contenido de la tabla
-  while (tableBody.firstChild) {
-    // Mientras haya nodos hijos en tbody, elimínalos
-    tableBody.removeChild(tableBody.firstChild);
-  }
+  table.style.display = "none";
 
   limpiarResultados();
 }

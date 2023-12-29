@@ -23,6 +23,7 @@
           id="brandName"
           name="brandName"
           readonly
+          maxlength="20"
           oninput="this.value = this.value.toUpperCase()"
         />
       </div>
@@ -61,10 +62,6 @@
         </button>
       </div>
 
-      <button type="button" id="listBrand-btn" class="buttonLink">
-        Listado de Marcas
-      </button>
-
       <!-- Div para mensajes de error -->
       <div id="error-message" class="error-message"></div>
       <!-- Div para resultados de busqueda -->
@@ -75,7 +72,7 @@
       <thead>
         <tr>
           <th>ID</th>
-          <th>Nombre de la Marca</th>
+          <th>Marca</th>
         </tr>
       </thead>
       <tbody>

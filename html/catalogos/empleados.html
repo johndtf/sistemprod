@@ -18,7 +18,15 @@
       <h2>Actualizar Empleados</h2>
       <div class="form-group">
         <label for="usernames">Nombres:</label>
-        <input type="text" id="usernames" name="usernames" required readonly />
+        <input
+          type="text"
+          id="usernames"
+          name="usernames"
+          required
+          readonly
+          maxlength="45"
+          oninput="this.value = this.value.toUpperCase()"
+        />
       </div>
       <div class="form-group">
         <label for="userlastnames">Apellidos:</label>
@@ -28,92 +36,125 @@
           name="userlastnames"
           required
           readonly
+          maxlength="45"
+          oninput="this.value = this.value.toUpperCase()"
         />
       </div>
       <div class="form-group">
         <label for="cedula">Cédula/Nit:</label>
-        <input type="text" id="cedula" name="cedula" required readonly />
-      </div>
-
-      <div class="form-group">
-        <label for="email">Correo electrónico:</label>
-        <input type="text" id="email" name="email" required readonly />
-      </div>
-
-      <div class="form-group">
-        <label for="telefono">Teléfono:</label>
-        <input type="text" id="telefono" name="telefono" required readonly />
-      </div>
-      <div class="form-group">
-        <label for="direccion">Dirección:</label>
-        <input type="text" id="direccion" name="direccion" required readonly />
-      </div>
-      <div class="form-group">
-        <label for="perfil">Perfil:</label>
-        <input type="text" id="perfil" name="perfil" required readonly />
-      </div>
-
-      <div class="form-group">
-        <label for="login">Usuario:</label>
-        <input type="text" id="login" name="login" required readonly />
-      </div>
-      <div class="form-group">
-        <label for="password">Contraseña:</label>
         <input
-          type="password"
-          id="password"
-          name="password"
+          type="text"
+          id="cedula"
+          name="cedula"
           required
           readonly
+          maxlength="10"
+          oninput="this.value = this.value.replace(/[^0-9]/g, '');"
         />
       </div>
 
       <div class="form-group">
+        <label for="email">Correo electrónico:</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          required
+          readonly
+          maxlength="100"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="telefono">Teléfono:</label>
+        <input
+          type="text"
+          id="telefono"
+          name="telefono"
+          title="Ingrese su número de teléfono"
+          oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+          maxlength="10"
+          required
+          readonly
+        />
+      </div>
+      <div class="form-group">
+        <label for="direccion">Dirección:</label>
+        <input
+          type="text"
+          id="direccion"
+          name="direccion"
+          maxlength="100"
+          required
+          readonly
+        />
+      </div>
+      <div class="form-group">
+        <label for="perfil">Perfil:</label>
+        <select id="perfilSelect" name="perfil" disabled>
+          <!-- Options will be dynamically added here using JavaScript -->
+        </select>
+      </div>
+
+      <div class="form-group">
         <label for="state">Estado:</label>
-        <input type="text" id="state" name="state" required readonly />
+        <select id="state" name="state" disabled>
+          <option value="A">ACTIVO</option>
+          <option value="I">INACTIVO</option>
+        </select>
       </div>
 
       <!-- Input para almacenar de manera invisible el id del empleado -->
       <input type="hidden" id="employee-id" name="employee-id" />
 
       <div class="button-group">
-        <button
-          type="button"
-          class="primary-button short-button"
-          id="nuevoEmployee-btn"
-        >
+        <button type="button" class="primary-button short-button" id="new-btn">
           Agregar
         </button>
         <button
           type="button"
           class="primary-button short-button"
-          id="modifyEmployee-btn"
+          id="modify-btn"
           disabled
         >
           Modificar
         </button>
-        <button
-          type="button"
-          class="primary-button short-button"
-          id="findEmployee-btn"
-        >
+        <button type="button" class="primary-button short-button" id="find-btn">
           Buscar
         </button>
         <button
           type="button"
           class="primary-button short-button"
-          id="cancelEmployee-btn"
+          id="cancel-btn"
         >
           Cancelar
         </button>
       </div>
-      <a href="http://localhost:8080/empleados/">Listado de Empleados</a>
+      <!-- Div para mensajes de error -->
+      <div id="error-message" class="error-message"></div>
+      <!-- Div para resultados de busqueda -->
+      <div id="success-results" style="display: none"></div>
     </form>
-    <br />
-    <div id="employee-list" class="employee-list">
-      <!-- Aquí se muestra la lista de empleados -->
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombres</th>
+          <th>Apellidos</th>
+          <th>Cédula/Nit</th>
+          <th>Email</th>
+          <th>Teléfono</th>
+          <th>Dirección</th>
+          <th>id_perfil</th>
+          <th>Perfil</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Las filas se agregarán dinámicamente aquí -->
+      </tbody>
+    </table>
 
-    <script src="../../js/empleados.js"></script>
+    <script type="module" src="../../js/empleados.js"></script>
   </body>
 </html>

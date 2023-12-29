@@ -1,5 +1,5 @@
-.employee-list {
-  max-width: 1400px;
-  margin-left: auto;
-  margin-right: auto;
+/* Oculta la columna id_perfil en la tabla */
+th:nth-child(8),
+td:nth-child(8) {
+  display: none;
 }
