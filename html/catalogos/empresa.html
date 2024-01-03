@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="../../css/reset.css" />
     <link rel="stylesheet" href="../../css/produccion.css" />
     <link rel="stylesheet" href="../../css/catalogos.css" />
+    <link rel="stylesheet" href="../../css/empresa.css" />
     <title>Empresa</title>
   </head>
   <body>
@@ -15,46 +16,35 @@
     </header>
 
     <!-- Contenido principal  -->
-    <form class="form">
-      <h2>Buscar Cliente</h2>
 
-      <div id="search-container">
+    <div id="message-container" class="message-container"></div>
+
+    <form class="form">
+      <h2>Establecer Cliente como Empresa</h2>
+
+      <div id="search-container" class="search-container">
         <input
           type="text"
           id="search-input"
-          placeholder="Buscar por Cédula Nit o Nombre"
+          placeholder="Buscar por Cédula o Nit"
+          maxlength="10"
         />
-        <button type="button" id="search-button">&#128269;</button>
+        <button type="button" id="search-button" class="search-button">
+          &#128269;
+        </button>
       </div>
       <div class="form-group">
         <label for="userid">Cédula/Nit:</label>
-        <input
-          type="search"
-          id="userid"
-          name="userid"
-          value="1.234.567.890-1"
-        />
+        <input type="text" id="document" name="document" readonly />
       </div>
 
       <div class="form-group">
         <label for="usernames">Nombres:</label>
-        <input
-          type="text"
-          id="usernames"
-          name="usernames"
-          value="EMPRESA ABC REENCAUCHE"
-          readonly
-        />
+        <input type="text" id="names" name="names" readonly />
       </div>
       <div class="form-group">
         <label for="userlastnames">Apellidos:</label>
-        <input
-          type="text"
-          id="userlastnames"
-          name="userlastnames"
-          required
-          readonly
-        />
+        <input type="text" id="lastnames" name="lastnames" readonly />
       </div>
 
       <div class="form-group">
@@ -65,19 +55,14 @@
           class="eslogan"
           cols="34"
           rows="3"
-        >
-EL MEJOR PRODUCTO A LOS MEJORES PRECIOS</textarea
-        >
+          maxlength="100"
+        ></textarea>
       </div>
 
+      <!-- Input para almacenar de manera invisible el id del cliente -->
+      <input type="hidden" id="customer-id" name="customer-id" />
+
       <div class="button-group">
-        <button
-          type="button"
-          class="primary-button short-button"
-          id="change-logo-btn"
-        >
-          Cambiar Logo
-        </button>
         <button
           type="button"
           class="primary-button short-button"
@@ -87,10 +72,16 @@ EL MEJOR PRODUCTO A LOS MEJORES PRECIOS</textarea
         </button>
       </div>
     </form>
+    <!-- Cuadro de diálogo modal -->
+    <div id="confirmationModal" class="modal">
+      <div class="modal-content">
+        <h3>Confirmación CAMBIAR EMPRESA</h3>
+        <p>¿Estás seguro de realizar la actualización?</p>
+        <button id="confirmBtn">Confirmar</button>
+        <button id="cancelBtn">Cancelar</button>
+      </div>
+    </div>
 
-    <script
-      src="https://kit.fontawesome.com/f3b6c3464d.js"
-      crossorigin="anonymous"
-    ></script>
+    <script type="module" src="../../js/empresa.js"></script>
   </body>
 </html>
