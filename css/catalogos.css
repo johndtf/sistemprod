@@ -47,7 +47,7 @@ textarea {
   resize: none;
 }
 
-.enterprice-logo {
+/* .enterprice-logo {
   width: 10rem;
   height: auto;
   margin-left: auto;
@@ -55,12 +55,13 @@ textarea {
   margin-top: 10px;
   border: var(--border1);
 }
-
+ */
 .eslogan {
   font-family: var(--font);
-  background-color: transparent;
+  /*background-color: transparent;*/
+
   border: var(--border1);
-  color: var(--text-light-color);
+  /*   color: var(--text-light-color); */
   padding: 1rem;
 }
 

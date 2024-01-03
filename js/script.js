@@ -2,6 +2,8 @@ const hero = document.querySelector(".hero");
 const frameContainer = document.getElementById("frame-container");
 const tabsMenu = document.getElementById("tabs-menu");
 
+import apiUrl from "./config.js";
+
 // Cuando se carga la página, establece el enfoque en el campo de texto de usuario
 document.addEventListener("DOMContentLoaded", function () {
   document.getElementById("login").focus();
@@ -84,6 +86,55 @@ btnRecuperar.addEventListener("click", () => {
 });
 
 //================Form recuperar contraseña===================================
+
+// Obtener referencia al botón de generación de pin
+const generatePinBtn = document.querySelector(".generate-btn");
+
+// Agregar un event listener al botón
+generatePinBtn.addEventListener("click", async () => {
+  // Obtener el valor del campo de correo electrónico
+  const emailInput = document.getElementById("username-recovery");
+  const email = emailInput.value.trim();
+
+  // Validar el formato del correo electrónico
+  if (!isValidEmail(email)) {
+    alert("Por favor, ingrese un correo electrónico válido.");
+    return;
+  }
+
+  try {
+    // Enviar la solicitud a la API para generar el pin
+    const response = await fetch(`${apiUrl}/api/auth/recover-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    // Procesar la respuesta
+    if (response.ok) {
+      alert(
+        "Se ha generado un pin. Revise su correo electrónico para obtener más instrucciones."
+      );
+    } else {
+      // Manejar posibles errores
+      const errorMessage = await response.text();
+      alert(`Error al generar el pin: ${errorMessage}`);
+    }
+  } catch (error) {
+    console.error("Error en la solicitud de generación de pin:", error);
+    alert(
+      "Ocurrió un error al procesar la solicitud. Por favor, inténtelo de nuevo."
+    );
+  }
+});
+
+// Función para validar el formato de un correo electrónico
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
 
 // Boton Aceptar, solo salir del formulario, lo demás pendiente por programar
 

@@ -329,6 +329,7 @@ iframe.visible {
   border: none;
 }
 
+/* ===============Estilos clase modal===================== */
 .modal {
   display: block;
   position: fixed;
