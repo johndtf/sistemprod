@@ -2,6 +2,20 @@ const hero = document.querySelector(".hero");
 const frameContainer = document.getElementById("frame-container");
 const tabsMenu = document.getElementById("tabs-menu");
 
+const tab1 = document.getElementById("tab-1");
+const tab2 = document.getElementById("tab-2");
+const tab3 = document.getElementById("tab-3");
+const tab4 = document.getElementById("tab-4");
+const tab5 = document.getElementById("tab-5");
+const tab6 = document.getElementById("tab-6");
+
+const usernameField = document.getElementById("login");
+const passwordField = document.getElementById("password");
+
+//Form para mensajes de error
+const errorMessageForm = document.getElementById("error-message");
+const errorTitle = document.querySelector(".title-error");
+const errorContent = document.querySelector(".content-error");
 import apiUrl from "./config.js";
 
 // Cuando se carga la página, establece el enfoque en el campo de texto de usuario
@@ -51,28 +65,102 @@ function hideTabsMenu() {
   line3_bars.classList.remove("active-line3-bars-menu");
 }
 
+// =====================Asignar eventos a los radio buttons=====================================
+tab1.addEventListener("click", function () {
+  loadInicio();
+  hideTabsMenu();
+});
+
+tab2.addEventListener("click", function () {
+  loadPage("html/produccion/menu_produccion.html");
+  hideTabsMenu();
+});
+
+tab3.addEventListener("click", function () {
+  hideTabsMenu();
+  loadPage("html/ventas/menu_ventas.html");
+});
+
+tab4.addEventListener("click", function () {
+  hideTabsMenu();
+  loadPage("html/consultas/menu_consultas.html");
+});
+
+tab5.addEventListener("click", function () {
+  hideTabsMenu();
+  loadPage("html/catalogos/menu_catalogos.html");
+});
+
+tab6.addEventListener("click", function () {
+  loadPage("html/contacto.html");
+  hideTabsMenu();
+});
+
 //===============form ingreso de contraseña=========================
 
 //trae del document el formulario y el boton submit en variables
 const modalIngreso = document.getElementById("modal-ingreso");
 const submitBtn = document.getElementById("submit-btn");
-const errorMessage = document.getElementById("error-message");
 
 //en evento clic del botón submit sale del formulario modal dando paso a la página
 
-submitBtn.addEventListener("click", (event) => {
+submitBtn.addEventListener("click", async (event) => {
   event.preventDefault(); // Evita el envío del formulario
 
-  const username = document.getElementById("login").value;
-  const password = document.getElementById("password").value;
+  const username = usernameField.value;
+  const password = passwordField.value;
 
-  if (username && password) {
-    // Validación exitosa, ocultar el formulario modal
+  // Validaciones
+  if (!(username && password)) {
+    // Indicar que los campos son obligatorios
+    errorTitle.textContent = "Información Incompleta";
+    errorContent.textContent = "Por favor, completa todos los campos";
+    return (errorMessageForm.style.display = "block");
+  }
 
-    modalIngreso.style.display = "none";
-  } else {
-    // Mostrar un mensaje de error o realizar alguna acción para indicar que los campos son obligatorios
-    errorMessage.style.display = "block";
+  // Validar el formato del correo electrónico
+  if (!isValidEmail(username)) {
+    errorTitle.textContent = "Información Incorrecta";
+    errorContent.textContent =
+      "Por favor, ingresa un correo electrónico válido en el campo Usuario.";
+    errorMessageForm.style.display = "block";
+    //usernameField.focus();
+    return;
+  }
+
+  try {
+    //Enviar usuario y password
+    const response = await fetch(`${apiUrl}/api/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify({
+        email: username,
+        password: password,
+      }),
+      credentials: "include", // Importante para permitir cookies en la solicitud
+    });
+
+    //Procesar la respuesta
+
+    if (response.ok) {
+      // Validación exitosa, ocultar el formulario modal
+      const token = await response.json();
+      console.log(token);
+      modalIngreso.style.display = "none";
+    } else {
+      //manejo de errores
+      const errorMessage = await response.json();
+      errorTitle.textContent = "Error de Identificación";
+      errorContent.textContent = errorMessage.message;
+      errorMessageForm.style.display = "block";
+    }
+  } catch (error) {
+    console.error("Error al autenticar Empleado:", error);
+    errorTitle.textContent = "Error al procesar la Solicitud";
+    errorContent.textContent = error.json();
   }
 });
 
@@ -89,11 +177,11 @@ btnRecuperar.addEventListener("click", () => {
 
 // Obtener referencia al botón de generación de pin
 const generatePinBtn = document.querySelector(".generate-btn");
+const emailInput = document.getElementById("username-recovery");
 
-// Agregar un event listener al botón
+// Agregar un event listener al botón generar pin
 generatePinBtn.addEventListener("click", async () => {
   // Obtener el valor del campo de correo electrónico
-  const emailInput = document.getElementById("username-recovery");
   const email = emailInput.value.trim();
 
   // Validar el formato del correo electrónico
@@ -120,7 +208,7 @@ generatePinBtn.addEventListener("click", async () => {
     } else {
       // Manejar posibles errores
       const errorMessage = await response.text();
-      alert(`Error al generar el pin: ${errorMessage}`);
+      alert(`Error al establecer la nueva contraseña: ${errorMessage}`);
     }
   } catch (error) {
     console.error("Error en la solicitud de generación de pin:", error);
@@ -130,24 +218,68 @@ generatePinBtn.addEventListener("click", async () => {
   }
 });
 
-// Función para validar el formato de un correo electrónico
-function isValidEmail(email) {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
-}
+// -Botón Aceptar para cambio de contraseña
+const newPasswordButton = document.getElementById("nuevaClave-btn");
 
-// Boton Aceptar, solo salir del formulario, lo demás pendiente por programar
+newPasswordButton.addEventListener("click", async () => {
+  const email = emailInput.value.trim();
+  const recoveryCode = document.getElementById("password-recuperar").value;
+  const newPassword1 = document.getElementById("nuevaClave1").value;
+  const newPassword2 = document.getElementById("nuevaClave2").value;
 
-const btnAceptarNuevaClave = document.getElementById("nuevaClave-btn");
-btnAceptarNuevaClave.addEventListener("click", () => {
-  modalRecuperar.style.display = "none";
+  // Verificar que las nuevas contraseñas coincidan
+  if (newPassword1 !== newPassword2) {
+    alert("Las nuevas contraseñas no coinciden");
+
+    return;
+  }
+
+  // Realizar una solicitud al servidor para restablecer la contraseña
+  const newPassword = {
+    email: email,
+    recoveryCode: recoveryCode,
+    newPassword: newPassword1,
+  };
+  try {
+    const response = await fetch(`${apiUrl}/api/auth/reset-password`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify(newPassword),
+    });
+
+    // Procesar la respuesta
+    if (response.ok) {
+      alert(
+        "Se ha reestablecido la contraseña, en este momento puede ingresar con ella al sistema"
+      );
+      modalRecuperar.style.display = "none";
+    } else {
+      // Manejar posibles errores
+      const errorMessage = await response.text();
+      alert(`Error al establecer la nueva contraseña: ${errorMessage}`);
+    }
+  } catch (error) {
+    console.error("Error en la solicitud de generación de pin:", error);
+    alert(
+      "Ocurrió un error al procesar la solicitud. Por favor, inténtelo de nuevo."
+    );
+  }
 });
 
-/*====================Form Error=================0*/
+/*====================================Form Error=======================*/
 // Obtener el botón de aceptar del mensaje de error
 const errorButton = document.getElementById("error-button");
 
 // Agregar un evento de clic al botón de aceptar
-errorButton.addEventListener("click", () => {
-  errorMessage.style.display = "none";
+errorButton.addEventListener("click", async () => {
+  errorMessageForm.style.display = "none";
 });
+
+// -------Función para validar el formato de un correo electrónico------
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
