@@ -24,52 +24,22 @@
       </div>
       <!-- Menú de opciones -->
       <nav class="tabs-menu sub-menu" id="tabs-menu">
-        <input
-          type="radio"
-          id="tab-1"
-          name="tabs"
-          onclick="loadInicio(); hideTabsMenu()"
-        />
+        <input type="radio" id="tab-1" name="tabs" />
         <label for="tab-1">Inicio</label>
 
-        <input
-          type="radio"
-          id="tab-2"
-          name="tabs"
-          onclick="loadPage('html/produccion/menu_produccion.html'); hideTabsMenu()"
-        />
+        <input type="radio" id="tab-2" name="tabs" />
         <label for="tab-2">Producción</label>
 
-        <input
-          type="radio"
-          id="tab-3"
-          name="tabs"
-          onclick="hideTabsMenu(); loadPage('html/ventas/menu_ventas.html')"
-        />
+        <input type="radio" id="tab-3" name="tabs" />
         <label for="tab-3">Ventas</label>
 
-        <input
-          type="radio"
-          id="tab-4"
-          name="tabs"
-          onclick="hideTabsMenu(); loadPage('html/consultas/menu_consultas.html')"
-        />
+        <input type="radio" id="tab-4" name="tabs" />
         <label for="tab-4">Consultas</label>
 
-        <input
-          type="radio"
-          id="tab-5"
-          name="tabs"
-          onclick="hideTabsMenu(); loadPage('html/catalogos/menu_catalogos.html')"
-        />
+        <input type="radio" id="tab-5" name="tabs" />
         <label for="tab-5">Catálogos</label>
 
-        <input
-          type="radio"
-          id="tab-6"
-          name="tabs"
-          onclick="loadPage('html/contacto.html'); hideTabsMenu()"
-        />
+        <input type="radio" id="tab-6" name="tabs" />
         <label for="tab-6">Contacto</label>
 
         <!-- div que hace el efecto cuando se selecciona una opción -->
@@ -119,6 +89,8 @@
             Recuperar contraseña
           </button>
         </div>
+        <p>usuario de prueba: example@example.com</p>
+        <p>password de prueba: 1</p>
       </form>
     </div>
 
@@ -137,7 +109,7 @@
           <label for="username-recovery">Usuario:</label>
         </div>
         <div>
-          <button type="button" class="buttonForm" class="generate-btn">
+          <button type="button" class="buttonForm generate-btn">
             Generar Pin
           </button>
         </div>
@@ -154,6 +126,7 @@
             name="password-recuperar"
             required
           />
+
           <label for="password-recuperar">Pin de recuperación:</label>
         </div>
         <div class="form-group">
@@ -174,11 +147,11 @@
 
     <!-- ==================Form pantalla de error============= -->
     <div id="error-message" class="error-message">
-      <h2>Información Incompleta</h2>
+      <h2 class="title-error">Información Incompleta</h2>
       <div class="error-icon">
         <i class="fa-solid fa-triangle-exclamation"></i>
       </div>
-      <p>Por favor, completa todos los campos</p>
+      <p class="content-error">Por favor, completa todos los campos</p>
       <button id="error-button">Aceptar</button>
     </div>
 
