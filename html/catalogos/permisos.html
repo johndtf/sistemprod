@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="../../css/reset.css" />
     <link rel="stylesheet" href="../../css/produccion.css" />
     <link rel="stylesheet" href="../../css/catalogos.css" />
+    <script
+      src="https://kit.fontawesome.com/f3b6c3464d.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Permisos</title>
   </head>
   <body>
@@ -18,11 +22,7 @@
     <form class="form">
       <div class="form-group">
         <label for="perfil">Seleccionar Perfil:</label>
-        <select id="perfil" name="perfil">
-          <option value="OPERARIO">OPERARIO</option>
-          <option value="INGENIERO_DE_PLANTA">INGENIERO DE PLANTA</option>
-          <option value="JEFE_DE_VENTAS">JEFE DE VENTAS</option>
-        </select>
+        <select id="perfil" name="perfil"></select>
       </div>
       <div class="button-group">
         <button
@@ -33,19 +33,21 @@
           Actualizar Permisos
         </button>
       </div>
+      <!-- Div para resultados -->
+      <div id="success-results"></div>
     </form>
 
-    <section class="grid-section">
+    <section class="grid-section" id="permisos-section">
       <label>
         <input type="checkbox" name="ordenes" value="ordenes" />
         Ordenes
       </label>
       <label>
-        <input type="checkbox" name="salidasProce" value="salidasProce" />
+        <input type="checkbox" name="salidasProce" value="salidasprocesadas" />
         Salidas procesadas
       </label>
       <label>
-        <input type="checkbox" name="salidasrech" value="salidasrech" />
+        <input type="checkbox" name="salidasrech" value="salidasrechazos" />
         Salidas Rechazadas
       </label>
       <label>
@@ -53,7 +55,7 @@
         Garantías
       </label>
       <label>
-        <input type="checkbox" name="inspIninical" value="inspIninical" />
+        <input type="checkbox" name="inspIninical" value="inspeccioni" />
         Inspección Inicial
       </label>
       <label>
@@ -73,7 +75,7 @@
         Relleno
       </label>
       <label>
-        <input type="checkbox" name="corteBanda" value="corteBanda" />
+        <input type="checkbox" name="corteBanda" value="corteb" />
         Corte de Banda
       </label>
       <label>
@@ -85,7 +87,7 @@
         Vulcanización
       </label>
       <label>
-        <input type="checkbox" name="inspefinal" value="inspefinal" />
+        <input type="checkbox" name="inspefinal" value="inspeccionf" />
         Inspección final
       </label>
       <label>
@@ -93,42 +95,34 @@
         Terminación
       </label>
       <label>
-        <input
-          type="checkbox"
-          name="entregareencauche"
-          value="entregareencauche"
-        />
+        <input type="checkbox" name="entregareencauche" value="facturacion" />
         Facturación Procesadas
       </label>
       <label>
-        <input type="checkbox" name="entregarechazo" value="entregarechazo" />
+        <input type="checkbox" name="entregarechazo" value="entregar" />
         Entrega Rechazo a Cliente
       </label>
       <label>
-        <input type="checkbox" name="compraBodega" value="compraBodega" />
+        <input type="checkbox" name="compraBodega" value="comprac" />
         Compra de cascos en Bodega
       </label>
       <label>
-        <input
-          type="checkbox"
-          name="consultaClientes"
-          value="consultaClientes"
-        />
+        <input type="checkbox" name="consultaClientes" value="cclientes" />
         Consulta para Clientes
       </label>
       <label>
-        <input type="checkbox" name="incices" value="incices" />
-        Íncices
+        <input type="checkbox" name="indices" value="indices" />
+        Índices
       </label>
       <label>
-        <input type="checkbox" name="consultaventas" value="consultaventas" />
+        <input type="checkbox" name="consultaventas" value="cventas" />
         Consulta de Ventas
       </label>
       <label>
         <input
           type="checkbox"
           name="consultaInventarios"
-          value="consultaInventarios"
+          value="cinventarios"
         />
         Consulta de Inventarios
       </label>
@@ -146,9 +140,6 @@
       </label>
     </section>
 
-    <script
-      src="https://kit.fontawesome.com/f3b6c3464d.js"
-      crossorigin="anonymous"
-    ></script>
+    <script type="module" src="../../js/permisos.js"></script>
   </body>
 </html>

@@ -18,8 +18,8 @@ const stateField = document.getElementById("state");
 const errorMessage = document.getElementById("error-message");
 const successResults = document.getElementById("success-results");
 const form = document.querySelector("form");
-const tableBody = document.getElementById("table tbody");
 const table = document.querySelector("table");
+const tableBody = document.querySelector("table tbody");
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expresión regular para validar el formato de correo electrónico
 
