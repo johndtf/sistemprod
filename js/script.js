@@ -16,12 +16,35 @@ const passwordField = document.getElementById("password");
 const errorMessageForm = document.getElementById("error-message");
 const errorTitle = document.querySelector(".title-error");
 const errorContent = document.querySelector(".content-error");
+
 import apiUrl from "./config.js";
 
-// Cuando se carga la página, establece el enfoque en el campo de texto de usuario
-document.addEventListener("DOMContentLoaded", function () {
-  document.getElementById("login").focus();
+// Cuando se carga la página
+document.addEventListener("DOMContentLoaded", () => {
+  //verificar el Token de autenticación
+
+  //Obtener token desde el local storage;
+  const tokenFromLocalStorage = localStorage.getItem("myTokenName");
+  if (tokenFromLocalStorage) {
+    // Ya hay un token almacenado, no mostrar el formulario de login
+
+    modalIngreso.style.display = "none";
+  } else {
+    usernameField.focus();
+  }
 });
+
+/*--------------Función Obtener Token desde Cookie------------------*/
+/* function obtenerTokenDesdeCookie() {
+  const cookies = document.cookie.split("; ");
+  for (const cookie of cookies) {
+    const [name, value] = cookie.split("=");
+    if (name === "myTokenName") {
+      return value;
+    }
+  }
+  return null;
+} */
 
 /* =================Menú Hamburguesa========================0 */
 document.querySelector(".bars-menu").addEventListener("click", animateBars);
@@ -102,7 +125,7 @@ tab6.addEventListener("click", function () {
 const modalIngreso = document.getElementById("modal-ingreso");
 const submitBtn = document.getElementById("submit-btn");
 
-//en evento clic del botón submit sale del formulario modal dando paso a la página
+//en evento clic del botón submit
 
 submitBtn.addEventListener("click", async (event) => {
   event.preventDefault(); // Evita el envío del formulario
@@ -140,16 +163,18 @@ submitBtn.addEventListener("click", async (event) => {
         email: username,
         password: password,
       }),
-      credentials: "include", // Importante para permitir cookies en la solicitud
+      //credentials: "include", // Importante para permitir cookies en la solicitud
     });
 
     //Procesar la respuesta
 
     if (response.ok) {
       // Validación exitosa, ocultar el formulario modal
-      const token = await response.json();
-      console.log(token);
       modalIngreso.style.display = "none";
+
+      // Almacenar el token en el Local Storage
+      const token = await response.json();
+      localStorage.setItem("myTokenName", token);
     } else {
       //manejo de errores
       const errorMessage = await response.json();

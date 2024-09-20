@@ -259,55 +259,81 @@ async function createElement(newElement) {
 //-------Función Buscar Empleado--------------------------
 
 async function findEmployees(filtroEmpleado) {
-  // Realizar una solicitud al servidor para obtener la lista de empleados.
   try {
+    const token = localStorage.getItem("myTokenName");
+
     const response = await fetch(`${apiUrl}/api/employees/employeeslist`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`, // Incluir el token en el encabezado
       },
       body: JSON.stringify(filtroEmpleado),
     });
 
-    if (response.status === 200) {
-      // carga la información en la tabla del formulario
+    // Validar el código de estado de la respuesta
+    if (response.ok) {
+      // Si el código de estado es 200, procesar la respuesta
       const listaempleados = await response.json();
 
-      //Limpia el contenido de la tabla
+      // Limpiar la tabla y agregar nuevas filas
       cleanTable(tableBody);
-      //Carga el contenido de la consulta en la tabla
       listaempleados.forEach((listaempleado) => {
         const row = document.createElement("tr");
         row.innerHTML = `
-            <td>${listaempleado.id_empleado}</td>
-            <td>${listaempleado.nombre}</td>
-            <td>${listaempleado.apellido}</td>
-            <td>${listaempleado.cedula}</td>
-            <td>${listaempleado.email}</td>
-            <td>${listaempleado.telefono}</td>
-            <td>${listaempleado.direccion}</td>
-            <td>${listaempleado.id_perfil}</td>
-            <td>${listaempleado.perfil}</td>
-            <td>${listaempleado.estado}</td>
-             `;
-
+          <td>${listaempleado.id_empleado}</td>
+          <td>${listaempleado.nombre}</td>
+          <td>${listaempleado.apellido}</td>
+          <td>${listaempleado.cedula}</td>
+          <td>${listaempleado.email}</td>
+          <td>${listaempleado.telefono}</td>
+          <td>${listaempleado.direccion}</td>
+          <td>${listaempleado.id_perfil}</td>
+          <td>${listaempleado.perfil}</td>
+          <td>${listaempleado.estado}</td>
+        `;
         tableBody.appendChild(row);
       });
       table.style.display = "table";
-    } else if (response.status === 400) {
-      // Cédula, nombre o apellido inválido
-      errorMessage.textContent =
-        "Por favor, proporciona información válida para la búsqueda.";
     } else {
-      // Otro error en el servidor
-      errorMessage.textContent =
-        "Ocurrió un error en el servidor al hacer la consulta.";
+      // Manejo de errores por código de estado
+      handleErrorResponse(response);
     }
   } catch (error) {
     console.error("Error de red:", error);
     errorMessage.textContent =
       "Ocurrió un error de red al hacer la consulta. Por favor, verifica tu conexión a Internet.";
   }
+}
+
+// Función para manejar respuestas no exitosas
+async function handleErrorResponse(response) {
+  let errorMsg = "Ocurrió un error en el servidor al hacer la consulta.";
+  try {
+    const data = await response.json();
+    errorMsg = data.message || errorMsg; // Obtener el mensaje del backend si existe
+  } catch (error) {
+    console.error("Error al procesar la respuesta JSON:", error);
+    errorMsg = "Error al procesar la respuesta del servidor.";
+  }
+
+  // Mostrar mensaje de error basado en el código de estado
+  switch (response.status) {
+    case 400:
+      errorMsg = "Por favor, proporciona información válida para la búsqueda.";
+      break;
+    case 401:
+      // Token inválido o no autorizado
+      break;
+    case 403:
+      // Token válido pero el usuario no tiene permiso
+      break;
+    default:
+      // Otro tipo de error del servidor
+      break;
+  }
+
+  errorMessage.textContent = errorMsg;
 }
 
 /* ---------------FUNCION MODIFICAR EMPLEADO---------------- */
