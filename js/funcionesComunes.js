@@ -11,3 +11,16 @@ export function cleanTable(tableBody) {
     tableBody.removeChild(tableBody.firstChild);
   }
 }
+
+// ----------Función para manejar respuestas no exitosas------------------
+export async function handleErrorResponse(response, errorMessageElement) {
+  let errorMsg = "Ocurrió un error en el servidor al hacer la consulta.";
+  try {
+    const data = await response.json();
+    errorMsg = data.message || errorMsg; // Obtener el mensaje del backend si existe
+  } catch (error) {
+    console.error("Error al procesar la respuesta JSON:", error);
+    errorMsg = "Error al procesar la respuesta del servidor.";
+  }
+  errorMessageElement.textContent = errorMsg; // Mostrar el mensaje de error
+}

@@ -26,7 +26,11 @@ const table = document.querySelector("table");
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expresión regular para validar el formato de correo electrónico
 
 import apiUrl from "./config.js";
-import { esCadenaNoVacia, cleanTable } from "./funcionesComunes.js";
+import {
+  esCadenaNoVacia,
+  cleanTable,
+  handleErrorResponse,
+} from "./funcionesComunes.js";
 
 //==============AGREGAR EMPLEADO====================================
 
@@ -64,7 +68,7 @@ newButton.addEventListener("click", () => {
       id_perfil: parseInt(perfilField.value),
     };
     // Llama a la función para agregar el nuevo empleado
-    console.log(newElement.id_perfil);
+    // console.log(newElement.id_perfil);
     createElement(newElement);
   }
 });
@@ -228,10 +232,13 @@ async function createElement(newElement) {
   // Realizar una solicitud POST para crear el registro
 
   try {
+    const token = localStorage.getItem("myTokenName");
+
     const response = await fetch(`${apiUrl}/api/employees`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`, //incluir token en el encabezado
       },
       body: JSON.stringify(newElement),
     });
@@ -242,15 +249,8 @@ async function createElement(newElement) {
       restaurarValoresIniciales();
 
       mostrarResultados("Empleado creado con éxito.");
-    } else if (response.status === 400) {
-      // La cédula o el email ya existen
-      const error = await response.json();
-      //muestra el mensaje enviado por la api, ya sea que la cédula o el email  estén siendo usados
-      errorMessage.textContent = error.message;
-    } else {
-      // Otro error
-      errorMessage.textContent = "Ocurrió un error al crear el registro.";
-    }
+    } // Manejo de errores por código de estado
+    await handleErrorResponse(response, errorMessage);
   } catch (error) {
     console.error("Error de red:", error);
     errorMessage.textContent = "Ocurrió un error de red al crear el registro";
@@ -297,7 +297,7 @@ async function findEmployees(filtroEmpleado) {
       table.style.display = "table";
     } else {
       // Manejo de errores por código de estado
-      handleErrorResponse(response);
+      await handleErrorResponse(response, errorMessage);
     }
   } catch (error) {
     console.error("Error de red:", error);
@@ -306,45 +306,19 @@ async function findEmployees(filtroEmpleado) {
   }
 }
 
-// Función para manejar respuestas no exitosas
-async function handleErrorResponse(response) {
-  let errorMsg = "Ocurrió un error en el servidor al hacer la consulta.";
-  try {
-    const data = await response.json();
-    errorMsg = data.message || errorMsg; // Obtener el mensaje del backend si existe
-  } catch (error) {
-    console.error("Error al procesar la respuesta JSON:", error);
-    errorMsg = "Error al procesar la respuesta del servidor.";
-  }
-
-  // Mostrar mensaje de error basado en el código de estado
-  switch (response.status) {
-    case 400:
-      errorMsg = "Por favor, proporciona información válida para la búsqueda.";
-      break;
-    case 401:
-      // Token inválido o no autorizado
-      break;
-    case 403:
-      // Token válido pero el usuario no tiene permiso
-      break;
-    default:
-      // Otro tipo de error del servidor
-      break;
-  }
-
-  errorMessage.textContent = errorMsg;
-}
-
 /* ---------------FUNCION MODIFICAR EMPLEADO---------------- */
 
 async function modifyFunction(id, modifiedElement) {
   try {
     // Realiza una solicitud PATCH para modificar la información
+
+    const token = localStorage.getItem("myTokenName");
+
     const response = await fetch(`${apiUrl}/api/employees/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(modifiedElement),
     });
@@ -357,19 +331,9 @@ async function modifyFunction(id, modifiedElement) {
       mostrarResultados(
         `Empleado : ${modifiedElement.nombre} Modificado con Éxito`
       );
-    } else if (response.status === 404) {
-      // Error: cliente no encontrado
-      errorMessage.textContent = "Registro no encontrado. Verifique el ID.";
-    } else if (response.status === 400) {
-      // Error de información duplicada
-
-      const error = await response.json();
-      //muestra el mensaje enviado por la api
-      errorMessage.textContent = error.message;
     } else {
-      // Otro error
-      console.error("Error al actualizar el registro:", error);
-      errorMessage.textContent = "Ocurrió un error al modificar el registro.";
+      // Manejo de errores por código de estado
+      await handleErrorResponse(response, errorMessage);
     }
   } catch (error) {
     console.error("Error de red:", error);
