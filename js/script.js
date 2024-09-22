@@ -12,6 +12,8 @@ const tab6 = document.getElementById("tab-6");
 const usernameField = document.getElementById("login");
 const passwordField = document.getElementById("password");
 
+const logoutBtn = document.querySelector(".logout-btn");
+
 //Form para mensajes de error
 const errorMessageForm = document.getElementById("error-message");
 const errorTitle = document.querySelector(".title-error");
@@ -119,6 +121,11 @@ tab6.addEventListener("click", function () {
   hideTabsMenu();
 });
 
+// =============Salir de la Aplicación =============================
+
+logoutBtn.addEventListener("click", function () {
+  localStorage.removeItem("myTokenName");
+});
 //===============form ingreso de contraseña=========================
 
 //trae del document el formulario y el boton submit en variables

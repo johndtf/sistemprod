@@ -1,7 +1,9 @@
 import apiUrl from "./config.js";
+import { handleErrorResponse } from "./funcionesComunes.js";
 const perfilSelect = document.getElementById("perfil");
 const succesResults = document.getElementById("success-results");
 const actualizarBtn = document.getElementById("actualizar-permisos-btn");
+const errorMessage = document.getElementById("error-message");
 
 document.addEventListener("DOMContentLoaded", () => {
   succesResults.innerHTML = "";
@@ -37,10 +39,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       // Enviar la solicitud al servidor con los cambios
+      const token = localStorage.getItem("myTokenName");
       const response = await fetch(`${apiUrl}/api/permisos`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
           perfil: selectedPerfil,
@@ -54,7 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
           succesResults.innerHTML = " ";
         }, 2000);
       } else {
-        console.error("Error al actualizar permisos");
+        // Manejo de errores por código de estado
+        await handleErrorResponse(response, errorMessage);
       }
     } catch (error) {
       console.error("Error de red:", error);
@@ -69,7 +74,15 @@ export async function cargarPermisos() {
 
   try {
     // Realizar una solicitud al backend para obtener los permisos del perfil
-    const response = await fetch(`${apiUrl}/api/permisos/${selectedPerfil}`);
+    const token = localStorage.getItem("myTokenName");
+
+    const response = await fetch(`${apiUrl}/api/permisos/${selectedPerfil}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+      },
+    });
 
     if (response.ok) {
       const { permisos } = await response.json();
@@ -77,7 +90,8 @@ export async function cargarPermisos() {
       // Marcar las casillas de verificación según los permisos obtenidos
       marcaCasillasSegunPermisos(permisos);
     } else {
-      console.error("Error al obtener permisos del perfil");
+      // Manejo de errores por código de estado
+      await handleErrorResponse(response, errorMessage);
     }
   } catch (error) {
     console.error("Error de red:", error);
