@@ -162,15 +162,20 @@ img {
   display: none;
 }
 
+.welcome-message {
+  color: var(--text-light-color);
+  padding-top: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
 .hero-titles {
-  height: 30vh;
+  height: 25vh;
   color: #fff;
-  /*  border: thick solid rebeccapurple; */
   text-align: center;
   display: block;
   padding: 3rem;
-
-  /* align-content: center; */
+  align-content: center;
 }
 
 .form {

@@ -9,6 +9,8 @@ const tab4 = document.getElementById("tab-4");
 const tab5 = document.getElementById("tab-5");
 const tab6 = document.getElementById("tab-6");
 
+const userNameTitle = document.getElementById("userName");
+
 const usernameField = document.getElementById("login");
 const passwordField = document.getElementById("password");
 
@@ -21,32 +23,59 @@ const errorContent = document.querySelector(".content-error");
 
 import apiUrl from "./config.js";
 
-// Cuando se carga la página
-document.addEventListener("DOMContentLoaded", () => {
+// -------------Cuando se carga la página-----------------------------
+document.addEventListener("DOMContentLoaded", async () => {
   //verificar el Token de autenticación
 
   //Obtener token desde el local storage;
   const tokenFromLocalStorage = localStorage.getItem("myTokenName");
   if (tokenFromLocalStorage) {
-    // Ya hay un token almacenado, no mostrar el formulario de login
+    // Enviar el token al backend para verificar si es válido
 
-    modalIngreso.style.display = "none";
+    const isValid = await validateToken(tokenFromLocalStorage);
+
+    if (isValid) {
+      // Si el token es válido:
+
+      const decodedToken = jwt_decode(tokenFromLocalStorage); // Decodificar el token
+
+      userNameTitle.textContent = decodedToken.username; // Mostrar usuario
+      modalIngreso.style.display = "none";
+    } else {
+      console.log("el token no fue válido");
+      // Si el token no es válido, mostrar el formulario de login
+      usernameField.focus();
+    }
   } else {
+    // Si no hay token almacenado, mostrar el formulario de login
+    console.log("no hay token");
     usernameField.focus();
   }
 });
 
-/*--------------Función Obtener Token desde Cookie------------------*/
-/* function obtenerTokenDesdeCookie() {
-  const cookies = document.cookie.split("; ");
-  for (const cookie of cookies) {
-    const [name, value] = cookie.split("=");
-    if (name === "myTokenName") {
-      return value;
+// ------------- Función para validar el token en el backend---------------
+async function validateToken(token) {
+  try {
+    const response = await fetch(`${apiUrl}/api/auth/validate-token`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`, // Enviar el token en el encabezado
+      },
+    });
+
+    if (response.ok) {
+      // Si el token es válido
+      return true;
+    } else {
+      // Si el token es inválido (401, 403, etc.)
+      return false;
     }
+  } catch (error) {
+    console.error("Error de red:", error);
+    return false; // En caso de error, asumir que el token no es válido
   }
-  return null;
-} */
+}
 
 /* =================Menú Hamburguesa========================0 */
 document.querySelector(".bars-menu").addEventListener("click", animateBars);
@@ -182,6 +211,9 @@ submitBtn.addEventListener("click", async (event) => {
       // Almacenar el token en el Local Storage
       const token = await response.json();
       localStorage.setItem("myTokenName", token);
+      const decodedToken = jwt_decode(token);
+      // Mostrar usuario
+      userNameTitle.textContent = decodedToken.username;
     } else {
       //manejo de errores
       const errorMessage = await response.json();
