@@ -11,7 +11,14 @@ document.addEventListener("DOMContentLoaded", () => {
   /* --------------------------Carga de perfiles-------------------------- */
 
   // Realizar una solicitud al servidor para obtener la lista de perfiles
-  fetch(`${apiUrl}/api/profiles/list`)
+  const token = localStorage.getItem("myTokenName");
+  fetch(`${apiUrl}/api/profiles/list`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+  })
     .then((response) => response.json())
     .then((data) => {
       // Llenar dinámicamente el select con opciones de perfil
@@ -26,45 +33,45 @@ document.addEventListener("DOMContentLoaded", () => {
       cargarPermisos();
     })
     .catch((error) => console.error("Error al cargar perfiles", error));
+});
 
-  // ===================== "Actualizar Permisos" ==============================
-  actualizarBtn.addEventListener("click", async () => {
-    const selectedPerfil = perfilSelect.value;
-    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+// ===================== "Actualizar Permisos" ==============================
+actualizarBtn.addEventListener("click", async () => {
+  const selectedPerfil = perfilSelect.value;
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-    // Obtener los permisos seleccionados
-    const selectedPermisos = Array.from(checkboxes)
-      .filter((checkbox) => checkbox.checked)
-      .map((checkbox) => checkbox.value);
+  // Obtener los permisos seleccionados
+  const selectedPermisos = Array.from(checkboxes)
+    .filter((checkbox) => checkbox.checked)
+    .map((checkbox) => checkbox.value);
 
-    try {
-      // Enviar la solicitud al servidor con los cambios
-      const token = localStorage.getItem("myTokenName");
-      const response = await fetch(`${apiUrl}/api/permisos`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          perfil: selectedPerfil,
-          permisos: selectedPermisos,
-        }),
-      });
+  try {
+    // Enviar la solicitud al servidor con los cambios
+    const token = localStorage.getItem("myTokenName");
+    const response = await fetch(`${apiUrl}/api/permisos`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        perfil: selectedPerfil,
+        permisos: selectedPermisos,
+      }),
+    });
 
-      if (response.ok) {
-        succesResults.innerHTML = "Permisos actualizados con éxito";
-        setTimeout(() => {
-          succesResults.innerHTML = " ";
-        }, 2000);
-      } else {
-        // Manejo de errores por código de estado
-        await handleErrorResponse(response, errorMessage);
-      }
-    } catch (error) {
-      console.error("Error de red:", error);
+    if (response.ok) {
+      succesResults.innerHTML = "Permisos actualizados con éxito";
+      setTimeout(() => {
+        succesResults.innerHTML = " ";
+      }, 2000);
+    } else {
+      // Manejo de errores por código de estado
+      await handleErrorResponse(response, errorMessage);
     }
-  });
+  } catch (error) {
+    console.error("Error de red:", error);
+  }
 });
 
 //---------------Función para cargar permisos a perfil------------------
