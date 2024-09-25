@@ -13,8 +13,10 @@ const confirmBtn = document.getElementById("confirmBtn");
 const cancelBtn = document.getElementById("cancelBtn");
 
 const messageContainer = document.getElementById("message-container");
+const errorMessage = document.getElementById("error-message");
 
 import apiUrl from "./config.js";
+import { handleErrorResponse } from "./funcionesComunes.js";
 
 /* -----------------------Carga de información de la empresa--------------------- */
 
@@ -97,7 +99,14 @@ cancelBtn.addEventListener("click", () => {
 /* ----------------Función encontrar cliente----------------------------- */
 async function findCustomer(cedula_nit) {
   try {
-    const response = await fetch(`${apiUrl}/api/customers/${cedula_nit}`);
+    const token = localStorage.getItem("myTokenName");
+    const response = await fetch(`${apiUrl}/api/customers/${cedula_nit}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+      },
+    });
 
     if (response.status === 200) {
       // carga la información en los campos
@@ -108,12 +117,9 @@ async function findCustomer(cedula_nit) {
       namesField.value = data.nombre;
       lastnamesField.value = data.apellido;
       esloganField.value = "";
-    } else if (response.status === 404) {
-      // Error: cliente no encontrado
-      showMessage("Cliente no encontrado. Verifique la cédula.");
-    } else if (response.status === 500) {
-      //Error en servidor
-      showMessage("Error interno del servidor");
+    } else {
+      // Manejo de errores por código de estado
+      await handleErrorResponse(response, errorMessage);
     }
   } catch (error) {
     console.error("Error de red:", error);
@@ -125,22 +131,21 @@ async function findCustomer(cedula_nit) {
 
 async function updateCompany(modifiedCompany) {
   try {
+    const token = localStorage.getItem("myTokenName");
     const response = await fetch(`${apiUrl}/api/customers/updatedata`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(modifiedCompany),
     });
 
     if (response.status === 200) {
       showMessage("Empresa actualizada con éxito");
-    } else if (response.status === 400) {
-      showMessage("Se requiere el id y el eslogan para la actualización");
-    } else if (response.status === 500) {
-      showMessage("Error interno del servidor");
     } else {
-      showMessage("Ocurrió un error al modificar la empresa");
+      // Manejo de errores por código de estado
+      await handleErrorResponse(response, errorMessage);
     }
   } catch (error) {
     console.error("Error de red:", error);

@@ -16,7 +16,7 @@ const telefonoField = document.getElementById("telefono");
 const direccionField = document.getElementById("direccion");
 const perfilField = document.getElementById("perfilSelect");
 const stateField = document.getElementById("state");
-
+// ######implementar permisos ultima modificación elemento siguiente
 const errorMessage = document.getElementById("error-message");
 const successResults = document.getElementById("success-results");
 const form = document.querySelector("form");
@@ -26,6 +26,7 @@ const table = document.querySelector("table");
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Expresión regular para validar el formato de correo electrónico
 
 import apiUrl from "./config.js";
+//#######implementar permisos ultima modificación elemento siguiente
 import {
   esCadenaNoVacia,
   cleanTable,
@@ -154,22 +155,29 @@ cancelButton.addEventListener("click", () => {
 });
 
 /* --------------------------Carga de perfiles-------------------------- */
-
-// Realizar una solicitud al servidor para obtener la lista de perfiles
-fetch(`${apiUrl}/api/profiles/list`)
-  .then((response) => response.json())
-  .then((data) => {
-    // Llenar dinámicamente el select con opciones de perfil
-
-    data.forEach((perfil) => {
-      const option = document.createElement("option");
-      option.value = perfil.id_perfil; // Asigna el valor del perfil
-      option.text = perfil.perfil; // Asigna el nombre del perfil
-      perfilField.appendChild(option);
-    });
+document.addEventListener("DOMContentLoaded", () => {
+  // Realizar una solicitud al servidor para obtener la lista de perfiles
+  const token = localStorage.getItem("myTokenName");
+  fetch(`${apiUrl}/api/profiles/list`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
   })
-  .catch((error) => console.error("Error al cargar perfiles", error));
+    .then((response) => response.json())
+    .then((data) => {
+      // Llenar dinámicamente el select con opciones de perfil
 
+      data.forEach((perfil) => {
+        const option = document.createElement("option");
+        option.value = perfil.id_perfil; // Asigna el valor del perfil
+        option.text = perfil.perfil; // Asigna el nombre del perfil
+        perfilField.appendChild(option);
+      });
+    })
+    .catch((error) => console.error("Error al cargar perfiles", error));
+});
 /* ------------Función para validar campos -------------------- */
 function validateFields() {
   if (
@@ -238,6 +246,7 @@ async function createElement(newElement) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+
         authorization: `Bearer ${token}`, //incluir token en el encabezado
       },
       body: JSON.stringify(newElement),

@@ -14,7 +14,11 @@ const tableBody = document.querySelector("table tbody");
 const table = document.querySelector("table");
 
 import apiUrl from "./config.js";
-import { esCadenaNoVacia, cleanTable } from "./funcionesComunes.js";
+import {
+  esCadenaNoVacia,
+  cleanTable,
+  handleErrorResponse,
+} from "./funcionesComunes.js";
 
 //Evitar que al darle enter envíe el formulario
 form.addEventListener("submit", (event) => {
@@ -131,10 +135,13 @@ async function agregarPerfil(nuevoPerfil) {
   // Realizar una solicitud POST para crear el perfil
 
   try {
+    const token = localStorage.getItem("myTokenName");
+    //console.log(token);
     const response = await fetch(`${apiUrl}/api/profiles`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(nuevoPerfil),
     });
@@ -144,12 +151,9 @@ async function agregarPerfil(nuevoPerfil) {
 
       restaurarValoresIniciales();
       mostrarResultados("Perfil creado con éxito.");
-    } else if (response.status === 400) {
-      // el perfil ya existe
-      errorMessage.textContent = "El perfil ya existe.";
     } else {
-      // Otro error
-      errorMessage.textContent = "Ocurrió un error al crear el perfil.";
+      // Manejo de errores por código de estado
+      await handleErrorResponse(response, errorMessage);
     }
   } catch (error) {
     //console.error("Error de red:", error);
@@ -173,11 +177,13 @@ function limpiarResultados() {
 /*---------- Función para buscar el perfil en la base de datos ------------*/
 async function buscarPerfilEnBaseDeDatos(filtroPerfil) {
   try {
+    const token = localStorage.getItem("myTokenName");
     // Realiza una solicitud al servidor para obtener la lista de resoluciones
     const response = await fetch(`${apiUrl}/api/profiles/profileslist`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(filtroPerfil),
     });
@@ -192,20 +198,16 @@ async function buscarPerfilEnBaseDeDatos(filtroPerfil) {
       listaperfiles.forEach((perfil) => {
         const row = document.createElement("tr");
         row.innerHTML = `
-    <td>${perfil.id_perfil}</td>
-    <td>${perfil.perfil}</td>
-    <td>${perfil.descripcion}</td>
-  `;
+        <td>${perfil.id_perfil}</td>
+        <td>${perfil.perfil}</td>
+        <td>${perfil.descripcion}</td>
+         `;
         tableBody.appendChild(row);
       });
       table.style.display = "table";
-    } else if (response.status === 400) {
-      errorMessage.textContent =
-        "Por favor, proporciona información válida para la búsqueda.";
     } else {
-      // Otro error en el servidor
-      errorMessage.textContent =
-        "Ocurrió un error en el servidor al hacer la consulta.";
+      // Manejo de errores por código de estado
+      await handleErrorResponse(response, errorMessage);
     }
   } catch (error) {
     console.error("Error de red:", error);
@@ -218,10 +220,12 @@ async function buscarPerfilEnBaseDeDatos(filtroPerfil) {
 async function actualizarDescripcionEnBaseDeDatos(idPerfil, perfilModificado) {
   try {
     // Realiza una solicitud PATCH para modificar el perfil
+    const token = localStorage.getItem("myTokenName");
     const response = await fetch(`${apiUrl}/api/profiles/${idPerfil}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(perfilModificado),
     });
@@ -232,21 +236,15 @@ async function actualizarDescripcionEnBaseDeDatos(idPerfil, perfilModificado) {
       restaurarValoresIniciales();
 
       mostrarResultados(`Perfil modificado: ${perfilModificado.perfil}`);
-    } else if (response.status === 404) {
-      // Error: perfil no encontrado
-      errorMessage.textContent = "Perfil no encontrada. Verifique el ID.";
-    } else if (response.status === 400) {
-      // Error de validación u otro error
-      errorMessage.textContent =
-        "Esta descripción de perfil ya está siendo usada.";
     } else {
-      // Otro error
-      console.error("Error al actualizar el perfil:", error);
-      errorMessage.textContent = "Ocurrió un error al modificar el perfil.";
+      // Manejo de errores por código de estado
+      await handleErrorResponse(response, errorMessage);
     }
   } catch (error) {
     console.error("Error de red:", error);
-    alert("Ocurrió un error de red al modificar el empleado.");
+    errorMessage.textContent(
+      "Ocurrió un error de red al modificar el empleado."
+    );
   }
 }
 
