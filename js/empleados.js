@@ -258,8 +258,10 @@ async function createElement(newElement) {
       restaurarValoresIniciales();
 
       mostrarResultados("Empleado creado con éxito.");
-    } // Manejo de errores por código de estado
-    await handleErrorResponse(response, errorMessage);
+    }
+    else {// Manejo de errores por código de estado
+      await handleErrorResponse(response, errorMessage)
+    };
   } catch (error) {
     console.error("Error de red:", error);
     errorMessage.textContent = "Ocurrió un error de red al crear el registro";

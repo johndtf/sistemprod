@@ -2,6 +2,8 @@ const hero = document.querySelector(".hero");
 const frameContainer = document.getElementById("frame-container");
 const tabsMenu = document.getElementById("tabs-menu");
 
+const logo = document.querySelector(".logo");
+
 const tab1 = document.getElementById("tab-1");
 const tab2 = document.getElementById("tab-2");
 const tab3 = document.getElementById("tab-3");
@@ -118,6 +120,13 @@ function hideTabsMenu() {
   line2_bars.classList.remove("active-line2-bars-menu");
   line3_bars.classList.remove("active-line3-bars-menu");
 }
+
+// ====================Regrezar al inicio mediante el logo =======================
+logo.addEventListener("click", function () {
+  loadInicio();
+  hideTabsMenu();
+  tab1.checked = true;
+});
 
 // =====================Asignar eventos a los radio buttons=====================================
 tab1.addEventListener("click", function () {

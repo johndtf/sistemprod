@@ -13,7 +13,11 @@ const tableBody = document.querySelector("table tbody");
 const table = document.querySelector("table");
 
 import apiUrl from "./config.js";
-import { esCadenaNoVacia, cleanTable } from "./funcionesComunes.js";
+import {
+  esCadenaNoVacia,
+  cleanTable,
+  handleErrorResponse,
+} from "./funcionesComunes.js";
 
 //Evitar que al darle enter envíe el formulario
 form.addEventListener("submit", (event) => {
@@ -129,10 +133,12 @@ async function agregarResolgarant(nuevaResolgarant) {
   // Realizar una solicitud POST para crear la resolución de garantía
 
   try {
+    const token = localStorage.getItem("myTokenName");
     const response = await fetch(`${apiUrl}/api/resolutionsWarranty`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(nuevaResolgarant),
     });
@@ -143,17 +149,8 @@ async function agregarResolgarant(nuevaResolgarant) {
 
       restaurarValoresIniciales();
       mostrarResultados("Resolución de garantía creada con éxito.");
-    } else if (response.status === 400) {
-      // La resolución de garantía o el código ya existe
-
-      const error = await response.json();
-      //muestra el mensaje enviado por la api, ya sea que el código o la descripción esté siendo usada
-      errorMessage.textContent = error.message;
     } else {
-      // Otro error
-      console.log(response.status);
-      errorMessage.textContent =
-        "Ocurrió un error al crear la resolución de garantía.";
+      handleErrorResponse(response, errorMessage);
     }
   } catch (error) {
     console.error("Error de red:", error);
@@ -180,12 +177,14 @@ function limpiarResultados() {
 async function findResolutions(filtroResolucion) {
   try {
     // Realiza una solicitud al servidor para obtener la lista de resoluciones
+    const token = localStorage.getItem("myTokenName");
     const response = await fetch(
       `${apiUrl}/api/resolutionsWarranty/resolutionslist`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(filtroResolucion),
       }
@@ -208,18 +207,13 @@ async function findResolutions(filtroResolucion) {
         tableBody.appendChild(row);
       });
       table.style.display = "table";
-    } else if (response.status === 400) {
-      errorMessage.textContent =
-        "Por favor, proporciona información válida para la búsqueda.";
     } else {
-      // Otro error en el servidor
-      errorMessage.textContent =
-        "Ocurrió un error en el servidor al hacer la consulta.";
+      handleErrorResponse(response, errorMessage);
     }
   } catch (error) {
     console.error("Error de red:", error);
     errorMessage.textContent =
-      "Ocurrió un error de red al hacer la consulta. Por favor, verifica tu conexión a Internet.";
+      "Ocurrió un error de red al hacer la consulta, Por favor verifica tu conexión a Internet.";
   }
 }
 
@@ -231,12 +225,14 @@ async function actualizarDescripcionEnBaseDeDatos(
 ) {
   try {
     // Realiza una solicitud PATCH para modificar la resolución de garantía
+    const token = localStorage.getItem("myTokenName");
     const response = await fetch(
       `${apiUrl}/api/resolutionsWarranty/${idResolgarant}`,
       {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(resolGarantModificada),
       }
@@ -250,24 +246,13 @@ async function actualizarDescripcionEnBaseDeDatos(
       mostrarResultados(
         `Resolución modificada: ${resolGarantModificada.resol_garan}`
       );
-    } else if (response.status === 404) {
-      // Error: resolución de garantía no encontrada
-      errorMessage.textContent = "Resolución no encontrada. Verifique el ID.";
-    } else if (response.status === 400) {
-      // La resolución de garantía o el código ya existe
-
-      const error = await response.json();
-      //muestra el mensaje enviado por la api, ya sea que el código o la descripción esté siendo usada
-      errorMessage.textContent = error.message;
     } else {
-      // Otro error
-      console.error("Error al actualizar la resolución de garantía:", error);
-      errorMessage.textContent =
-        "Ocurrió un error al modificar la resolución de garantía.";
+      handleErrorResponse(response, errorMessage);
     }
   } catch (error) {
     console.error("Error de red:", error);
-    alert("Ocurrió un error de red al modificar el empleado.");
+    errorMessage.textContent =
+      "Ocurrió un error de red al modificar la resolución";
   }
 }
 

@@ -13,7 +13,11 @@ const tableBody = document.querySelector("table tbody");
 const table = document.querySelector("table");
 
 import apiUrl from "./config.js";
-import { esCadenaNoVacia, cleanTable } from "./funcionesComunes.js";
+import {
+  esCadenaNoVacia,
+  cleanTable,
+  handleErrorResponse,
+} from "./funcionesComunes.js";
 
 //Evitar que al darle enter envíe el formulario
 form.addEventListener("submit", (event) => {
@@ -110,10 +114,12 @@ async function agregarMarca(nuevaMarca) {
   // Realizar una solicitud POST para crear la marca
 
   try {
+    const token = localStorage.getItem("myTokenName");
     const response = await fetch(`${apiUrl}/api/brands`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(nuevaMarca),
     });
@@ -123,13 +129,8 @@ async function agregarMarca(nuevaMarca) {
 
       restaurarValoresIniciales();
       mostrarResultados("Marca creada con éxito.");
-    } else if (response.status === 400) {
-      // La marca ya existe
-      errorMessage.textContent =
-        "La nueva descripción ya está siendo utilizada. Por favor, elija otra.";
     } else {
-      // Otro error
-      errorMessage.textContent = "Ocurrió un error al crear la marca.";
+      handleErrorResponse(response, errorMessage);
     }
   } catch (error) {
     //console.error("Error de red:", error);
@@ -154,11 +155,12 @@ function limpiarResultados() {
 async function buscarMarcaEnBaseDeDatos(nombreMarca) {
   try {
     // Realiza una solicitud al servidor para buscar la marca
-
+    const token = localStorage.getItem("myTokenName");
     const response = await fetch(`${apiUrl}/api/brands/brandslist`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(nombreMarca),
     });
@@ -180,18 +182,13 @@ async function buscarMarcaEnBaseDeDatos(nombreMarca) {
         tableBody.appendChild(row);
       });
       table.style.display = "table";
-    } else if (response.status === 400) {
-      errorMessage.textContent =
-        "Por favor, proporciona información válida para la búsqueda.";
     } else {
-      // Otro error en el servidor
-      errorMessage.textContent =
-        "Ocurrió un error en el servidor al hacer la consulta.";
+      handleErrorResponse(response, errorMessage);
     }
   } catch (error) {
     console.error("Error de red:", error);
     errorMessage.textContent =
-      "Ocurrió un error de red al hacer la consulta. Por favor, verifica tu conexión a Internet.";
+      "Ocurrió un error de red al hacer la consulta, por favor verifica tu conexión a Internet.";
   }
 }
 
@@ -200,10 +197,12 @@ async function buscarMarcaEnBaseDeDatos(nombreMarca) {
 async function actualizarDescripcionEnBaseDeDatos(idMarca, nuevaDescripcion) {
   try {
     // Realiza una solicitud PATCH para modificar la marca
+    const token = localStorage.getItem("myTokenName");
     const response = await fetch(`${apiUrl}/api/brands/${idMarca}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(nuevaDescripcion),
     });
@@ -217,14 +216,8 @@ async function actualizarDescripcionEnBaseDeDatos(idMarca, nuevaDescripcion) {
     } else if (response.status === 404) {
       // Error: marca no encontrada
       errorMessage.textContent = "Marca no encontrada. Verifique el ID.";
-    } else if (response.status === 400) {
-      // Error de validación u otro error
-      errorMessage.textContent =
-        "Esta descripción de marca ya está siendo usada.";
     } else {
-      // Otro error
-      console.error("Error al actualizar la marca:", error);
-      errorMessage.textContent = "Ocurrió un error al modificar la marca.";
+      handleErrorResponse(response, errorMessage);
     }
   } catch (error) {
     console.error("Error de red:", error);

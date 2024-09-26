@@ -13,7 +13,11 @@ const tableBody = document.querySelector("table tbody");
 const table = document.querySelector("table");
 
 import apiUrl from "./config.js";
-import { esCadenaNoVacia, cleanTable } from "./funcionesComunes.js";
+import {
+  esCadenaNoVacia,
+  cleanTable,
+  handleErrorResponse,
+} from "./funcionesComunes.js";
 
 //Evitar que al darle enter envíe el formulario
 form.addEventListener("submit", (event) => {
@@ -108,10 +112,12 @@ async function agregarDimension(nuevaDimension) {
   // Realizar una solicitud POST para crear la dimensión
 
   try {
+    const token = localStorage.getItem("myTokenName");
     const response = await fetch(`${apiUrl}/api/dimensions`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(nuevaDimension),
     });
@@ -121,13 +127,8 @@ async function agregarDimension(nuevaDimension) {
 
       restaurarValoresIniciales();
       mostrarResultados("Dimensión creada con éxito.");
-    } else if (response.status === 400) {
-      // La dimensión ya existe
-      errorMessage.textContent =
-        "La nueva descripción ya está siendo utilizada. Por favor, elija otra.";
     } else {
-      // Otro error
-      errorMessage.textContent = "Ocurrió un error al crear la dimensión.";
+      handleErrorResponse(response, errorMessage);
     }
   } catch (error) {
     //console.error("Error de red:", error);
@@ -154,10 +155,12 @@ async function buscarDimensionEnBaseDeDatos(nombreDimension) {
     // Realiza una solicitud al servidor para buscar la dimensión
     //mediante POST ya que existen dimensiones que tienen el caracter /
     //y al enviar este caracter la api presenta error en el endpoint
+    const token = localStorage.getItem("myTokenName");
     const response = await fetch(`${apiUrl}/api/dimensions/dimensionslist`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(nombreDimension),
     });
@@ -179,13 +182,8 @@ async function buscarDimensionEnBaseDeDatos(nombreDimension) {
         tableBody.appendChild(row);
       });
       table.style.display = "table";
-    } else if (response.status === 400) {
-      errorMessage.textContent =
-        "Por favor, proporciona información válida para la búsqueda.";
     } else {
-      // Otro error en el servidor
-      errorMessage.textContent =
-        "Ocurrió un error en el servidor al hacer la consulta.";
+      handleErrorResponse(response, errorMessage);
     }
   } catch (error) {
     console.error("Error de red:", error);
@@ -202,10 +200,12 @@ async function actualizarDescripcionEnBaseDeDatos(
 ) {
   try {
     // Realiza una solicitud PATCH para modificar la dimensión
+    const token = localStorage.getItem("myTokenName");
     const response = await fetch(`${apiUrl}/api/dimensions/${idDimension}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(nuevaDescripcion),
     });
@@ -219,14 +219,8 @@ async function actualizarDescripcionEnBaseDeDatos(
     } else if (response.status === 404) {
       // Error: dimensión no encontrada
       errorMessage.textContent = "Dimensión no encontrada. Verifique el ID.";
-    } else if (response.status === 400) {
-      // Error de validación u otro error
-      errorMessage.textContent =
-        "Esta descripción de dimensión ya está siendo usada.";
     } else {
-      // Otro error
-      console.error("Error al actualizar la dimensión:", error);
-      errorMessage.textContent = "Ocurrió un error al modificar la dimensión.";
+      handleErrorResponse(response, errorMessage);
     }
   } catch (error) {
     console.error("Error de red:", error);
