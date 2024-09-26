@@ -13,7 +13,11 @@ const tableBody = document.querySelector("table tbody");
 const table = document.querySelector("table");
 
 import apiUrl from "./config.js";
-import { esCadenaNoVacia, cleanTable } from "./funcionesComunes.js";
+import {
+  esCadenaNoVacia,
+  cleanTable,
+  handleErrorResponse,
+} from "./funcionesComunes.js";
 
 //Evitar que al darle enter envíe el formulario
 form.addEventListener("submit", (event) => {
@@ -110,10 +114,12 @@ async function agregarDesign(nuevoDesign) {
   // Realizar una solicitud POST para crear el diseño
 
   try {
+    const token = localStorage.getItem("myTokenName");
     const response = await fetch(`${apiUrl}/api/treads`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(nuevoDesign),
     });
@@ -123,13 +129,8 @@ async function agregarDesign(nuevoDesign) {
 
       restaurarValoresIniciales();
       mostrarResultados("Diseño creado con éxito.");
-    } else if (response.status === 400) {
-      // El diseño ya existe
-      errorMessage.textContent =
-        "El nuevo diseño ya está siendo utilizada. Por favor, elija otro.";
     } else {
-      // Otro error
-      errorMessage.textContent = "Ocurrió un error al crear el diseño.";
+      handleErrorResponse(response, errorMessage);
     }
   } catch (error) {
     //console.error("Error de red:", error);
@@ -154,11 +155,12 @@ function limpiarResultados() {
 async function buscarDesignEnBaseDeDatos(nombreDesign) {
   try {
     // Realiza una solicitud al servidor para buscar el diseño
-
+    const token = localStorage.getItem("myTokenName");
     const response = await fetch(`${apiUrl}/api/treads/treadslist`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(nombreDesign),
     });
@@ -180,13 +182,8 @@ async function buscarDesignEnBaseDeDatos(nombreDesign) {
         tableBody.appendChild(row);
       });
       table.style.display = "table";
-    } else if (response.status === 400) {
-      errorMessage.textContent =
-        "Por favor, proporciona información válida para la búsqueda.";
     } else {
-      // Otro error en el servidor
-      errorMessage.textContent =
-        "Ocurrió un error en el servidor al hacer la consulta.";
+      handleErrorResponse(response, errorMessage);
     }
   } catch (error) {
     console.error("Error de red:", error);
@@ -200,10 +197,12 @@ async function buscarDesignEnBaseDeDatos(nombreDesign) {
 async function actualizarDescripcionEnBaseDeDatos(idDesign, nuevaDescripcion) {
   try {
     // Realiza una solicitud PATCH para modificar el diseño
+    const token = localStorage.getItem("myTokenName");
     const response = await fetch(`${apiUrl}/api/treads/${idDesign}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(nuevaDescripcion),
     });
@@ -217,14 +216,8 @@ async function actualizarDescripcionEnBaseDeDatos(idDesign, nuevaDescripcion) {
     } else if (response.status === 404) {
       // Error: Banda no encontrada
       errorMessage.textContent = "Diseño no encontrado. Verifique el ID.";
-    } else if (response.status === 400) {
-      // Error de validación u otro error
-      errorMessage.textContent =
-        "Esta descripción de diseño ya está siendo usada.";
     } else {
-      // Otro error
-      console.error("Error al actualizar el diseño:", error);
-      errorMessage.textContent = "Ocurrió un error al modificar el diseño.";
+      handleErrorResponse(response, errorMessage);
     }
   } catch (error) {
     console.error("Error de red:", error);

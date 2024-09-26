@@ -15,7 +15,7 @@ img {
 .logo {
   width: 3rem;
   height: auto;
-  /* border: thin solid black; */
+  cursor: pointer;
 }
 
 .tabs-menu {
