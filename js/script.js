@@ -11,7 +11,7 @@ const tab4 = document.getElementById("tab-4");
 const tab5 = document.getElementById("tab-5");
 const tab6 = document.getElementById("tab-6");
 
-const userNameTitle = document.getElementById("userName");
+const userNameTitle = document.getElementById("user-name-display");
 
 const usernameField = document.getElementById("login");
 const passwordField = document.getElementById("password");
@@ -39,9 +39,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (isValid) {
       // Si el token es válido:
 
-      const decodedToken = jwt_decode(tokenFromLocalStorage); // Decodificar el token
+      // Mostrar usuario
+      userNameTitle.textContent = localStorage.getItem("userNameDecoded");
 
-      userNameTitle.textContent = decodedToken.username; // Mostrar usuario
       modalIngreso.style.display = "none";
     } else {
       console.log("el token no fue válido");
@@ -163,6 +163,7 @@ tab6.addEventListener("click", function () {
 
 logoutBtn.addEventListener("click", function () {
   localStorage.removeItem("myTokenName");
+  localStorage.removeItem("userNameDecoded");
 });
 //===============form ingreso de contraseña=========================
 
@@ -221,7 +222,8 @@ submitBtn.addEventListener("click", async (event) => {
       const token = await response.json();
       localStorage.setItem("myTokenName", token);
       const decodedToken = jwt_decode(token);
-      // Mostrar usuario
+      // Grabar y mostrar usuario
+      localStorage.setItem("userNameDecoded", decodedToken.username);
       userNameTitle.textContent = decodedToken.username;
     } else {
       //manejo de errores

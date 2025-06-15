@@ -15,7 +15,7 @@
       crossorigin="anonymous"
     ></script>
   </head>
-  <body>
+  <body>  
     <header>
       <h1>Entradas de Reencauche</h1>
     </header>
@@ -78,8 +78,10 @@
       </section>
 
       <section class="button-group">
-        <button class="add-orden-btn primary-button">Agregar Orden</button>
-        <button class="modify-orden-btn primary-button">Modificar Orden</button>
+        <button class="add-orden-btn primary-button">Agregar</button>
+        <button class="modify-orden-btn primary-button">Modificar</button>
+        <button class="find-orden-btn primary-button">Buscar</button>
+        <button class="cancel-orden-btn primary-button">Cancelar</button>
       </section>
 
       <section class="grid-section">
@@ -87,46 +89,40 @@
         <div class="form-group item">
         <label for="marca">Marca:</label>
         <select id="marca" name="marca">
-          <option value="GOODYEAR">GOODYEAR</option>
-          <option value="BRIDGESTONE">BRIDGESTONE</option>
-          <option value="MICHELIN">MICHELIN</option>
+         
         </select>
-      </div>
+        </div>
 
         <div class="form-group item">
         <label for="dimension">Dimensión:</label>
         <select id="dimension" name="dimension">
-          <option value="295/80R22.5">295/80R22.5</option>
-          <option value="215/75R17.5">215/75R17.5</option>
-          <option value="235/75R17.5">235/75R17.5</option>
+       
         </select>
         </div>
 
         <div class="form-group item">
           <label for="serie">Serie:</label>
-          <input type="text" id="serie" name="serie" value="1220" />
+          <input type="text" id="serie" name="serie"  />
         </div>
 
         <div class="form-group item">
         <label for="diseno">Diseño:</label>
         <select id="diseno" name="diseno">
-          <option value="VDE2">VDE2</option>
-          <option value="DVM729">DVM729</option>
-          <option value="SCORD">SCORD</option>
+          
         </select>
-        </div>
+        </div>-
 
         <div class="form-group item">
         <label for="prioridad">Prioridad:</label>
         <select id="prioridad" name="prioridad">
-          <option value="NORMAL">NORMAL</option>
-          <option value="URGENTE">URGENTE</option>
+          <option value="0">NORMAL</option>
+          <option value="1">URGENTE</option>
         </select>
         </div>
 
         <div class="form-group item triple-size">
         <label for="observacion">Observación:</label>
-        <input type="text" id="observacion" name="observacion" value="EN CASO DE RETIRAR CINTURON PROCESAR EN BANDA DIRECCIONAL"/>
+        <input type="text" id="observacion" name="observacion" />
 
       </section>
       <section class="button-group">
@@ -240,6 +236,6 @@
       
     
 
-    <script src="../../js/ordenes.js"></script>
+    <script type="module" src="../../js/ordenes.js"></script>
   </body>
 </html>

@@ -141,6 +141,18 @@ img {
   transform: rotate(-45deg) translate(-4px, 2px);
 }
 
+/*===========Información del Usuario =====================*/
+
+.user-info {
+  position: absolute;
+  z-index: 1;
+  top: 3.5rem;
+  left: 2rem;
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--white-color);
+}
+
 /* ===========SUBMENUS=============== */
 
 /* ============ESTILOS PARA LA HERO IMAGE================ */
@@ -160,13 +172,6 @@ img {
 /* no visible el hero cuando se cargue una página en este espacio*/
 .hero.hidden {
   display: none;
-}
-
-.welcome-message {
-  color: var(--text-light-color);
-  padding-top: 1rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 
 .hero-titles {
