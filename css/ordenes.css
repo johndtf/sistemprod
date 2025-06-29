@@ -7,6 +7,55 @@
 .print-btn i {
   font-size: 40px;
 }
+/* ocultar elementos que no se necesitan en el momento */
+.hidden {
+  display: none;
+}
+
+/* -----------Ajustes del tom select ----------------------- */
+/* asegurar de que toda la estructura de Tom Select se ajuste al tamaño de su contenedor */
+.ts-wrapper,
+.ts-wrapper input,
+.ts-control,
+.ts-dropdown {
+  width: 100% !important;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Estilo general del campo de entrada de Tom Select */
+/* Fuerza el estilo general del campo de entrada de Tom Select */
+.ts-wrapper .ts-control {
+  font-size: 1.2rem !important;
+  color: #000 !important; /* O el color que uses tú */
+  font-family: inherit !important;
+  padding: 0.4rem 0.6rem !important;
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
+  min-height: 2.2rem !important;
+  box-sizing: border-box;
+  width: 100% !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Cambios al recibir foco */
+.ts-wrapper.focus .ts-control {
+  border-color: #007bff !important;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2) !important;
+  outline: none !important;
+}
+
+/* Opciones desplegables */
+.ts-dropdown .option {
+  font-size: 1em !important;
+  padding: 0.4rem 0.6rem !important;
+}
+
+/* Input de búsqueda dentro de Tom Select */
+.ts-control input {
+  font-size: 1.2rem !important;
+  color: #000 !important;
+}
 
 /* Media queries */
 @media (max-width: 768px) {
@@ -27,7 +76,7 @@
   }
 }
 
-/* Media queries */
+/*---------------- Media queries -------------------------*/
 @media (max-width: 1200px) {
   .triple-size {
     grid-column: span 2;

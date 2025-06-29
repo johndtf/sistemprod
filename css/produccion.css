@@ -78,6 +78,7 @@ input[type="password"],
 input[type="search"],
 input[type="email"],
 input[type="number"],
+input[type="date"],
 select,
 textarea {
   width: 10rem;
@@ -224,7 +225,12 @@ input[type="radio"]:checked + label:after {
 }
 
 .triple-size input {
-  flex: 3; /* Inputs de tamaño doble ocupan 3 partes  */
+  flex: 3; /* Inputs de tamaño triple ocupan 3 partes  */
+  /* width: 100%; */
+}
+
+.triple-size select {
+  flex: 3; /* Select de tamaño triple ocupa 3 partes (el triple) */
 }
 
 .large-size {
@@ -284,19 +290,20 @@ input[type="radio"]:checked + label:after {
 }
 
 /* =======================Boton desactivado========================= */
-/* Estilo para un botón deshabilitado */
+
 button:disabled {
-  background-color: #ccc; /* Cambia el color de fondo cuando está deshabilitado */
-  color: #999; /* Cambia el color del texto cuando está deshabilitado */
-  cursor: not-allowed; /* Cambia el cursor cuando está deshabilitado */
-  /* Otros estilos deseados */
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none; /* evita cualquier interacción JS o visual */
+  box-shadow: none !important;
+  transform: none !important;
+  transition: none;
 }
 
-/* Estilo para un botón deshabilitado cuando se coloca el cursor sobre él */
+/* Opcional: neutraliza hover solo por claridad (aunque pointer-events ya lo bloquea) */
 button:disabled:hover {
-  background-color: #ccc; /* Cambia el color de fondo cuando está deshabilitado */
-  color: #999; /* Cambia el color del texto cuando está deshabilitado */
-  /* Otros estilos deseados */
+  transform: none;
+  box-shadow: none;
 }
 
 /* Estilos para botón secundario */

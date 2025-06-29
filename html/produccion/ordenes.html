@@ -4,9 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ordenes de Servicio</title>
-<!--     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet"> -->
+
+<!-- Tom Select CSS -->
+<link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="../../css/reset.css" />
     <link rel="stylesheet" href="../../css/produccion.css" />
     <link rel="stylesheet" href="../../css/ordenes.css" />
@@ -14,6 +15,8 @@
       src="https://kit.fontawesome.com/f3b6c3464d.js"
       crossorigin="anonymous"
     ></script>
+    
+
   </head>
   <body>  
     <header>
@@ -21,27 +24,19 @@
     </header>
     <div class="form-container ">
       <section class="grid-section">
-        <div class="form-group item">
+        <div class="form-group item" id="cedulaContainer">
           <label for="cedula">Cédula/nit:</label>
-          <input
-            type="text"
-            id="cedula"
-            name="cedula"
-            value="1.123.567.890-1"
-            required
-            readonly
-          />
+          <input type="text" id="cedula" name="cedula" value="" readonly />
         </div>
-
-        <div class="form-group item double-size">
-          <label for="cliente" >Cliente:</label>
-          <input
-            type="text"
-            id="cliente"
-            name="cliente"
-            value="NOMBRE1 NOMBRE2 APELLIDOEJEMPLO1 APELLIDO EJEMPLO2"
-            readonly
-          />
+        
+        <div class="form-group item double-size" id="clienteContainer">
+          <label for="cliente">Cliente:</label>
+          <input type="text" id="cliente" name="cliente" value="" readonly />
+        </div>
+        
+        <div class="form-group item triple-size hidden" id="clienteSelectContainer">
+          <label for="clienteSelect">Cliente:</label>
+          <select id="clienteSelect" placeholder="Buscar cliente..."></select>
         </div>
 
         <div class="form-group item">
@@ -51,7 +46,7 @@
 
         <div class="form-group item">
           <label for="fecha">Fecha:</label>
-          <input type="text" id="fecha" name="fecha" value="2023/07/07" readonly/>
+          <input type="date" id="fecha" name="fecha" readonly/>
         </div>
 
         <div class="form-group item">
@@ -78,43 +73,43 @@
       </section>
 
       <section class="button-group">
-        <button class="add-orden-btn primary-button">Agregar</button>
-        <button class="modify-orden-btn primary-button">Modificar</button>
-        <button class="find-orden-btn primary-button">Buscar</button>
-        <button class="cancel-orden-btn primary-button">Cancelar</button>
+        <button id="btnAgregarOrden" class="add-orden-btn primary-button">Agregar</button>
+        <button id="btnModificarOrden" class="modify-orden-btn primary-button">Modificar</button>
+        <button id="btnBuscarOrden" class="find-orden-btn primary-button">Buscar</button>
+        <button id="btnCancelarOrden" class="cancel-orden-btn primary-button">Cancelar</button>
       </section>
 
       <section class="grid-section">
 
         <div class="form-group item">
         <label for="marca">Marca:</label>
-        <select id="marca" name="marca">
+        <select id="marca" name="marca" disabled>
          
         </select>
         </div>
 
         <div class="form-group item">
         <label for="dimension">Dimensión:</label>
-        <select id="dimension" name="dimension">
+        <select id="dimension" name="dimension" disabled>
        
         </select>
         </div>
 
         <div class="form-group item">
           <label for="serie">Serie:</label>
-          <input type="text" id="serie" name="serie"  />
+          <input type="text" id="serie" name="serie" disabled />
         </div>
 
         <div class="form-group item">
         <label for="diseno">Diseño:</label>
-        <select id="diseno" name="diseno">
+        <select id="diseno" name="diseno" disabled>
           
         </select>
-        </div>-
+        </div>
 
         <div class="form-group item">
         <label for="prioridad">Prioridad:</label>
-        <select id="prioridad" name="prioridad">
+        <select id="prioridad" name="prioridad" disabled>
           <option value="0">NORMAL</option>
           <option value="1">URGENTE</option>
         </select>
@@ -122,13 +117,13 @@
 
         <div class="form-group item triple-size">
         <label for="observacion">Observación:</label>
-        <input type="text" id="observacion" name="observacion" />
+        <input type="text" id="observacion" name="observacion" disabled/>
 
       </section>
       <section class="button-group">
-        <button class="add-llanta-btn primary-button">Agregar Llanta</button>
+        <button id="btnAgregarLlanta" class="add-llanta-btn primary-button">Agregar Llanta</button>
 
-        <button class="modify-llanta-btn primary-button">
+        <button id="btnModificarLlanta" class="modify-llanta-btn primary-button">
           Modificar Llanta
         </button>
       </section>
@@ -224,18 +219,14 @@
        
           <p>Imprimir las llantas seleccionadas</p>
         
-          <button class="print-btn primary-button graph-button">
+          <button id="btnImprimir" class="print-btn primary-button graph-button">
            <!--  <i class="fa-solid fa-print"></i> -->
           <img src="../../img/imprimir.png" alt=""></button>
          
-          
-       
-      </div>
-    </div>
-      
-      
-    
-
+      </div> 
     <script type="module" src="../../js/ordenes.js"></script>
+    <!-- Tom Select JS -->
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
+
   </body>
 </html>
