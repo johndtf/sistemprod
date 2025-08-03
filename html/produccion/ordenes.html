@@ -9,6 +9,7 @@
 <link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/style.css" />
     <link rel="stylesheet" href="../../css/produccion.css" />
     <link rel="stylesheet" href="../../css/ordenes.css" />
     <script
@@ -41,12 +42,12 @@
 
         <div class="form-group item">
           <label for="orden">Orden:</label>
-          <input type="text" id="orden" name="orden" value="8879" readonly/>
+          <input type="text" id="orden" name="orden" value="8879" readonly />
         </div>
 
         <div class="form-group item">
           <label for="fecha">Fecha:</label>
-          <input type="date" id="fecha" name="fecha" readonly/>
+          <input type="date" id="fecha" name="fecha" readonly />
         </div>
 
         <div class="form-group item">
@@ -56,6 +57,7 @@
             id="telefono"
             name="telefono"
             value="1234567890"
+            disabled
             readonly
           />
         </div>
@@ -67,6 +69,7 @@
             id="direccion"
             name="direccion"
             value="calle 25 diagonal 31 edificio nombre ejemplo torre 3 apartamento 138"
+            disabled
             readonly
           />
         </div>
@@ -76,10 +79,15 @@
         <button id="btnAgregarOrden" class="add-orden-btn primary-button">Agregar</button>
         <button id="btnModificarOrden" class="modify-orden-btn primary-button">Modificar</button>
         <button id="btnBuscarOrden" class="find-orden-btn primary-button">Buscar</button>
-        <button id="btnCancelarOrden" class="cancel-orden-btn primary-button">Cancelar</button>
+        <button id="btnCancelarOrden" class="cancel-orden-btn secondary-button" disabled>Cancelar</button>
       </section>
 
       <section class="grid-section">
+        
+        <div class="form-group item">
+        <label for="consecOrden">Consecutivo:</label>
+        <input type="number" id="consecOrden" name="consecOrden" min="1" />
+        </div>
 
         <div class="form-group item">
         <label for="marca">Marca:</label>
@@ -118,15 +126,14 @@
         <div class="form-group item triple-size">
         <label for="observacion">Observación:</label>
         <input type="text" id="observacion" name="observacion" disabled/>
-
       </section>
       <section class="button-group">
-        <button id="btnAgregarLlanta" class="add-llanta-btn primary-button">Agregar Llanta</button>
-
-        <button id="btnModificarLlanta" class="modify-llanta-btn primary-button">
-          Modificar Llanta
-        </button>
+      <button id="btnAgregarLlanta" class="add-llanta-btn primary-button">Agregar Llanta</button>
+      <button id="btnModificarLlanta" class="modify-llanta-btn primary-button" disabled>Modificar Llanta</button>
+      <button id="btnCambiarOrdenLlanta" class="change-llanta-btn primary-button" disabled >Cambiar de Orden</button>
+      <button id="btnCancelarLlanta" class="cancel-llanta-btn secondary-button" disabled>Cancelar</button>
       </section>
+
       
     
       <!-- ... Tabla que muestra las llantas ... -->
@@ -141,75 +148,14 @@
               <th>Dimensión</th>
               <th>Serie</th>
               <th>Diseño</th>
+              <th>Prioridad</th>
+              <th>Observación</th>
               <th><input type="checkbox" id="checkAll"></th>
             </tr>
           </thead>
           <tbody>
-            <!-- Generación de filas  -->
-            <tr>
-              <td>1</td>
-              <td>19824</td>
-              <td>GOODYEAR</td>
-              <td>315/80R22.5</td>
-              <td>1200</td>
-              <td>VM729</td>
-              <td><input type="checkbox"></td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>19825</td>
-              <td>MICHELIN</td>
-              <td>295/80R22.5</td>
-              <td>1419</td>
-              <td>VDE2</td>
-              <td><input type="checkbox"></td>
-            </tr>
-
-            <tr>
-              <td>3</td>
-              <td>19826</td>
-              <td>BRIDGESTONE</td>
-              <td>215/75R17.5</td>
-              <td>2318</td>
-              <td>VZE1</td>
-              <td><input type="checkbox"></td>
-            </tr>
-            <tr>
-              <td>4</td>
-              <td>19827</td>
-              <td>FIRESTONE</td>
-              <td>235/75R17.5</td>
-              <td>3520</td>
-              <td>VR250</td>
-              <td><input type="checkbox"></td>
-            </tr>
-            <tr>
-              <td>5</td>
-              <td>19828</td>
-              <td>HANKOOK</td>
-              <td>9.5R17.5</td>
-              <td>4222</td>
-              <td>VZE1</td>
-              <td><input type="checkbox"></td>
-            </tr>
-            <tr>
-              <td>6</td>
-              <td>19829</td>
-              <td>PIRELLI</td>
-              <td>295/80R22.5</td>
-              <td>3619</td>
-              <td>VZE2</td>
-              <td><input type="checkbox"></td>
-            </tr>
-            <tr>
-              <td>7</td>
-              <td>19830</td>
-              <td>DUNLOP</td>
-              <td>295/80R22.5</td>
-              <td>4821</td>
-              <td>DVRM</td>
-              <td><input type="checkbox"></td>
-            </tr>
+            <!-- Tabla donde se mostrarán los datos de las llantas de la orden  -->
+           
           </tbody>
         </table>
       </div>
@@ -219,11 +165,18 @@
        
           <p>Imprimir las llantas seleccionadas</p>
         
-          <button id="btnImprimir" class="print-btn primary-button graph-button">
+          <button id="btnImprimir" class="print-btn primary-button graph-button" disabled>
            <!--  <i class="fa-solid fa-print"></i> -->
           <img src="../../img/imprimir.png" alt=""></button>
+
+          
+
          
       </div> 
+
+      
+
+
     <script type="module" src="../../js/ordenes.js"></script>
     <!-- Tom Select JS -->
     <script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
