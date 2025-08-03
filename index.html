@@ -148,12 +148,14 @@
     </div>
 
     <!-- ==================Form pantalla de error============= -->
-    <div id="error-message" class="error-message">
-      <h2 class="title-error">Información Incompleta</h2>
+    <div id="error-message" class="error-message hidden">
+      <h2 class="title-error" id="error-title">Información Incompleta</h2>
       <div class="error-icon">
         <i class="fa-solid fa-triangle-exclamation"></i>
       </div>
-      <p class="content-error">Por favor, completa todos los campos</p>
+      <p class="content-error" id="error-content">
+        Por favor, completa todos los campos
+      </p>
       <button id="error-button">Aceptar</button>
     </div>
 
