@@ -82,8 +82,8 @@ findButton.addEventListener("click", () => {
   } else {
     // Crea la variable con los parámetros de búsqueda
     const filtroResolucion = {
-      codigo: codeField.value,
-      resol_garan: nameField.value,
+      codigo: codeField.value.trim(),
+      resol_inspec: nameField.value.trim(),
     };
 
     findResolutions(filtroResolucion);
@@ -172,22 +172,19 @@ function limpiarResultados() {
   succesResults.innerHTML = ""; // Limpiar resultados anteriores
 }
 
-/*---------- Función para buscar resoluciones de garantía en la base de datos ------------*/
+/*---------- Función para buscar resoluciones de inspección en la base de datos con filtros ------------*/
 async function findResolutions(filtroResolucion) {
   try {
-    // Realiza una solicitud al servidor para obtener la lista de resoluciones
+    // Realiza una solicitud al servidor para obtener resoluciones de inspección
     const token = localStorage.getItem("myTokenName");
-    const response = await fetch(
-      `${apiUrl}/api/resolutionsInsp/resolutionslist`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(filtroResolucion),
-      }
-    );
+    const response = await fetch(`${apiUrl}/api/resolutionsInsp/search`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(filtroResolucion),
+    });
 
     if (response.status === 200) {
       // carga la información en la tabla del formulario

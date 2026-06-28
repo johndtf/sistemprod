@@ -156,7 +156,7 @@ async function buscarDimensionEnBaseDeDatos(nombreDimension) {
     //mediante POST ya que existen dimensiones que tienen el caracter /
     //y al enviar este caracter la api presenta error en el endpoint
     const token = localStorage.getItem("myTokenName");
-    const response = await fetch(`${apiUrl}/api/dimensions/dimensionslist`, {
+    const response = await fetch(`${apiUrl}/api/dimensions/search`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

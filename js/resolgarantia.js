@@ -178,17 +178,14 @@ async function findResolutions(filtroResolucion) {
   try {
     // Realiza una solicitud al servidor para obtener la lista de resoluciones
     const token = localStorage.getItem("myTokenName");
-    const response = await fetch(
-      `${apiUrl}/api/resolutionsWarranty/resolutionslist`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(filtroResolucion),
-      }
-    );
+    const response = await fetch(`${apiUrl}/api/resolutionsWarranty/search`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(filtroResolucion),
+    });
 
     if (response.status === 200) {
       // carga la información en la tabla del formulario

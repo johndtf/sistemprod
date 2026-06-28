@@ -156,7 +156,7 @@ async function buscarMarcaEnBaseDeDatos(nombreMarca) {
   try {
     // Realiza una solicitud al servidor para buscar la marca
     const token = localStorage.getItem("myTokenName");
-    const response = await fetch(`${apiUrl}/api/brands/brandslist`, {
+    const response = await fetch(`${apiUrl}/api/brands/search`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

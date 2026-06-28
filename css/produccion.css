@@ -208,6 +208,11 @@ input[type="radio"]:checked + label:after {
   /* border: thin solid red; */
 }
 
+/* para los imput que no tienen label y se requiere ocupar todo el espacio */
+.full-width input,
+.full-width select {
+  width: 100%;
+}
 /* Ocupa dos columnas en la grid */
 .double-size {
   grid-column: span 2;
@@ -224,30 +229,30 @@ input[type="radio"]:checked + label:after {
   grid-column: span 3;
 }
 
-.triple-size input {
+.triple-size input,
+select {
   flex: 3; /* Inputs de tamaño triple ocupan 3 partes  */
   /* width: 100%; */
-}
-
-.triple-size select {
-  flex: 3; /* Select de tamaño triple ocupa 3 partes (el triple) */
-}
-
-.large-size {
-  font-size: 1.5rem;
-}
-.large-size input[type="text"],
-.large-size select {
-  font-size: 2rem;
 }
 
 .double-large-size {
   grid-column: span 2;
 }
 
+/*
+.double-large-size {
+  font-size: 1.4rem;
+}
+*/
 .double-large-size input[type="text"] {
-  font-size: 2rem;
-  flex: 2;
+  /*font-size: 1.4rem;*/
+  flex: 2; /* Inputs de tamaño doble ocupan 2 partes (el doble) */
+}
+.double-large-size textarea {
+  /*font-size: 1.4rem;*/
+  resize: none; /* Evita el cambio de tamaño manual */
+  flex: 2; /* Textarea de tamaño doble ocupa 2 partes (el doble) */
+  margin-left: 10px;
 }
 
 /*=============Estilos para grupo de botones=================*/
@@ -447,7 +452,7 @@ button:disabled:hover {
   width: 20px;
   height: auto;
 }
-/*Estilos para el proceso acual*/
+/*Estilos para el proceso actual*/
 .menu li.current a {
   background-color: var(--second-color);
 }
