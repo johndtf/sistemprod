@@ -179,7 +179,7 @@ async function buscarPerfilEnBaseDeDatos(filtroPerfil) {
   try {
     const token = localStorage.getItem("myTokenName");
     // Realiza una solicitud al servidor para obtener la lista de resoluciones
-    const response = await fetch(`${apiUrl}/api/profiles/profileslist`, {
+    const response = await fetch(`${apiUrl}/api/profiles/list`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -1,3 +1,5 @@
+// funcionesComunes.js
+
 //---------------Validar que sea una cadena no vacía------------------
 export function esCadenaNoVacia(valor) {
   return typeof valor === "string" && valor.trim() !== "";
@@ -26,7 +28,10 @@ export async function handleErrorResponse(response, errorMessageElement) {
 }
 
 // -----------------Función para insertar un contenedor de alertas-----------------
-// Esta función crea un contenedor para mostrar alertas en la parte superior derecha de la pantalla
+// Esta función crea un contenedor para mostrar alertas en la parte superior derecha de la pantalla, el html donde va a funcionar debe ser de type "module"
+// y debe importar las funciones insertarContenedorAlerta() y mostrarAlerta() desde este archivo funcionesComunes.js:
+// import { insertarContenedorAlerta, mostrarAlerta } from "./funcionesComunes.js";
+//Hace uso de clases definidas en style.css
 
 // ======= Inserta el HTML de la alerta una sola vez =======
 
@@ -90,7 +95,7 @@ export function mostrarAlerta(titulo, mensaje, tipo = "info") {
   });
 
   // Ocultar automáticamente después de 4 segundos
-  /* setTimeout(() => {
+  setTimeout(() => {
     alerta.classList.remove("mostrar");
-  }, 6000); */
+  }, 6000);
 }

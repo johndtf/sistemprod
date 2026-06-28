@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -8,6 +8,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     /> -->
     <link rel="stylesheet" href="../../css/reset.css" />
+    <link rel="stylesheet" href="../../css/style.css" />
     <link rel="stylesheet" href="../../css/produccion.css" />
     <!--  <link rel="stylesheet" href="../../css/inspeccion.css" /> -->
     <title>Inspección Inicial</title>
@@ -95,78 +96,64 @@
 
     <!-- Contenido principal  -->
     <div class="content">
+      <!-- Sección para mostrar información de la llanta -->
       <section class="grid-section">
         <div class="form-group item">
-          <label for="orden">Orden:</label>
-          <input type="text" id="orden" name="orden" value="8879" readonly />
+          <label for="tiquete-info">Tiquete:</label>
+          <input type="text" id="tiquete-info" name="tiquete-info" readonly />
         </div>
 
         <div class="form-group item double-size">
           <label for="cliente">Cliente:</label>
-          <input
-            type="text"
-            id="cliente"
-            name="cliente"
-            value="NOMBRE1 NOMBRE2 APELLIDOEJEMPLO1 APELLIDO EJEMPLO2"
-            readonly
-          />
+          <input type="text" id="cliente" name="cliente" readonly />
+        </div>
+
+        <div class="form-group item">
+          <label for="orden">Orden:</label>
+          <input type="text" id="orden" name="orden" readonly />
         </div>
 
         <div class="form-group item">
           <label for="marca">Marca:</label>
-          <input
-            type="text"
-            id="marca"
-            name="marca"
-            value="MICHELIN"
-            readonly
-          />
+          <input type="text" id="marca" name="marca" readonly />
         </div>
 
         <div class="form-group item">
           <label for="dimension">Dimensión:</label>
-          <input
-            type="text"
-            id="dimension"
-            name="dimension"
-            value="295/80R22.5"
-            readonly
-          />
+          <input type="text" id="dimension" name="dimension" readonly />
         </div>
 
         <div class="form-group item">
           <label for="diseno">Diseño:</label>
-          <input type="text" id="diseno" name="diseno" value="VZE2" readonly />
+          <input type="text" id="diseno" name="diseno" readonly />
         </div>
 
         <div class="form-group item">
           <label for="serie">Serie:</label>
-          <input type="text" id="serie" name="serie" value="0420" readonly />
+          <input type="text" id="serie" name="serie" readonly />
         </div>
 
         <div class="form-group item">
           <label for="estadol">Estado:</label>
-          <input
-            type="text"
-            id="estadol"
-            name="estadol"
-            value="PENDIENTE"
-            readonly
-          />
+          <input type="text" id="estadol" name="estadol" readonly />
         </div>
 
         <div class="form-group item">
           <label for="nivell">Nivel reenc:</label>
-          <input type="text" id="nivell" name="nivell" value="1" readonly />
+          <input type="text" id="nivell" name="nivell" readonly />
         </div>
 
         <div class="form-group item double-size">
           <label for="resolucionl">Resolución:</label>
+          <input type="text" id="resolucionl" name="resolucionl" readonly />
+        </div>
+
+        <div class="form-group item triple-size">
+          <label for="observacion-inicial">Observación ini:</label>
           <input
             type="text"
-            id="resolucionl"
-            name="resolucionl"
-            value="12 RODADA A BAJA PRESIÓN O SOBRECARGA"
+            id="observacion-inicial"
+            name="observacion-inicial"
             readonly
           />
         </div>
@@ -174,32 +161,74 @@
 
       <div class="form-container2x1">
         <section class="grid-section">
-          <div class="form-group item large-size">
+          <div class="form-group item">
             <label for="tiquete">Tiquete:</label>
-            <input type="text" id="tiquete" name="tiquete" value="19879" />
+            <input type="number" id="tiquete" name="tiquete" min="1" step="1" />
           </div>
 
-          <div class="form-group item large-size">
+          <div class="form-group item">
             <label for="reencauches">N.Reenc.:</label>
-            <input type="text" id="reencauches" name="reencauches" value="1" />
+            <input
+              type="number"
+              id="reencauches"
+              name="reencauches"
+              min="1"
+              step="1"
+              value="1"
+            />
           </div>
 
-          <div class="form-group item large-size">
-            <label for="codinsp">Cod. Insp:</label>
-            <select id="codinsp" name="codinsp">
-              <option value="A">A</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-            </select>
+          <div class="form-group item">
+            <label for="operario">Operario:</label>
+            <input
+              type="number"
+              id="operario"
+              name="operario"
+              inputmode="numeric"
+            />
           </div>
-          <div class="form-group item double-large-size">
-            <!-- <label for="reencauches">Nivel Reenc.:</label> -->
+          <div class="form-group item full-width">
+            <!-- espacio para mostrar el nombre del operario -->
+            <input
+              type="text"
+              id="operario-display"
+              name="operario-display"
+              readonly
+              disabled
+            />
+          </div>
+
+          <div class="form-group item">
+            <label for="codinsp">Cod. Insp:</label>
+            <select id="codinsp" name="codinsp"></select>
+          </div>
+          <div class="form-group item full-width">
+            <!-- Eespacio para mostrar la resolución de inspección -->
             <input
               type="text"
               id="resolinspect"
               name="resolinspect"
-              value="APTA PARA REENCAUCHE"
+              readonly
+              disabled
             />
+          </div>
+
+          <div class="form-group item">
+            <label for="fechaProceso">Fecha/Hora:</label>
+            <input
+              type="datetime-local"
+              id="fechaProceso"
+              name="fechaProceso"
+            />
+          </div>
+
+          <div class="form-group item double-large-size">
+            <label for="observacion">Observación:</label>
+            <textarea
+              id="observacion"
+              name="observacion"
+              placeholder="Ingrese observación..."
+            ></textarea>
           </div>
         </section>
         <section class="button-group">
@@ -215,6 +244,6 @@
       src="https://kit.fontawesome.com/f3b6c3464d.js"
       crossorigin="anonymous"
     ></script>
-    <script src="../../js/inspeccion.js"></script>
+    <script type="module" src="../../js/inspeccion.js"></script>
   </body>
 </html>

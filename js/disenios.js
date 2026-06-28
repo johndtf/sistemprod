@@ -156,7 +156,7 @@ async function buscarDesignEnBaseDeDatos(nombreDesign) {
   try {
     // Realiza una solicitud al servidor para buscar el diseño
     const token = localStorage.getItem("myTokenName");
-    const response = await fetch(`${apiUrl}/api/treads/treadslist`, {
+    const response = await fetch(`${apiUrl}/api/treads/search`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
